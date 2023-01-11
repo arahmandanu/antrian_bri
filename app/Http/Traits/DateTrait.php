@@ -14,6 +14,7 @@ trait DateTrait
         for ($x = 1; $x <= $range; $x++) {
             array_push($dates, $startWeek->copy()->addDays($x));
         }
+
         return $dates;
     }
 }

@@ -16,6 +16,6 @@ class MstBank extends Model
         'name',
         'address',
         'latitude',
-        'longitude'
+        'longitude',
     ];
 }

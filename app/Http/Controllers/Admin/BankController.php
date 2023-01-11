@@ -21,8 +21,7 @@ class BankController extends Controller
         $name = $request->name;
         $address = $request->address;
 
-        $banks = MstBank
-            ::when($code, function ($query, $code) {
+        $banks = MstBank::when($code, function ($query, $code) {
                 $query->where('code', 'like', "%$code%");
             })
             ->when($name, function ($query, $name) {
@@ -81,7 +80,7 @@ class BankController extends Controller
      */
     public function show(MstBank $bank)
     {
-        if (!$bank) {
+        if (! $bank) {
             abort(404);
         }
 
@@ -99,7 +98,7 @@ class BankController extends Controller
      */
     public function update(UpdateBank $request, MstBank $bank)
     {
-        abort_if(!$bank, 404);
+        abort_if(! $bank, 404);
         $bank->update($request->validated());
 
         flash()->success('Berhasil update Bank');
@@ -115,7 +114,7 @@ class BankController extends Controller
      */
     public function destroy(MstBank $bank)
     {
-        abort_if(!$bank, 404);
+        abort_if(! $bank, 404);
 
         if ($bank->delete()) {
             flash()->success('Berhasil delete Bank');

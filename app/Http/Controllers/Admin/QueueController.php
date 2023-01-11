@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\MstBank;
 use App\Models\Queue;
 use App\Models\UnitCode;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class QueueController extends Controller
 {
@@ -23,8 +21,7 @@ class QueueController extends Controller
         $queue_for = $request->queue_for;
         $created_at = $request->created_at;
 
-        $queues = Queue
-            ::when($bank, function ($query, $bank) {
+        $queues = Queue::when($bank, function ($query, $bank) {
                 $query->where('bank_id', $bank);
             })
             ->when($unit_code, function ($query, $unit_code) {
@@ -45,7 +42,7 @@ class QueueController extends Controller
 
         return view('admin.queue.index', [
             'queues' => $queues,
-            'unitCodes' => UnitCode::get()
+            'unitCodes' => UnitCode::get(),
         ]);
     }
 

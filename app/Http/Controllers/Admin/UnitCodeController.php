@@ -19,8 +19,8 @@ class UnitCodeController extends Controller
     {
         $code = $request->code;
         $unitCodes = UnitCode::when($code, function ($query, $code) {
-                $query->where('code', 'like', "%$code%");
-            })
+            $query->where('code', 'like', "%$code%");
+        })
             ->paginate(15);
         $unitCodes->appends($request->all());
         session()->flashInput($request->input());

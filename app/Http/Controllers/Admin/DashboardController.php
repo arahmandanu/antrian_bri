@@ -24,8 +24,7 @@ class DashboardController extends Controller
         $totalsByDate = [];
         $labels = [];
 
-        $data = Queue
-            ::whereBetween('created_at', [Arr::first($weekRange), Arr::last($weekRange)->copy()->endOfDay()])
+        $data = Queue::whereBetween('created_at', [Arr::first($weekRange), Arr::last($weekRange)->copy()->endOfDay()])
             ->orderBy('created_at', 'asc')
             ->get()
             ->groupBy(function ($date) {
@@ -46,7 +45,7 @@ class DashboardController extends Controller
             'totalUnitCodes' => UnitCode::count(),
             'totalQueues' => Queue::count(),
             'barDataTotal' => $totalsByDate,
-            'labels' => $labels
+            'labels' => $labels,
         ]);
     }
 
