@@ -1,0 +1,14 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+@import '../css/theme.css';
+@import '~select2/dist/css/select2.css';
+
+@import './style.scss';
+@import '../custom/font-awesome-4.7.0/scss/font-awesome.scss';

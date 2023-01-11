@@ -1,0 +1,27 @@
+.new-btn-gradient {
+    background: transparent linear-gradient(90deg, #f59823 0%, #d94a00 100%) 0% 0% no-repeat padding-box;
+    border-color: transparent !important;
+
+    &:hover {
+        color: #f8f8f8;
+    }
+}
+
+.new-btn-custom-secondary {
+    background-color: #f59823;
+    border-color: #f59823;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: normal !important;
+    font-family: "Poppins-Medium" !important;
+    text-transform: uppercase
+}
+
+.my-border {
+    border: red;
+    border-style: solid;
+    border-width: thin;
+    border-left: hidden;
+    border-right: hidden;
+    border-bottom: hidden;
+}
