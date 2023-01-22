@@ -52,6 +52,7 @@
                                             <select name="bank"
                                                 class="js-data-example-ajax form-control {{ $errors->has('bank') ? 'is-invalid' : '' }}"
                                                 required id="bank">
+                                                <option value="">Silahkan Pilih Bank</option>
                                             </select>
 
                                             @error('bank')
@@ -74,38 +75,155 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('select#unit').select2({
-                placeholder: 'Silahkan pilih Unit',
-                minimumResultsForSearch: Infinity
+            Selectize.define( 'no_results', function( options ) {
+                var self = this;
+
+                options = $.extend({
+                    message: 'No results found.',
+
+                    html: function(data) {
+                        return (
+                            '<div class="selectize-dropdown ' + data.classNames + '">' +
+                            '<div class="selectize-dropdown-content">' +
+                            '<div class="no-results">' + data.message + '</div>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    }
+                }, options );
+
+                self.displayEmptyResultsMessage = function () {
+                    this.$empty_results_container.css('top', this.$control.outerHeight());
+                    this.$empty_results_container.css('width', this.$control.outerWidth());
+                    this.$empty_results_container.show();
+                    this.$control.addClass("dropdown-active");
+                };
+
+                self.refreshOptions = (function () {
+                    var original = self.refreshOptions;
+
+                    return function () {
+                        original.apply(self, arguments);
+                        if (this.hasOptions || !this.lastQuery) {
+                            this.$empty_results_container.hide()
+                        } else {
+                            this.displayEmptyResultsMessage();
+                        }
+                    }
+                })();
+
+                self.onKeyDown = (function () {
+                    var original = self.onKeyDown;
+
+                    return function ( e ) {
+                        original.apply( self, arguments );
+                        if ( e.keyCode === 27 ) {
+                            this.$empty_results_container.hide();
+                        }
+                    }
+                })();
+
+                self.onBlur = (function () {
+                    var original = self.onBlur;
+
+                    return function () {
+                        original.apply( self, arguments );
+                        this.$empty_results_container.hide();
+                        this.$control.removeClass("dropdown-active");
+                    };
+                })();
+
+                self.setup = (function() {
+                    var original = self.setup;
+                    return function() {
+                        original.apply(self, arguments);
+                        self.$empty_results_container = $(options.html($.extend({
+                            classNames: self.$input.attr('class')
+                        }, options)));
+                        self.$empty_results_container.insertBefore(self.$dropdown);
+                        self.$empty_results_container.hide();
+                    };
+                })();
             });
 
-            $('select#bank').select2({
-                placeholder: 'Silahkan pilih Bank',
-                minimumInputLength: 0,
-                dataType: 'json',
-                delay: 250,
-                templateResult: formatBankView,
-                templateSelection: formatBankSelection,
-                allowClear: false,
-                ajax: {
-                    url: "{{ route('barcode.get_bank') }}",
-                    dataType: 'json',
-                    data: function(params) {
-                        var query = {
-                            search: params.term,
-                            type: 'public'
-                        }
-
-                        return query;
+            $('select#unit').selectize();
+            $('select#bank').selectize({
+                create:false,
+                valueField: 'id',
+                labelField: 'name',
+                searchField: ['name'],
+                options: [],
+                plugins: ["clear_button", 'no_results'],
+                render: {
+                    item: function (item, escape) {
+                        return (
+                            "<div>" +
+                                '<span class="name">' + escape(item.name) + "</span>" +
+                            "</div>"
+                        );
                     },
-                    processResults: function(data) {
-                        return {
-                            results: data
-                        };
+                    option: function (item, escape) {
+                        var label = item.name;
+                        var caption = item.name ;
+                        return(
+                            "<div class='container'>" +
+                                "<div class='row'>" +
+                                    "<div class='col-10'>" +
+                                        "<div class='text-start'>" + escape(item.name) + "</div>" +
+                                        "<div class='text-start fst-italic'><em>" + escape(item.address) + "</em></div>" +
+                                    "</div>" +
+                                "<div class='col-2'>10 Km</div>" +
+                            "</div>" +"</div>"
+                        );
                     },
-                    cache: true
+                },
+                load: function (query, callback) {
+                    if (query.length > 1) {
+                        $.get({
+                            url: "{{ route('barcode.get_bank') }}",
+                            type: 'GET',
+                            dataType: 'json',
+                            data: {
+                                search: query,
+                            },
+                            error: function () {
+                                console.log('gagal');
+                                callback();
+                            },
+                            success: function (res) {
+                                callback(res);
+                            }
+                        });
+                    }
                 }
             });
+            {{--$('select#bank').select2({--}}
+            {{--    placeholder: 'Silahkan pilih Bank',--}}
+            {{--    minimumInputLength: 0,--}}
+            {{--    dataType: 'json',--}}
+            {{--    delay: 250,--}}
+            {{--    templateResult: formatBankView,--}}
+            {{--    templateSelection: formatBankSelection,--}}
+            {{--    allowClear: false,--}}
+            {{--    ajax: {--}}
+            {{--        url: "{{ route('barcode.get_bank') }}",--}}
+            {{--        dataType: 'json',--}}
+            {{--        data: function(params) {--}}
+            {{--            var query = {--}}
+            {{--                search: params.term,--}}
+            {{--                type: 'public'--}}
+            {{--            }--}}
+
+            {{--            return query;--}}
+            {{--        },--}}
+            {{--        processResults: function(data) {--}}
+            {{--            return {--}}
+            {{--                results: data--}}
+            {{--            };--}}
+            {{--        },--}}
+            {{--        cache: true--}}
+            {{--    }--}}
+            {{--});--}}
         });
 
         function formatBankView(data) {

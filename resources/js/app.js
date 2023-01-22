@@ -19,4 +19,7 @@ import daterangepicker from 'daterangepicker';
 window.daterangepicker = daterangepicker;
 
 import './chart';
+import Selectize from '@selectize/selectize/dist/js/selectize';
+window.Selectize = window.selectize = Selectize;
+
 

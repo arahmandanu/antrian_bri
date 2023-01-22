@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Latitude</label>
-                            <input type="number" name="latitude"
+                            <input type="text" name="latitude"
                                 class="form-control {{ $errors->has('latitude') ? 'is-invalid' : '' }}"
                                 placeholder="latitude" value='{{ $bank->latitude }}'>
                             @error('latitude')
@@ -49,7 +49,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Longitude</label>
-                            <input type="number" name="longitude"
+                            <input type="text" name="longitude"
                                 class="form-control {{ $errors->has('longitude') ? 'is-invalid' : '' }}"
                                 placeholder="longitude" value='{{ $bank->longitude }}'>
                             @error('longitude')

@@ -44,6 +44,17 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Kota</label>
+                            <input type="text" name="city"
+                                   class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" placeholder="Bank Name"
+                                   value='{{ old('city') }}'>
+                            @error('city')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Address</label>
                             <textarea placeholder="Bank Address" class="form-control  {{ $errors->has('address') ? 'is-invalid' : '' }}"
                                 name="address" rows="3">{{ old('address') }}</textarea>
@@ -55,7 +66,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Latitude</label>
-                            <input type="number" name="latitude"
+                            <input type="text" name="latitude"
                                 class="form-control {{ $errors->has('latitude') ? 'is-invalid' : '' }}"
                                 placeholder="latitude" value='{{ old('latitude') }}'>
                             @error('latitude')
@@ -66,7 +77,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Longitude</label>
-                            <input type="number" name="longitude"
+                            <input type="text" name="longitude"
                                 class="form-control {{ $errors->has('longitude') ? 'is-invalid' : '' }}"
                                 placeholder="longitude" value='{{ old('longitude') }}'>
                             @error('longitude')
