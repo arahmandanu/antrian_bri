@@ -25,18 +25,28 @@ class BarcodeController extends Controller
     {
         $data = [];
         if ($request->ajax()) {
+            $distance = 1;
             $search = $request->search;
-            if (isset($search)) {
-                $data = MstBank::select('id', 'code', 'name', 'address')
-                    ->when($search, function ($query, $search) {
-                        $query
-                            ->where('address', 'like', "%$search%")
-                            ->orWhere('name', 'like', "%$search%");
-                    })
-                    ->take(5)
-                    ->get()
-                    ->toArray();
+            $latitude = $request->latitude;
+            $longitude = $request->longitude;
+            $coor = null;
+
+            if (isset($latitude) && isset($longitude)) {
+                $coor = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
             }
+
+            $data = MstBank::select('id', 'code', 'name', 'address', 'latitude', 'longitude')
+                ->when($search, function ($query, $search) {
+                    $query
+                        ->where('address', 'like', "%$search%")
+                        ->orWhere('name', 'like', "%$search%");
+                })
+                ->when($coor, function ($query, $coor) {
+                    $query->distance($coor['latitude'], $coor['longitude'], $coor['distance']);
+                })
+                ->take(5)
+                ->get()
+                ->toArray();
         }
 
         return json_encode($data);

@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class BarcodeService
 {
     public function generate(
-        int $unitCode,
+        string $unitCode,
         string $queueFor,
         int $idBank,
         string $createdAt,
@@ -25,7 +25,7 @@ class BarcodeService
             'id' => Str::uuid()->toString(),
             'queue_for' => $queueFor,
             'number_queue' => $this->getNumberQueue($queueFor, $bank->code, $unitCode),
-            'unit_code_id' => $unitCode->id,
+            'unit_code_name' => $unitCode->name,
             'unit_code' => $unitCode->code,
             'bank_id' => $bank->id,
             'bank_code' => $bank->code,
@@ -57,7 +57,7 @@ class BarcodeService
 
     private function getUnitCode($unitCode)
     {
-        return UnitCode::where('id', $unitCode)->first();
+        return UnitCode::where('code', $unitCode)->first();
     }
 
     private function getBank($idBank)

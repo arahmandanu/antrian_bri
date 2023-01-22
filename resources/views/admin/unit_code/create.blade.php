@@ -23,9 +23,20 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Code</label>
                             <input type="text" name="code"
-                                class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" placeholder="Bank Code"
+                                class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" placeholder="Unit Code"
                                 value='{{ old('code') }}'>
                             @error('code')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Nama</label>
+                            <input type="text" name="name"
+                                class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" placeholder="Unit name"
+                                value='{{ old('name') }}'>
+                            @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

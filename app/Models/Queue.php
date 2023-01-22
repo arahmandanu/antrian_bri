@@ -27,12 +27,13 @@ class Queue extends Model
         'bank_code',
         'bank_name',
         'bank_address',
+        'unit_code_name'
     ];
 
     public function getBarcode()
     {
-        $dateFor = Carbon::parse($this->queue_for)->format('Ymd');
-        $data = "$dateFor-$this->number_queue-$this->unit_code-$this->bank_code";
+        $dateFor = Carbon::parse($this->queue_for)->format('dmY');
+        $data = "$dateFor" . "$this->bank_code" . "$this->unit_code" . "$this->number_queue";
         $a = new DNS2D;
 
         return $a->getBarcodeHTML($data, 'QRCODE');

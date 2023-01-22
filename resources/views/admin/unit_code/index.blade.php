@@ -36,6 +36,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Unit Code</th>
+                                <th>Name Code</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,6 +46,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $unitCode->code }}</td>
+                                    <td>{{ $unitCode->name }}</td>
                                     <td>
                                         <div class="d-flex flex-row bd-highlight">
                                             <div class="p-2 bd-highlight"><a class="btn btn-info btn-sm"
@@ -66,7 +68,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3">No Data</td>
+                                    <td colspan="4">No Data</td>
                                 </tr>
                             @endforelse
 

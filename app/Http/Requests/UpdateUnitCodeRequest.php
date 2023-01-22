@@ -25,9 +25,14 @@ class UpdateUnitCodeRequest extends FormRequest
     {
         $rule = [
             'code' => ['required'],
+            'name' => ['required']
         ];
+
         if ($this->code != $this->unit_code->code) {
             array_push($rule['code'], 'unique:unit_codes');
+        }
+        if ($this->name != $this->unit_code->name) {
+            array_push($rule['name'], 'unique:unit_codes');
         }
 
         return $rule;

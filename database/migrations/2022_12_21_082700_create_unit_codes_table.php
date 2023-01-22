@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('unit_codes', function (Blueprint $table) {
             $table->id();
             $table->string('code', 100)->unique(true)->nullable(false);
+            $table->string('name', 100)->unique(true)->nullable(false);
             $table->timestamps();
         });
     }

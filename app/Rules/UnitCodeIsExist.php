@@ -26,7 +26,7 @@ class UnitCodeIsExist implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (UnitCode::where('id', $value)->exists()) {
+        if (UnitCode::where('code', $value)->exists()) {
             return true;
         }
     }

@@ -20,9 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('number_queue')->nullable(false);
 
             //Unit Code
-            $table->unsignedBigInteger('unit_code_id');
-            $table->foreign('unit_code_id')->references('id')->on('unit_codes');
-            $table->string('unit_code')->nullable(false);
+            $table->string('unit_code');
+            $table->foreign('unit_code')->references('code')->on('unit_codes');
+            $table->string('unit_code_name')->nullable(false);
 
             //BANK
             $table->unsignedBigInteger('bank_id');

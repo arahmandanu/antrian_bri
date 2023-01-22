@@ -5,10 +5,13 @@
 
         <div class="container position-relative">
             <div class="row  py-vh-6">
-                <div class="col-lg-12 position-relative" data-aos="fade-right" id="mycanvas">
-                    <h2 class="mt-5">Nomor Antrian - {{ $numberQueue }}</h2>
-                    {!! $barcode !!}
-                    <strong> {{ $dateQueue }}</strong>
+                <div class="col-lg-12" data-aos="fade-right">
+                    <div id="mycanvas" class="m-5">
+                        <h2 class="mt-5">Nomor Antrian - {{ $numberQueue }}</h2>
+                        {!! $barcode !!}
+                        <strong> {{ $dateQueue }}</strong>
+                    </div>
+
                 </div>
                 <div class="col-lg-12 py-vh-3" data-aos="fade-right">
                     <h2>Silahkan simpan url ini atau Download</h2>
@@ -24,8 +27,8 @@
             domtoimage.toJpeg(document.getElementById('mycanvas'), {
                     quality: 1,
                     bgcolor: 'white',
-                    width: 500,
-                    height: 500
+                    width: 320,
+                    height: 350
                 })
                 .then(function(dataUrl) {
                     var link = document.createElement('a');

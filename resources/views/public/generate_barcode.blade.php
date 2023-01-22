@@ -5,6 +5,9 @@
 
         <div class="container position-relative">
             <div class="row">
+                <input type="hidden" name='latitude' id="latitude">
+                <input type="hidden" name='longitude' id="longitude">
+
                 <div class="col-lg-12 py-vh-6 position-relative" data-aos="fade-right">
                     <div class="py-vh-6 bg-primary text-light w-100 my-border" id="workwithus">
                         <div class="row d-flex justify-content-center">
@@ -21,9 +24,9 @@
                                                 id="unit" required>
                                                 <option value=""></option>
                                                 @forelse ($unitCodes as $unitCode)
-                                                    <option value="{{ $unitCode->id }}"
-                                                        @if (old('unit_code') == $unitCode->id) {{ 'selected' }} @endif>
-                                                        {{ Str::upper($unitCode->code) }}</option>
+                                                    <option value="{{ $unitCode->code }}"
+                                                        @if (old('unit_code') == $unitCode->code) {{ 'selected' }} @endif>
+                                                        {{ Str::upper($unitCode->name) }}</option>
                                                 @empty
                                                     <option> No Data Found</option>
                                                 @endforelse
@@ -75,7 +78,13 @@
     </div>
     <script>
         $(document).ready(function() {
-            Selectize.define( 'no_results', function( options ) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(assignData);
+            } else {
+                false;
+            }
+
+            Selectize.define('no_results', function(options) {
                 var self = this;
 
                 options = $.extend({
@@ -90,19 +99,19 @@
                             '</div>'
                         );
                     }
-                }, options );
+                }, options);
 
-                self.displayEmptyResultsMessage = function () {
+                self.displayEmptyResultsMessage = function() {
                     this.$empty_results_container.css('top', this.$control.outerHeight());
                     this.$empty_results_container.css('width', this.$control.outerWidth());
                     this.$empty_results_container.show();
                     this.$control.addClass("dropdown-active");
                 };
 
-                self.refreshOptions = (function () {
+                self.refreshOptions = (function() {
                     var original = self.refreshOptions;
 
-                    return function () {
+                    return function() {
                         original.apply(self, arguments);
                         if (this.hasOptions || !this.lastQuery) {
                             this.$empty_results_container.hide()
@@ -112,22 +121,22 @@
                     }
                 })();
 
-                self.onKeyDown = (function () {
+                self.onKeyDown = (function() {
                     var original = self.onKeyDown;
 
-                    return function ( e ) {
-                        original.apply( self, arguments );
-                        if ( e.keyCode === 27 ) {
+                    return function(e) {
+                        original.apply(self, arguments);
+                        if (e.keyCode === 27) {
                             this.$empty_results_container.hide();
                         }
                     }
                 })();
 
-                self.onBlur = (function () {
+                self.onBlur = (function() {
                     var original = self.onBlur;
 
-                    return function () {
-                        original.apply( self, arguments );
+                    return function() {
+                        original.apply(self, arguments);
                         this.$empty_results_container.hide();
                         this.$control.removeClass("dropdown-active");
                     };
@@ -147,37 +156,40 @@
             });
 
             $('select#unit').selectize();
+
             $('select#bank').selectize({
-                create:false,
+                create: false,
                 valueField: 'id',
                 labelField: 'name',
                 searchField: ['name'],
                 options: [],
                 plugins: ["clear_button", 'no_results'],
                 render: {
-                    item: function (item, escape) {
+                    item: function(item, escape) {
                         return (
                             "<div>" +
-                                '<span class="name">' + escape(item.name) + "</span>" +
+                            '<span class="name">' + escape(item.name) + "</span>" +
                             "</div>"
                         );
                     },
-                    option: function (item, escape) {
+                    option: function(item, escape) {
                         var label = item.name;
-                        var caption = item.name ;
-                        return(
+                        var caption = item.name;
+                        return (
                             "<div class='container'>" +
-                                "<div class='row'>" +
-                                    "<div class='col-10'>" +
-                                        "<div class='text-start'>" + escape(item.name) + "</div>" +
-                                        "<div class='text-start fst-italic'><em>" + escape(item.address) + "</em></div>" +
-                                    "</div>" +
-                                "<div class='col-2'>10 Km</div>" +
-                            "</div>" +"</div>"
+                            "<div class='row'>" +
+                            "<div class='col-10'>" +
+                            "<div class='text-start'>" + escape(item.name) + "</div>" +
+                            "<div class='text-start fst-italic'><em>" + escape(item.address) +
+                            "</em></div>" +
+                            "</div>" +
+                            "<div class='col-2'>10 Km</div>" +
+                            "</div>" + "</div>"
                         );
                     },
                 },
-                load: function (query, callback) {
+                load: function(query, callback) {
+                    console.log(latitude);
                     if (query.length > 1) {
                         $.get({
                             url: "{{ route('barcode.get_bank') }}",
@@ -186,68 +198,40 @@
                             data: {
                                 search: query,
                             },
-                            error: function () {
-                                console.log('gagal');
+                            error: function() {
                                 callback();
                             },
-                            success: function (res) {
+                            success: function(res) {
                                 callback(res);
                             }
                         });
                     }
                 }
             });
-            {{--$('select#bank').select2({--}}
-            {{--    placeholder: 'Silahkan pilih Bank',--}}
-            {{--    minimumInputLength: 0,--}}
-            {{--    dataType: 'json',--}}
-            {{--    delay: 250,--}}
-            {{--    templateResult: formatBankView,--}}
-            {{--    templateSelection: formatBankSelection,--}}
-            {{--    allowClear: false,--}}
-            {{--    ajax: {--}}
-            {{--        url: "{{ route('barcode.get_bank') }}",--}}
-            {{--        dataType: 'json',--}}
-            {{--        data: function(params) {--}}
-            {{--            var query = {--}}
-            {{--                search: params.term,--}}
-            {{--                type: 'public'--}}
-            {{--            }--}}
 
-            {{--            return query;--}}
-            {{--        },--}}
-            {{--        processResults: function(data) {--}}
-            {{--            return {--}}
-            {{--                results: data--}}
-            {{--            };--}}
-            {{--        },--}}
-            {{--        cache: true--}}
-            {{--    }--}}
-            {{--});--}}
         });
 
-        function formatBankView(data) {
-            if (data.loading) {
-                return data.text;
-            }
-            var $container = $(
-                "<div class='select2-result-repository clearfix'>" +
-                "<div class='select2-result-repository__meta'>" +
-                "<div class='select2-result-repository__title'>" + data.name + "</div>" +
-                "<div class='select2-result-repository__description'>" + data.address + "</div>" +
-                "</div>" +
-                "</div>"
-            );
+        function assignData(position) {
+            $('input#latitude').val(position.coords.latitude);
+            $('input#longitude').val(position.coords.longitude);
 
-            return $container;
+            defineBankOption(position.coords.latitude, position.coords.longitude);
         }
 
-        function formatBankSelection(data) {
-            if (data.code) {
-                return data.name;
-            } else {
-                return data.text;
-            }
+        function defineBankOption(latitude, longitude) {
+            $.ajax({
+                type: "get",
+                url: "{{ route('barcode.get_bank') }}",
+                data: {
+                    'latitude': latitude,
+                    'longitude': longitude,
+                    "_token": "{{ csrf_token() }}"
+                },
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                }
+            });
         }
     </script>
 @endsection

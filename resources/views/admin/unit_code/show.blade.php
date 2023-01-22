@@ -33,6 +33,18 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Nama</label>
+                            <input type="text" name="name"
+                                class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" placeholder="Unit name"
+                                value='{{ $unit_code->name }}'>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
