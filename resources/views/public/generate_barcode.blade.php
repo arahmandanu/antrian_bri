@@ -162,7 +162,7 @@
                 valueField: 'id',
                 labelField: 'name',
                 searchField: ['name'],
-                options: [],
+                options: @json($banks),
                 plugins: ["clear_button", 'no_results'],
                 render: {
                     item: function(item, escape) {
@@ -189,13 +189,14 @@
                     },
                 },
                 load: function(query, callback) {
-                    console.log(latitude);
                     if (query.length > 1) {
                         $.get({
                             url: "{{ route('barcode.get_bank') }}",
                             type: 'GET',
                             dataType: 'json',
                             data: {
+                                latitude: $('input#latitude').val(),
+                                longitude: $('input#longitude').val(),
                                 search: query,
                             },
                             error: function() {
@@ -206,6 +207,9 @@
                             }
                         });
                     }
+                },
+                onInitialize: function() {
+
                 }
             });
 
@@ -214,24 +218,6 @@
         function assignData(position) {
             $('input#latitude').val(position.coords.latitude);
             $('input#longitude').val(position.coords.longitude);
-
-            defineBankOption(position.coords.latitude, position.coords.longitude);
-        }
-
-        function defineBankOption(latitude, longitude) {
-            $.ajax({
-                type: "get",
-                url: "{{ route('barcode.get_bank') }}",
-                data: {
-                    'latitude': latitude,
-                    'longitude': longitude,
-                    "_token": "{{ csrf_token() }}"
-                },
-                dataType: "json",
-                success: function(response) {
-                    console.log(response);
-                }
-            });
         }
     </script>
 @endsection

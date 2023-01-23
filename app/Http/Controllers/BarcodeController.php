@@ -15,8 +15,9 @@ class BarcodeController extends Controller
 {
     public function index()
     {
+        $banks = MstBank::select('id', 'code', 'name', 'address')->orderBy('name', 'desc')->take(10)->get()->toArray();
         return view('public.generate_barcode', [
-            'banks' => MstBank::select('id', 'code', 'name', 'address')->take(10)->get()->toArray(),
+            'banks' => $banks,
             'unitCodes' => UnitCode::all(),
         ]);
     }
@@ -35,7 +36,7 @@ class BarcodeController extends Controller
                 $coor = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
             }
 
-            $data = MstBank::select('id', 'code', 'name', 'address', 'latitude', 'longitude')
+            $result = MstBank::select('id', 'code', 'name', 'address', 'latitude', 'longitude')
                 ->when($search, function ($query, $search) {
                     $query
                         ->where('address', 'like', "%$search%")
@@ -45,8 +46,19 @@ class BarcodeController extends Controller
                     $query->distance($coor['latitude'], $coor['longitude'], $coor['distance']);
                 })
                 ->take(5)
-                ->get()
-                ->toArray();
+                ->get();
+
+            if ($result->count() == 0) {
+                $result = MstBank::select('id', 'code', 'name', 'address', 'latitude', 'longitude')
+                    ->when($search, function ($query, $search) {
+                        $query
+                            ->where('address', 'like', "%$search%")
+                            ->orWhere('name', 'like', "%$search%");
+                    })
+                    ->take(5)
+                    ->get();
+            }
+            $data = $result->toArray();
         }
 
         return json_encode($data);

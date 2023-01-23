@@ -17,7 +17,7 @@ return new class extends Migration
             $table->ipAddress('ip');
             $table->uuid('id')->unique();
             $table->date('queue_for', $precision = 0)->nullable(false);
-            $table->unsignedBigInteger('number_queue')->nullable(false);
+            $table->string('number_queue')->nullable(false);
 
             //Unit Code
             $table->string('unit_code');

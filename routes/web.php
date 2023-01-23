@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BankController;
-use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\UnitCodeController;
 use App\Http\Controllers\Authentication\LogOutController;
@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('public.index');
 })->name('index');
 
-Route::group(['prefix' => 'barcode'], function () {
+Route::group(['prefix' => '/barcode'], function () {
     Route::get('/generate', [BarcodeController::class, 'index'])->name('barcode.show_form');
     Route::get('/bank', [BarcodeController::class, 'bank'])->name('barcode.get_bank');
     Route::post('/bank', [BarcodeController::class, 'generateBarcode'])->name('barcode.post_form');
@@ -37,8 +37,8 @@ Route::group(['prefix' => 'auth', 'middleware' => ['isLogin']], function () {
     Route::post('/verify', [VerifyController::class, 'call'])->name('auth.verify');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin_dashboard');
+Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
+    Route::get('/dashboard', DashboardController::class, 'index')->name('admin_dashboard');
 
     Route::resource('/banks', BankController::class);
     Route::resource('/unit_codes', UnitCodeController::class);

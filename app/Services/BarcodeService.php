@@ -52,12 +52,23 @@ class BarcodeService
             $number = 1;
         }
 
-        return $number;
+        return $this->formatQueueNumber($number);
     }
 
     private function getUnitCode($unitCode)
     {
         return UnitCode::where('code', $unitCode)->first();
+    }
+
+    private function formatQueueNumber($queue)
+    {
+        if (strlen($queue) == 2) {
+            $queue = "0" . $queue;
+        } elseif (strlen($queue) == 1) {
+            $queue = "00" . $queue;
+        }
+
+        return $queue;
     }
 
     private function getBank($idBank)
