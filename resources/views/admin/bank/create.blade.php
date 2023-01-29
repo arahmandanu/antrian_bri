@@ -22,6 +22,28 @@
                     <form action="{{ route('banks.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Area Code</label>
+                            <input type="text" name="Area_Code"
+                                   class="form-control {{ $errors->has('Area_Code') ? 'is-invalid' : '' }}" placeholder="Bank Name"
+                                   value='{{ old('Area_Code') }}'>
+                            @error('Area_Code')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">KC Code</label>
+                            <input type="text" name="KC_Code"
+                                   class="form-control {{ $errors->has('KC_Code') ? 'is-invalid' : '' }}" placeholder="Bank Name"
+                                   value='{{ old('KC_Code') }}'>
+                            @error('KC_Code')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Code</label>
                             <input type="text" name="code"
                                 class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" placeholder="Bank Code"

@@ -17,7 +17,9 @@ class MstBank extends Model
         'address',
         'latitude',
         'longitude',
-        'city'
+        'city',
+        'Area_Code',
+        'KC_Code',
     ];
 
     public function scopeDistance($query, $latitude, $longitude, $distance, $unit = "km")

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('code', 100)->unique(true)->nullable(false);
             $table->string('name', 255)->nullable(false);
             $table->string('city', 255)->nullable(true);
+            $table->string('Area_Code', 255)->nullable(true);
+            $table->string('KC_Code', 255)->nullable(true);
             $table->text('address')->nullable(false);
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();

@@ -23,6 +23,16 @@
                         @method('PUT')
                         @csrf
                         <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Area Code</label>
+                            <input type="text" name="Area_Code" class="form-control" placeholder="Area Bank Code"
+                                   value="{{ $bank->Area_Code }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">KC Code</label>
+                            <input type="text" name="KC_Code" class="form-control" placeholder="KC Code"
+                                   value="{{ $bank->KC_Code }}">
+                        </div>
+                        <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Code</label>
                             <input type="text" name="code" class="form-control" placeholder="Bank Code"
                                 value="{{ $bank->code }}">

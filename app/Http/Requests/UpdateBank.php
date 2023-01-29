@@ -26,6 +26,8 @@ class UpdateBank extends FormRequest
     public function rules()
     {
         $rule = [
+            'Area_Code' => [],
+            'KC_Code' => [],
             'code' => ['required', 'max:100'],
             'name' => ['required', 'max:100'],
             'address' => ['required', 'max:255'],
