@@ -22,6 +22,8 @@
     },
     "dependencies": {
         "@selectize/selectize": "^0.15.2",
+        "datatables.net": "^1.13.1",
+        "datatables.net-dt": "^1.13.1",
         "daterangepicker": "^3.1.0",
         "dom-to-image": "^2.6.0",
         "jquery": "^3.6.2",

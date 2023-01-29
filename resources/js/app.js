@@ -22,4 +22,6 @@ import './chart';
 import Selectize from '@selectize/selectize/dist/js/selectize';
 window.Selectize = window.selectize = Selectize;
 
+import DataTable from 'datatables.net-dt';
+window.DataTable = DataTable;
 

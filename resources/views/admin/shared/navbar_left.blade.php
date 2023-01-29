@@ -35,6 +35,20 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsereports"
+           aria-expanded="true" aria-controls="collapsereports">
+            <i class="fas fa-fw fa-bars"></i>
+            <span>Laporan</span>
+        </a>
+        <div id="collapsereports" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('admin.over_sla') }}">Chart Over Sla</a>
+                <a class="collapse-item" href="{{ route('admin.reports') }}">Reports</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 

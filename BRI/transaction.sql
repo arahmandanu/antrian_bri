@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (64 bit)
-MySQL - 10.4.27-MariaDB : Database - u1573577_antrian
+MySQL - 10.4.27-MariaDB : Database - antrian
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 10.4.27-MariaDB : Database - u1573577_antrian
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`u1573577_antrian` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`antrian` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
-USE `u1573577_antrian`;
+USE `antrian`;
 
 /*Table structure for table `transactioncust` */
 
@@ -43,7 +43,7 @@ CREATE TABLE `transactioncust` (
 
 /*Data for the table `transactioncust` */
 
-insert  into `transactioncust`(`BaseDt`,`SeqNumber`,`TrxDesc`,`TimeTicket`,`TimeCall`,`CustWaitDuration`,`UnitServe`,`CounterNo`,`Absent`,`UserId`,`Flag`,`TimeEnd`,`Tservice`,`TWservice`,`TSLAservice`,`TOverSLA`,`QrSeqNumber`,`OnlineQ`) values 
+insert  into `transactioncust`(`BaseDt`,`SeqNumber`,`TrxDesc`,`TimeTicket`,`TimeCall`,`CustWaitDuration`,`UnitServe`,`CounterNo`,`Absent`,`UserId`,`Flag`,`TimeEnd`,`Tservice`,`TWservice`,`TSLAservice`,`TOverSLA`,`QrSeqNumber`,`OnlineQ`) values
 ('20210605','A001','1111','21:50:07','22:22:28','00:32:21','A','02','N','teller1','N','22:22:39','00:00:03','00:00:06','00:05:00','00:00:00','',NULL),
 ('20210605','A002','Antrian Te','21:51:03','22:28:20','00:37:17','A','02','N','teller1','N','22:28:26','00:00:04',NULL,NULL,NULL,'',NULL),
 ('20210605','A003','Antrian Te','21:52:35','22:29:01','00:36:26','A','02','N','teller1','N','22:29:12','00:00:02',NULL,NULL,NULL,'',NULL),
