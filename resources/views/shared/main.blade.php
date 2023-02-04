@@ -9,42 +9,45 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
 
+    <style>
+        body {
+            background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), rgb(12, 14, 145));
+        }
+
+        p.font-call {
+            color: white;
+            font-size: 0.675em;
+        }
+
+        img#call_bri {
+            width: 100px;
+        }
+    </style>
+
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#navScroll">
+<body>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto mt-5" style="text-align: center;">
+                <img src="{{ asset('images/bri-logo.png') }}" alt="">
+                <img src="{{ asset('images/eBiru.png') }}" alt="">
+            </div>
+        </div>
 
-    @include('shared.navbar_top')
-
-    <main>
         @yield('content')
-    </main>
 
-    {{-- @include('shared.footer') --}}
-    <script>
-        AOS.init({
-            duration: 800, // values from 0 to 3000, with step 50ms
-        });
-    </script>
-
-    {{-- <script>
-        let scrollpos = window.scrollY;
-        const header = document.querySelector(".navbar");
-        const header_height = header.offsetHeight;
-
-        const add_class_on_scroll = () => header.classList.add("scrolled", "shadow-sm");
-        const remove_class_on_scroll = () => header.classList.remove("scrolled", "shadow-sm");
-
-        window.addEventListener('scroll', function() {
-            scrollpos = window.scrollY;
-
-            if (scrollpos >= header_height) {
-                add_class_on_scroll();
-            } else {
-                remove_class_on_scroll();
-            }
-        })
-    </script> --}}
-
+        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5 rounded-circle">
+            <div class="row justify-content-md-center">
+                <img src="{{ asset('images/CALL_BRI.png') }}"class="img-responsive center-block d-block mx-auto"
+                    alt="" id="call_bri">
+            </div>
+            <div class="row justify-content-md-center">
+                <p class="font-call text-center">Powered by Bank Rakyat Indonesia <br> Apllication Version EMQ 23.1
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

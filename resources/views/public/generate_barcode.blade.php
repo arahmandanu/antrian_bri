@@ -1,79 +1,66 @@
 @extends('shared.main')
 
 @section('content')
-    <div class="w-100 overflow-hidden" id="top">
+    <div class="row justify-content-md-center">
+        <input type="hidden" name='latitude' id="latitude">
+        <input type="hidden" name='longitude' id="longitude">
+        <div class="col-lg-6">
+            @include('shared.alert')
+            <form action="{{ route('barcode.post_form') }}" method="POST">
+                @csrf
+                @method('POST')
+                <div class="mb-3 text-center">
+                    <label for="unit_code" class="fw-bold form-label">Unit</label>
+                    <select name="unit_code"
+                        class="js-example-placeholder-single js-states form-control {{ $errors->has('unit_code') ? 'is-invalid' : '' }}"
+                        id="unit" required>
+                        <option value=""></option>
+                        @forelse ($unitCodes as $unitCode)
+                            <option value="{{ $unitCode->code }}"
+                                @if (old('unit_code') == $unitCode->code) {{ 'selected' }} @endif>
+                                {{ Str::upper($unitCode->name) }}</option>
+                        @empty
+                            <option> No Data Found</option>
+                        @endforelse
+                    </select>
 
-        <div class="container position-relative">
-            <div class="row">
-                <input type="hidden" name='latitude' id="latitude">
-                <input type="hidden" name='longitude' id="longitude">
-
-                <div class="col-lg-12 py-vh-6 position-relative" data-aos="fade-right">
-                    <div class="py-vh-6 bg-primary text-light w-100 my-border" id="workwithus">
-                        <div class="row d-flex justify-content-center">
-                            <div class="row d-flex justify-content-center text-center">
-                                <div class="col-lg-8 text-center" data-aos="fade">
-                                    @include('shared.alert')
-                                    <form action="{{ route('barcode.post_form') }}" method="POST">
-                                        @csrf
-                                        @method('POST')
-                                        <div class="mb-3">
-                                            <label for="unit_code" class="form-label">Unit</label>
-                                            <select name="unit_code"
-                                                class="js-example-placeholder-single js-states form-control {{ $errors->has('unit_code') ? 'is-invalid' : '' }}"
-                                                id="unit" required>
-                                                <option value=""></option>
-                                                @forelse ($unitCodes as $unitCode)
-                                                    <option value="{{ $unitCode->code }}"
-                                                        @if (old('unit_code') == $unitCode->code) {{ 'selected' }} @endif>
-                                                        {{ Str::upper($unitCode->name) }}</option>
-                                                @empty
-                                                    <option> No Data Found</option>
-                                                @endforelse
-                                            </select>
-
-                                            @error('unit_code')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="queue_for" class="form-label">Tanggal
-                                                Antrian</label>
-                                            <input name="queue_for" type="date"
-                                                class="form-control {{ $errors->has('queue_for') ? 'is-invalid' : '' }}"
-                                                id="exampleInputPassword1" value="{{ old('queue_for') }}" required>
-                                            @error('queue_for')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="bank" class="form-label">Bank</label>
-                                            <select name="bank"
-                                                class="js-data-example-ajax form-control {{ $errors->has('bank') ? 'is-invalid' : '' }}"
-                                                required id="bank">
-                                                <option value="">Silahkan Pilih Bank</option>
-                                            </select>
-
-                                            @error('bank')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <button type="submit"
-                                            class="btn new-btn-custom-secondary new-btn-gradient">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-
+                    @error('unit_code')
+                        <div class="invalid-feedback">
+                            {{ $message }}
                         </div>
-                    </div>
+                    @enderror
                 </div>
-            </div>
+                <div class="mb-3 text-center">
+                    <label for="form queue_for" class="fw-bold form-label">Tanggal
+                        Antrian</label>
+                    <input name="queue_for" type="date"
+                        class="form-control {{ $errors->has('queue_for') ? 'is-invalid' : '' }}" id="exampleInputPassword1"
+                        value="{{ old('queue_for') }}" required>
+                    @error('queue_for')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3 text-center">
+                    <label for="form bank" class="fw-bold form-label">Bank</label>
+                    <select name="bank"
+                        class="js-data-example-ajax form-control {{ $errors->has('bank') ? 'is-invalid' : '' }}" required
+                        id="bank">
+                        <option value="">Silahkan Pilih Bank</option>
+                    </select>
+
+                    @error('bank')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3 text-center">
+                    <button type="submit"
+                        class="btn new-btn-custom-secondary rounded-pill new-btn-gradient">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
     <script>
@@ -182,8 +169,6 @@
                             "<div class='text-start'>" + escape(item.name) + "</div>" +
                             "<div class='text-start fst-italic'><em>" + escape(item.address) +
                             "</em></div>" +
-                            "</div>" +
-                            "<div class='col-2'>10 Km</div>" +
                             "</div>" + "</div>"
                         );
                     },
