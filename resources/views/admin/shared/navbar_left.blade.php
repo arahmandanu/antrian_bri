@@ -64,6 +64,7 @@
                 <h6 class="collapse-header">System:</h6>
                 <a class="collapse-item" href="{{ route('banks.index') }}">Data Master Bank</a>
                 <a class="collapse-item" href="{{ route('unit_codes.index') }}">Unit Codes</a>
+                <a class="collapse-item" href="{{ route('user.index') }}">User</a>
             </div>
         </div>
     </li>
