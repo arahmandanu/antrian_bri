@@ -43,6 +43,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::resource('/banks', BankController::class);
     Route::resource('/unit_codes', UnitCodeController::class);
     Route::resource('/queue_logs', QueueController::class);
+    Route::resource('/user', \App\Http\Controllers\Admin\UserController::class);
     Route::get('/over_sla', [\App\Http\Controllers\Admin\OverSlaController::class, 'index'])->name('admin.over_sla');
     Route::get('/reports', [\App\Http\Controllers\Admin\ReportsController::class, 'index'])->name('admin.reports');
     Route::get('/log_out', [LogOutController::class, 'call'])->name('auth.log_out');
