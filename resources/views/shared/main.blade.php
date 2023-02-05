@@ -30,7 +30,7 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-auto mt-5" style="text-align: center;">
-                <img src="{{ asset('images/bri-logo.png') }}" alt="">
+                <img src="{{ asset('images/bri-logo.png') }}" alt=""><br>
                 <img src="{{ asset('images/eBiru.png') }}" alt="">
             </div>
         </div>
@@ -39,8 +39,8 @@
 
         <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5 rounded-circle">
             <div class="row justify-content-md-center">
-                <img src="{{ asset('images/CALL_BRI.png') }}"class="img-responsive center-block d-block mx-auto"
-                    alt="" id="call_bri">
+                <img src="{{ asset('images/CALL_BRI.png') }}" class="img-responsive center-block d-block mx-auto" alt=""
+                    id="call_bri">
             </div>
             <div class="row justify-content-md-center">
                 <p class="font-call text-center">Powered by Bank Rakyat Indonesia <br> Apllication Version EMQ 23.1
