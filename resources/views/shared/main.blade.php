@@ -20,7 +20,11 @@
         }
 
         img#call_bri {
-            width: 100px;
+            width: 80px;
+        }
+
+        img#mobile_queue {
+            width: 90px;
         }
     </style>
 
@@ -29,15 +33,15 @@
 <body>
     <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col-md-auto mt-5" style="text-align: center;">
+            <div class="col-md-auto mt-3" style="text-align: center;">
                 <img src="{{ asset('images/bri-logo.png') }}" alt=""><br>
-                <img src="{{ asset('images/eBiru.png') }}" alt="">
+                <img src="{{ asset('images/eBiru.png') }}" alt="" id="mobile_queue">
             </div>
         </div>
 
         @yield('content')
 
-        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5 rounded-circle">
+        <div class="position-absolute bottom-0 start-50 translate-middle-x mb-2 rounded-circle">
             <div class="row justify-content-md-center">
                 <img src="{{ asset('images/CALL_BRI.png') }}" class="img-responsive center-block d-block mx-auto" alt=""
                     id="call_bri">
