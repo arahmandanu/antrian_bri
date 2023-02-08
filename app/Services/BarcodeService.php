@@ -43,11 +43,11 @@ class BarcodeService
         $queueNumber = Queue::select('number_queue')
             ->whereBetween('queue_for', [$queueFor->copy()->startOfDay(),  $queueFor->copy()->endOfDay()])
             ->where('bank_code', $bankCode)
-            ->where('unit_code', $unitCode)
-            ->max('number_queue');
+            ->where('unit_code', $unitCode->code)
+            ->latest()->first();
 
         if (isset($queueNumber)) {
-            $number = $queueNumber + 1;
+            $number = $queueNumber->number_queue + 1;
         } else {
             $number = 1;
         }
