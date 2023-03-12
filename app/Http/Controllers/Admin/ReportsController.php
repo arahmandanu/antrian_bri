@@ -22,15 +22,15 @@ class ReportsController extends Controller
         $sla = $request->input('sla');
         $transactions = [];
 
-        if(isset($bankCode)){
-            $transactions = Transaction::when($bankCode, function($query, $bankCode){
+        if (isset($bankCode)) {
+            $transactions = Transaction::when($bankCode, function ($query, $bankCode) {
                 return $query->where('br_code', $bankCode);
             })
-                ->when($unitCode, function($query, $unitCode){
+                ->when($unitCode, function ($query, $unitCode) {
                     return $query->where('UnitServe', $unitCode);
                 })
-                ->when($sla, function($query, $sla){
-                    if($sla == 1){
+                ->when($sla, function ($query, $sla) {
+                    if ($sla == 1) {
                         // Over SLA
                         return $query->whereNotNull('TOverSLA')->Where('TOverSLA', '<>', '00:00:00');
                     } else {
@@ -38,17 +38,19 @@ class ReportsController extends Controller
                         return $query->whereNull('TOverSLA')->orWhere('TOverSLA', '=', '00:00:00');
                     }
                 })
-                ->when($dateRange, function($query, $dateRange){
+                ->when($dateRange, function ($query, $dateRange) {
                     $formatQueueFor = $this->formatDateRangePicker($dateRange);
+
                     return $query->whereBetween('BaseDt', [$formatQueueFor['from']->startOfDay()->format('Ymd'), $formatQueueFor['to']->endOfDay()->format('Ymd')]);
                 })
                 ->get();
         }
 
         session()->flashInput($request->input());
+
         return view('admin.reports.report_index', [
             'banks' => MstBank::all(),
-            'transactions' => $transactions
+            'transactions' => $transactions,
         ]);
     }
 

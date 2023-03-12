@@ -22,8 +22,8 @@ class QueueController extends Controller
         $created_at = $request->created_at;
 
         $queues = Queue::when($bank, function ($query, $bank) {
-                $query->where('bank_id', $bank);
-            })
+            $query->where('bank_id', $bank);
+        })
             ->when($unit_code, function ($query, $unit_code) {
                 $query->where('unit_code_id', $unit_code);
             })

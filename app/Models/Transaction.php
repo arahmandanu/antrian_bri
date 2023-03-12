@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $table = 'transactioncust';
+
     use HasFactory;
 
     public function scopeTeller($query)

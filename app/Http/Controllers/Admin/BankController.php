@@ -22,8 +22,8 @@ class BankController extends Controller
         $address = $request->address;
 
         $banks = MstBank::when($code, function ($query, $code) {
-                $query->where('code', 'like', "%$code%");
-            })
+            $query->where('code', 'like', "%$code%");
+        })
             ->when($name, function ($query, $name) {
                 $query->where('name', 'like', "%$name%");
             })

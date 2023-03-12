@@ -16,6 +16,7 @@ class BarcodeController extends Controller
     public function index()
     {
         $banks = MstBank::select('id', 'code', 'name', 'address')->orderBy('name', 'desc')->take(10)->get()->toArray();
+
         return view('public.generate_barcode', [
             'banks' => $banks,
             'unitCodes' => UnitCode::all(),
