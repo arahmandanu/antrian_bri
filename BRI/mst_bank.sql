@@ -47,7 +47,6 @@ CREATE TABLE `mst_bank` (
 --
 
 INSERT INTO `mst_bank` (`id`, `Area_Code`, `KC_Code`, `code`, `name`, `city`, `address`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
-(1, '', '', '0197', 'Yogyakarta (KW)', 'Jogyakarta', 'Jl. Cik Ditiro No. 3 Yogyakarta D.I. Yogyakarta', -7.7867472, 110.6300068, '2023-01-23 15:26:23', '2023-01-23 15:26:23'),
 (2, '00001', '00197', '00197', 'Yogyakarta (KW)', 'Jogyakarta', 'Jl. Cik Ditiro No. 3 Yogyakarta D.I. Yogyakarta', -7.7813203, 110.374962, '2023-01-23 15:26:23', '2023-01-23 15:26:23'),
 (4, '00001', '00236', '00236', 'Bantul (KC)', 'Jogyakarta', 'Jl. Jend. Sudirman No. 3 Bantu', -7.800689937847895, 110.33183843456521, '2023-01-23 15:26:23', '2023-01-23 15:26:23'),
 (5, '00001', '00245', '00245', 'Yogya Katamso (KC)', 'Jogyakarta', 'Jl. Brigjen. Katamso No. 13-15 Yogyakarta', -7.801821780407484, 110.36970972135765, '2023-01-23 15:26:23', '2023-01-23 15:26:23'),

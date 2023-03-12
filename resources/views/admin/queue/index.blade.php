@@ -36,7 +36,9 @@
                                     id="unit">
                                     <option value="">-- All --</option>
                                     @forelse ($unitCodes as $unitCode)
-                                        <option value="{{ $unitCode->id }}">{{ $unitCode->code }}</option>
+                                        <option {{ Request::input('unit_code') == $unitCode->code ? 'selected' : '' }}
+                                            value="{{ $unitCode->code }}">
+                                            {{ $unitCode->code }}</option>
                                     @empty
                                         <option>-- No Data Found --</option>
                                     @endforelse
@@ -171,7 +173,6 @@
                             search: params.term,
                             type: 'public'
                         }
-
                         return query;
                     },
                     processResults: function(data) {

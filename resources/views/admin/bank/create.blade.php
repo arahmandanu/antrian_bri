@@ -24,23 +24,23 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Area Code</label>
                             <input type="text" name="Area_Code"
-                                   class="form-control {{ $errors->has('Area_Code') ? 'is-invalid' : '' }}" placeholder="Bank Name"
-                                   value='{{ old('Area_Code') }}'>
+                                class="form-control {{ $errors->has('Area_Code') ? 'is-invalid' : '' }}"
+                                placeholder="Area Code" value='{{ old('Area_Code') }}'>
                             @error('Area_Code')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">KC Code</label>
                             <input type="text" name="KC_Code"
-                                   class="form-control {{ $errors->has('KC_Code') ? 'is-invalid' : '' }}" placeholder="Bank Name"
-                                   value='{{ old('KC_Code') }}'>
+                                class="form-control {{ $errors->has('KC_Code') ? 'is-invalid' : '' }}" placeholder="KC Code"
+                                value='{{ old('KC_Code') }}'>
                             @error('KC_Code')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                         <div class="mb-3">
@@ -68,12 +68,12 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Kota</label>
                             <input type="text" name="city"
-                                   class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" placeholder="Bank Name"
-                                   value='{{ old('city') }}'>
+                                class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" placeholder="Kota"
+                                value='{{ old('city') }}'>
                             @error('city')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                         <div class="mb-3">

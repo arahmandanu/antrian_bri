@@ -86,7 +86,7 @@
         var data1 = {
             labels: ["CS Over SLA", "CS Not Over SLA", "TELLER Over SLA", "Teller Not Over SLA"],
             datasets: [{
-                label: "TeamA Score",
+                label: "Chart SLA",
                 data: [csover, cs, tellerover, teller],
                 backgroundColor: [
                     "#DC143C",
@@ -103,9 +103,17 @@
         };
 
         var chart1 = new Chart($("#doughnut-chartcanvas-1"), {
-            type: "doughnut",
+            type: "bar",
             data: data1,
-            options: getOptionChart(namemonth)
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
         });
 
         var data2 = {
