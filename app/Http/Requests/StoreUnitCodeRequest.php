@@ -25,7 +25,7 @@ class StoreUnitCodeRequest extends FormRequest
     {
         return [
             'code' => ['required', 'unique:unit_codes'],
-            'name' => ['required', 'unique:unit_codes']
+            'name' => ['required', 'unique:unit_codes'],
         ];
     }
 }

@@ -42,7 +42,7 @@ class OverSlaController extends Controller
                 ->get();
 
             foreach ($transactions as $transaction) {
-                if ($transaction->OnlineQ == "Y") {
+                if ($transaction->OnlineQ == 'Y') {
                     $online++;
                 } else {
                     $offline++;
@@ -65,6 +65,7 @@ class OverSlaController extends Controller
         }
 
         session()->flashInput($request->input());
+
         return view('admin.reports.over_sla_index', [
             'month' => 'asd',
             'cs' => $cs,
@@ -73,7 +74,7 @@ class OverSlaController extends Controller
             'tellerover' => $tellerOver,
             'online' => $online,
             'offline' => $offline,
-            'banks' => MstBank::all()
+            'banks' => MstBank::all(),
         ]);
     }
 

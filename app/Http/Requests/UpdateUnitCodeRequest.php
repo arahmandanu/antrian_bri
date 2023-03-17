@@ -25,7 +25,7 @@ class UpdateUnitCodeRequest extends FormRequest
     {
         $rule = [
             'code' => ['required'],
-            'name' => ['required']
+            'name' => ['required'],
         ];
 
         if ($this->code != $this->unit_code->code) {

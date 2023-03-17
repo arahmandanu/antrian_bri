@@ -33,7 +33,7 @@ class StoreBank extends FormRequest
             'address' => ['required', 'max:255'],
             'latitude' => [new ValidLatitude],
             'longitude' => [new ValidLongitude],
-            'city' => ['required']
+            'city' => ['required'],
         ];
     }
 }

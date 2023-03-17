@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MstBank;
 use App\Models\Queue;
 use App\Models\UnitCode;
 use Illuminate\Http\Request;
@@ -22,10 +23,10 @@ class QueueController extends Controller
         $created_at = $request->created_at;
 
         $queues = Queue::when($bank, function ($query, $bank) {
-                $query->where('bank_id', $bank);
-            })
+            $query->where('bank_id', $bank);
+        })
             ->when($unit_code, function ($query, $unit_code) {
-                $query->where('unit_code_id', $unit_code);
+                $query->where('unit_code', $unit_code);
             })
             ->when($queue_for, function ($query, $queue_for) {
                 $formatQueueFor = $this->formatDateRangePicker($queue_for);
@@ -35,6 +36,7 @@ class QueueController extends Controller
                 $formatCreatedAt = $this->formatDateRangePicker($created_at);
                 $query->whereBetween('created_at', [$formatCreatedAt['from']->startOfDay(), $formatCreatedAt['to']->endOfDay()]);
             })
+            ->latest()
             ->paginate(15);
 
         $queues->appends($request->all());

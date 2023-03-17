@@ -24,9 +24,9 @@ class AddUser extends FormRequest
     public function rules()
     {
         $rule = [
-            "name" => ['required', 'min:4'],
-            "email" => ['required', 'unique:users'],
-            "password" => ['min:6', 'required']
+            'name' => ['required', 'min:4'],
+            'email' => ['required', 'unique:users'],
+            'password' => ['min:6', 'required'],
         ];
 
         return $rule;

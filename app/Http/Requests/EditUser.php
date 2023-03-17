@@ -24,15 +24,15 @@ class EditUser extends FormRequest
     public function rules()
     {
         $rule = [
-            "name" => ['required', 'min:4'],
-            "email" => ['required', 'min:4']
+            'name' => ['required', 'min:4'],
+            'email' => ['required', 'min:4'],
         ];
 
         if ($this->email != $this->user->email) {
             array_push($rule['email'], 'unique:users');
         }
 
-        if(isset($this->password)){
+        if (isset($this->password)) {
             $rule['password'] = ['min:6'];
         }
 

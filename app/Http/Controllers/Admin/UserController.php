@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUser;
 use App\Http\Requests\EditUser;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -18,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user.index', [
-            'users' => User::all()
+            'users' => User::all(),
         ]);
     }
 
@@ -42,6 +41,7 @@ class UserController extends Controller
     {
         $user = User::create($request->validated());
         flash()->success('Berhasil membuat user baru');
+
         return redirect()->route('user.show', $user->id);
     }
 
@@ -54,9 +54,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('admin.user.show', [
-            'user' => $user
+            'user' => $user,
         ]);
-
     }
 
     /**
@@ -80,11 +79,11 @@ class UserController extends Controller
     public function update(EditUser $request, User $user)
     {
         $attribute = $request->validated();
-        if(isset($request->validated()['password'])){
+        if (isset($request->validated()['password'])) {
             $attribute['password'] = bcrypt($request->validated()['password']);
         }
 
-        if($user->update($attribute)) {
+        if ($user->update($attribute)) {
             flash()->success('Berhasil update data user');
         } else {
             flash()->danger('Gagal update data user');

@@ -13,6 +13,6 @@ class UnitCode extends Model
 
     protected $fillable = [
         'code',
-        'name'
+        'name',
     ];
 }

@@ -18,16 +18,14 @@ class Queue extends Model
     protected $fillable = [
         'ip',
         'id',
-        'email',
         'queue_for',
         'number_queue',
-        'unit_code_id',
         'unit_code',
         'bank_id',
         'bank_code',
         'bank_name',
         'bank_address',
-        'unit_code_name'
+        'unit_code_name',
     ];
 
     public function getBarcode()
@@ -42,9 +40,9 @@ class Queue extends Model
     private function formatQueueNumber($queue)
     {
         if (strlen($queue) == 2) {
-            $queue = "0" . $queue;
+            $queue = '0' . $queue;
         } elseif (strlen($queue) == 1) {
-            $queue = "00" . $queue;
+            $queue = '00' . $queue;
         }
 
         return $queue;
