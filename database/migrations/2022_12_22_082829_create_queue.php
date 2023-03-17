@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('queue', function (Blueprint $table) {
-            $table->ipAddress('ip');
+            $table->ipAddress('ip')->nullable(true);
             $table->uuid('id')->unique();
             $table->date('queue_for', $precision = 0)->nullable(false);
             $table->string('number_queue')->nullable(false);
@@ -31,6 +31,11 @@ return new class extends Migration
             $table->string('bank_name', 255)->nullable(false);
             $table->text('bank_address')->nullable(false);
 
+            //online
+            $table->enum('OnlineQ', ['Y', 'N']);
+
+            //call
+            $table->enum('call', ['P', 'N']);
             $table->timestamps();
         });
     }
