@@ -30,7 +30,7 @@
             domtoimage.toJpeg(document.getElementById('mycanvas'), {
                     quality: 1,
                     bgcolor: 'white',
-                    width: 290,
+                    width: 430,
                     height: 500
                 })
                 .then(function(dataUrl) {
