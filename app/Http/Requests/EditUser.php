@@ -23,6 +23,7 @@ class EditUser extends FormRequest
      */
     public function rules()
     {
+
         $rule = [
             'name' => ['required', 'min:4'],
             'email' => ['required', 'min:4'],
@@ -34,6 +35,10 @@ class EditUser extends FormRequest
 
         if (isset($this->password)) {
             $rule['password'] = ['min:6'];
+        }
+
+        if ($this->input('role') != $this->user->roles->first()->id) {
+            $rule['role'] = ['exists:roles,id'];
         }
 
         return $rule;

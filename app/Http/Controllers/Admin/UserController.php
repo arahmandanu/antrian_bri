@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUser;
 use App\Http\Requests\EditUser;
+use App\Models\Role;
 use App\Models\User;
 
 class UserController extends Controller
@@ -55,6 +56,7 @@ class UserController extends Controller
     {
         return view('admin.user.show', [
             'user' => $user,
+            'roles' => Role::all(),
         ]);
     }
 
@@ -78,6 +80,7 @@ class UserController extends Controller
      */
     public function update(EditUser $request, User $user)
     {
+        $newRole = Role::find($request->validated('role'));
         $attribute = $request->validated();
         if (isset($request->validated()['password'])) {
             $attribute['password'] = bcrypt($request->validated()['password']);
@@ -88,6 +91,9 @@ class UserController extends Controller
         } else {
             flash()->danger('Gagal update data user');
         }
+
+        // $user->removeRole($user->roles->first());
+
 
         return redirect()->back();
     }

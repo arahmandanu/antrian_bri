@@ -197,6 +197,9 @@ return [
 
         //Barcode
         Milon\Barcode\BarcodeServiceProvider::class,
+
+        //Permission
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
 
     /*
