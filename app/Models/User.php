@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'unit_code',
     ];
 
     /**
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function roleName()
     {
         return $this->roles->pluck('name')[0];
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(MstBank::class, 'unit_code', 'code');
     }
 }

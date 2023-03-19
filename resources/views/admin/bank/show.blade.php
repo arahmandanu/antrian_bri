@@ -24,14 +24,31 @@
                         @csrf
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Area Code</label>
-                            <input type="text" name="Area_Code" class="form-control" placeholder="Area Bank Code"
-                                   value="{{ $bank->Area_Code }}">
+                            <input disabled type="text" class="form-control" placeholder="Area Bank Code"
+                                value="{{ $bank->Area_Code }}">
                         </div>
+
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">KC Code</label>
-                            <input type="text" name="KC_Code" class="form-control" placeholder="KC Code"
-                                   value="{{ $bank->KC_Code }}">
+                            <label for="exampleFormControlInput1" class="form-label">Branch Code</label>
+                            <select name="KC_Code" class="form-control">
+                                <option value="">-- Cabang --</option>
+                                @forelse ($bankBranches as $bankBranch)
+                                    <option {{ $bank->KC_Code == $bankBranch->code ? 'selected' : '' }}
+                                        value="{{ $bankBranch->code }}">{{ $bankBranch->name }} -
+                                        {{ $bankBranch->code }}
+                                    </option>
+                                @empty
+                                    <option value="" selected>No Data Found</option>
+                                @endforelse
+                            </select>
+
+                            @error('KC_Code')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Code</label>
                             <input type="text" name="code" class="form-control" placeholder="Bank Code"

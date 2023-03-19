@@ -63,14 +63,7 @@
                                             <div class="p-2 bd-highlight"><a type="button"
                                                     class="btn btn-info btn-sm btn-block"
                                                     href="{{ route('banks.show', $bank->id) }} "><i class="fa fa-pencil"
-                                                        aria-hidden="true"></i></a></div>
-                                            <div class="p-2 bd-highlight">
-                                                <form action="{{ route('banks.destroy', $bank->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm btn-block"><i
-                                                            class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                </form>
+                                                        aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                     </td>

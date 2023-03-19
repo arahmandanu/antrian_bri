@@ -21,28 +21,27 @@
                 <div class="card-body">
                     <form action="{{ route('banks.store') }}" method="POST">
                         @csrf
+
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Area Code</label>
-                            <input type="text" name="Area_Code"
-                                class="form-control {{ $errors->has('Area_Code') ? 'is-invalid' : '' }}"
-                                placeholder="Area Code" value='{{ old('Area_Code') }}'>
-                            @error('Area_Code')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">KC Code</label>
-                            <input type="text" name="KC_Code"
-                                class="form-control {{ $errors->has('KC_Code') ? 'is-invalid' : '' }}" placeholder="KC Code"
-                                value='{{ old('KC_Code') }}'>
+                            <label for="exampleFormControlInput1" class="form-label">Branch Code</label>
+                            <select name="KC_Code" class="form-control">
+                                <option value="">-- Cabang --</option>
+                                @forelse ($bankBranches as $bankBranch)
+                                    <option value="{{ $bankBranch->code }}">{{ $bankBranch->name }} -
+                                        {{ $bankBranch->code }}
+                                    </option>
+                                @empty
+                                    <option value="" selected>No Data Found</option>
+                                @endforelse
+                            </select>
+
                             @error('KC_Code')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Code</label>
                             <input type="text" name="code"

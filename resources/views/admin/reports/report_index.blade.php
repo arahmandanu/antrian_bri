@@ -14,20 +14,89 @@
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Bank</h6>
                     <hr>
+                    <h6><span class="badge bg-danger fst-italic">Silahkan pilih salah satu filter berdasar Area / Cabang /
+                            Unit</span>
+                    </h6>
                     <form class="row g-3" method="GET" action="{{ route('admin.reports') }}">
-                        <div class="col-4">
-                            <label for="inputname" class="visually-hidden">Bank</label>
-                            <select type="text" name="bank_code" class="form-control" required id="inputname"
+                        <p>
+                            <button class="btn btn-primary" onclick="collapse('byAreaBank')" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#byAreaBank" aria-expanded="false"
+                                aria-controls="byAreaBank">
+                                Area Bank
+                            </button>
+                            <button class="btn btn-primary" onclick="collapse('byCabangBank')" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#byCabangBank" aria-expanded="false"
+                                aria-controls="byCabangBank">
+                                Kantor Cabang
+                            </button>
+                            <button class="btn btn-primary" onclick="collapse('byUnitBank')" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#byUnitBank" aria-expanded="false"
+                                aria-controls="byUnitBank">
+                                Kantor Unit
+                            </button>
+                        </p>
+
+                        <div class="collapse" id="byAreaBank">
+                            <div class="card card-body">
+                                <label for="inputname" class="visually-hidden">Bank</label>
+                                <select type="text" name="area_code" class="form-control" id="byAreaBank"
+                                    placeholder="Area Name">
+                                    <option value="">Silahkan Pilih Area</option>
+                                    @forelse($bankAreas as $bankArea)
+                                        <option value="{{ $bankArea->code }}">{{ $bankArea->name }} - {{ $bankArea->code }}
+                                        </option>
+                                    @empty
+                                        <option value="">No Data Found</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="byCabangBank">
+                            <div class="card card-body">
+                                <label for="inputname" class="visually-hidden">Bank</label>
+                                <select type="text" name="branch_code" class="form-control" id="byCabangBank"
+                                    placeholder="Cabang Name">
+                                    <option value="">Silahkan Pilih Kantor Cabang</option>
+                                    @forelse($bankBranches as $bankBranch)
+                                        <option value="{{ $bankBranch->code }}">{{ $bankBranch->name }} -
+                                            {{ $bankBranch->code }}</option>
+                                    @empty
+                                        <option value="">No Data Found</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="collapse" id="byUnitBank">
+                            <div class="card card-body">
+                                <label for="inputname" class="visually-hidden">Bank</label>
+                                <select type="text" name="bank_code" class="form-control" id="byUnitBank"
+                                    placeholder="Bank Name">
+                                    <option value="">Silahkan Pilih Kantor Unit</option>
+                                    @forelse($banks as $bank)
+                                        <option value="{{ $bank->code }}">{{ $bank->name }}</option>
+                                    @empty
+                                        <option value="">No Data Found</option>
+                                    @endforelse
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-auto">
+                            <label for="inputname" class="visually-hidden">User</label>
+                            <select type="text" name="UserId" class="form-control" id="inputname"
                                 placeholder="Bank Name">
-                                <option value="">Silahkan Pilih Bank</option>
-                                @forelse($banks as $bank)
-                                    <option {{ $bank->code == old('bank_code') ? 'selected' : '' }}
-                                        value="{{ $bank->code }}">{{ $bank->name }}</option>
+                                <option value="">-- User --</option>
+                                @forelse ($actors as $actor)
+                                    <option {{ old('UserId') == $actor->code ? 'selected' : '' }}
+                                        value="{{ $actor->code }}">{{ $actor->name }}</option>
                                 @empty
                                     <option value="">No Data Found</option>
                                 @endforelse
                             </select>
                         </div>
+
                         <div class="col-auto">
                             <label for="inputname" class="visually-hidden">Unit Code</label>
                             <select type="text" name="unit_code" class="form-control" id="inputname"
@@ -37,6 +106,7 @@
                                 <option value="A" {{ old('unit_code') == 'A' ? 'selected' : '' }}>TELLER</option>
                             </select>
                         </div>
+
                         <div class="col-auto">
                             <label for="inputname" class="visually-hidden">SLA</label>
                             <select type="text" name="sla" class="form-control" id="inputname"
@@ -46,21 +116,25 @@
                                 <option value="2" {{ old('sla') == '2' ? 'selected' : '' }}>Not Over Sla</option>
                             </select>
                         </div>
+
                         <div class="col-auto">
                             <input name="queue_for" type="text"
                                 class="form-control {{ $errors->has('queue_for') ? 'is-invalid' : '' }}"
-                                id="exampleInputPassword1" placeholder="Date Range" value="{{ old('queue_for') }}">
+                                id="exampleInputPassword1" required placeholder="Date Range"
+                                value="{{ old('queue_for') }}">
                             @error('queue_for')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
                         <div class="col-auto">
                             <button type="submit" class="btn btn-success mb-3">Search</button>
                         </div>
                     </form>
                 </div>
+
                 <div class="card-body table-responsive">
                     <table class="table table-striped" id="report">
                         <thead>
@@ -119,6 +193,15 @@
     </div>
 
     <script>
+        function collapse(data) {
+            colls = ['byAreaBank', 'byCabangBank', 'byUnitBank'];
+            close = colls.filter(e => e !== data);
+            close.forEach(element => {
+                $("div.collapse,#" + element).collapse('hide');
+                $("select#" + element).val('');
+            });
+        }
+
         $(document).ready(function() {
             $('input[name="queue_for"]').daterangepicker({
                 opens: 'left',

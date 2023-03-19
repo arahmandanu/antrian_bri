@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBank;
 use App\Http\Requests\UpdateBank;
+use App\Models\BankArea;
+use App\Models\BankBranch;
 use App\Models\MstBank;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class BankController extends Controller
@@ -48,7 +51,10 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('admin.bank.create');
+        return view('admin.bank.create', [
+            'bankAreas' => BankArea::all(),
+            'bankBranches' => BankBranch::all(),
+        ]);
     }
 
     /**
@@ -59,7 +65,9 @@ class BankController extends Controller
      */
     public function store(StoreBank $request)
     {
-        $newBank = MstBank::create($request->validated());
+        $bankBranch = BankBranch::where('code', $request->validated('KC_Code'))->firstOrFail();
+        $attr = array_merge($request->validated(), ['Area_Code' => $bankBranch->area->code]);
+        $newBank = MstBank::create($attr);
 
         if ($newBank) {
             flash()->success('Berhasil menyimpan data Bank');
@@ -80,12 +88,13 @@ class BankController extends Controller
      */
     public function show(MstBank $bank)
     {
-        if (! $bank) {
+        if (!$bank) {
             abort(404);
         }
 
         return view('admin.bank.show', [
             'bank' => $bank,
+            'bankBranches' => BankBranch::all(),
         ]);
     }
 
@@ -98,8 +107,11 @@ class BankController extends Controller
      */
     public function update(UpdateBank $request, MstBank $bank)
     {
-        abort_if(! $bank, 404);
-        $bank->update($request->validated());
+        abort_if(!$bank, 404);
+
+        $bankBranch = BankBranch::where('code', $request->validated('KC_Code'))->firstOrFail();
+        $attr = array_merge($request->validated(), ['Area_Code' => $bankBranch->area->code]);
+        $bank->update($attr);
 
         flash()->success('Berhasil update Bank');
 
@@ -114,7 +126,7 @@ class BankController extends Controller
      */
     public function destroy(MstBank $bank)
     {
-        abort_if(! $bank, 404);
+        abort_if(!$bank, 404);
 
         if ($bank->delete()) {
             flash()->success('Berhasil delete Bank');

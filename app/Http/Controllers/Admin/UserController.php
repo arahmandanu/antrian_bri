@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUser;
 use App\Http\Requests\EditUser;
+use App\Models\MstBank;
 use App\Models\Role;
 use App\Models\User;
 
@@ -29,7 +30,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        return view('admin.user.create', [
+            'roles' => Role::all(),
+            'unitBanks' => MstBank::all(),
+        ]);
     }
 
     /**
@@ -40,7 +44,11 @@ class UserController extends Controller
      */
     public function store(AddUser $request)
     {
-        $user = User::create($request->validated());
+        $attribute = $request->validated();
+        $attribute['password'] = bcrypt($request->validated()['password']);
+        $user = User::create($attribute);
+        $role = Role::find($request->validated('role'));
+        $user->assignRole($role);
         flash()->success('Berhasil membuat user baru');
 
         return redirect()->route('user.show', $user->id);
@@ -57,6 +65,7 @@ class UserController extends Controller
         return view('admin.user.show', [
             'user' => $user,
             'roles' => Role::all(),
+            'unitBanks' => MstBank::all(),
         ]);
     }
 
@@ -80,7 +89,12 @@ class UserController extends Controller
      */
     public function update(EditUser $request, User $user)
     {
-        $newRole = Role::find($request->validated('role'));
+        if ($request->validated('role') !== null) {
+            $newRole = Role::find($request->validated('role'));
+            $user->removeRole($user->roles->first());
+            $user->assignRole($newRole);
+        }
+
         $attribute = $request->validated();
         if (isset($request->validated()['password'])) {
             $attribute['password'] = bcrypt($request->validated()['password']);
@@ -91,9 +105,6 @@ class UserController extends Controller
         } else {
             flash()->danger('Gagal update data user');
         }
-
-        // $user->removeRole($user->roles->first());
-
 
         return redirect()->back();
     }

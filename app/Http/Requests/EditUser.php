@@ -23,10 +23,10 @@ class EditUser extends FormRequest
      */
     public function rules()
     {
-
         $rule = [
             'name' => ['required', 'min:4'],
             'email' => ['required', 'min:4'],
+            'unit_code' => ['required'],
         ];
 
         if ($this->email != $this->user->email) {

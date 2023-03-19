@@ -26,8 +26,7 @@ class StoreBank extends FormRequest
     public function rules()
     {
         return [
-            'Area_Code' => [],
-            'KC_Code' => [],
+            'KC_Code' => ['required', 'exists:bank_branches,code'],
             'code' => ['required', 'max:100', 'unique:mst_bank'],
             'name' => ['required', 'max:100', 'unique:mst_bank'],
             'address' => ['required', 'max:255'],

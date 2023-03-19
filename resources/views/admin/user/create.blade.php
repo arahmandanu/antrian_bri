@@ -19,6 +19,7 @@
                 <div class="card-body">
                     <form action="{{ route('user.store') }}" method="POST">
                         @csrf
+
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Name</label>
                             <input type="text" name="name"
@@ -30,26 +31,60 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Email</label>
                             <input type="email" name="email"
-                                class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" placeholder="Email User"
-                                value='{{ old('email') }}'>
+                                class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                                placeholder="Email User" value='{{ old('email') }}'>
                             @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Unit Bank</label>
+                            <select name="unit_code" class="form-control">
+                                <option value="">-- Unit --</option>
+                                @foreach ($unitBanks as $bank)
+                                    <option value="{{ $bank->code }}">{{ $bank->name }} - {{ $bank->code }}</option>
+                                @endforeach
+                            </select>
+
+                            @error('unit_code')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Role</label>
+                            <select name="role" class="form-control">
+                                <option value="">-- Role User --</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">password</label>
                             <input type="password" name="password"
-                                   class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Password User"
-                                   value=''>
+                                class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
+                                placeholder="Password User" value=''>
                             @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
 

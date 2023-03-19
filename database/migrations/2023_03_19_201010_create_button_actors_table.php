@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('button_branch', function (Blueprint $table) {
+        Schema::create('button_actors', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique(true);
+            $table->string('name')->unique(true);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('button_branch');
+        Schema::dropIfExists('button_actors');
     }
 };

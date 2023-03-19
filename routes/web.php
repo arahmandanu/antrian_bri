@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\BankAreaController;
+use App\Http\Controllers\Admin\BankBranchesController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QueueController;
@@ -8,7 +10,10 @@ use App\Http\Controllers\Authentication\LogOutController;
 use App\Http\Controllers\Authentication\ShowController;
 use App\Http\Controllers\Authentication\VerifyController;
 use App\Http\Controllers\BarcodeController;
+use App\Http\Controllers\ButtonActorController;
+use App\Http\Controllers\ButtonBranchController;
 use App\Http\Controllers\QueueController as ControllersQueueController;
+use App\Models\ButtonBranch;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,8 +50,42 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::resource('/banks', BankController::class);
     Route::resource('/unit_codes', UnitCodeController::class);
     Route::resource('/queue_logs', QueueController::class);
+
+    Route::resource('/bank_area', BankAreaController::class)->names([
+        'index' => 'admin.bank_area.index',
+        'create' => 'admin.bank_area.create',
+        'show' => 'admin.bank_area.show',
+        'store' => 'admin.bank_area.store',
+        'update' => 'admin.bank_area.update',
+    ]);
+
+    Route::resource('/bank_branches', BankBranchesController::class)->names([
+        'index' => 'admin.bank_branches.index',
+        'create' => 'admin.bank_branches.create',
+        'show' => 'admin.bank_branches.show',
+        'store' => 'admin.bank_branches.store',
+        'update' => 'admin.bank_branches.update',
+    ]);
+
     Route::resource('/user', \App\Http\Controllers\Admin\UserController::class);
     Route::get('/over_sla', [\App\Http\Controllers\Admin\OverSlaController::class, 'index'])->name('admin.over_sla');
     Route::get('/reports', [\App\Http\Controllers\Admin\ReportsController::class, 'index'])->name('admin.reports');
     Route::get('/log_out', [LogOutController::class, 'call'])->name('auth.log_out');
+
+    Route::group(['prefix' => '/settings'], function () {
+        Route::resource('/button', ButtonBranchController::class)->names([
+            'index' => 'operator.button.index',
+            'create' => 'operator.button.create',
+            'show' => 'operator.button.show',
+            'store' => 'operator.button.store',
+            'update' => 'operator.button.update',
+        ]);
+        Route::resource('/button_actor', ButtonActorController::class)->names([
+            'index' => 'operator.button_actor.index',
+            'create' => 'operator.button_actor.create',
+            'show' => 'operator.button_actor.show',
+            'store' => 'operator.button_actor.store',
+            'update' => 'operator.button_actor.update',
+        ]);
+    });
 });
