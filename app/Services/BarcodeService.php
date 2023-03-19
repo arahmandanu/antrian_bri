@@ -6,7 +6,6 @@ use App\Models\MstBank;
 use App\Models\Queue;
 use App\Models\UnitCode;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 
 class BarcodeService
 {
@@ -19,18 +18,22 @@ class BarcodeService
     ) {
         $unitCode = $this->getUnitCode($unitCode);
         $bank = $this->getBank($idBank);
+        $numberQueue = $this->getNumberQueue($queueFor, $bank->code, $unitCode);
+        $uniqId = $this->generateUniqId($queueFor, $bank->code, $unitCode->code, $numberQueue);
 
         $queue = $this->saveQueue([
             'ip' => $ip,
-            'id' => Str::uuid()->toString(),
+            'id' => $uniqId,
             'queue_for' => $queueFor,
-            'number_queue' => $this->getNumberQueue($queueFor, $bank->code, $unitCode),
+            'number_queue' => $numberQueue,
             'unit_code_name' => $unitCode->name,
             'unit_code' => $unitCode->code,
             'bank_id' => $bank->id,
             'bank_code' => $bank->code,
             'bank_name' => $bank->name,
             'bank_address' => $bank->address,
+            'OnlineQ' => 'Y',
+            'call' => 'P',
         ]);
 
         return encrypt($queue->id);
@@ -63,9 +66,9 @@ class BarcodeService
     private function formatQueueNumber($queue)
     {
         if (strlen($queue) == 2) {
-            $queue = '0'.$queue;
+            $queue = '0' . $queue;
         } elseif (strlen($queue) == 1) {
-            $queue = '00'.$queue;
+            $queue = '00' . $queue;
         }
 
         return $queue;
@@ -79,5 +82,12 @@ class BarcodeService
     private function saveQueue($data)
     {
         return Queue::create($data);
+    }
+
+    private function generateUniqId($queueFor, $bankCode, $unitCode, $numberQueue)
+    {
+        $formatedQueueuFor = Carbon::parse($queueFor)->format('dmY');
+
+        return "{$formatedQueueuFor}{$bankCode}{$unitCode}{$numberQueue}";
     }
 }

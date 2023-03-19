@@ -18,10 +18,16 @@
                 anda</h3>
         </div>
 
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center m-3">
             <a href="{{ route('barcode.show_form') }}"
-                class="btn new-btn-custom-secondary new-btn-gradient rounded-pill">Generate
+                class="btn new-btn-custom-secondary new-btn-gradient rounded-pill" style="width: 400px">Generate
                 Qrcode
+                Antrian</a>
+        </div>
+
+        <div class="d-flex justify-content-center m-3">
+            <a href="{{ route('public.queue.index') }}"
+                class="btn new-btn-custom-secondary new-btn-gradient rounded-pill" style="width: 400px">Lihat
                 Antrian</a>
         </div>
     </div>

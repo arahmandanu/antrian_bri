@@ -8,6 +8,7 @@ use App\Http\Controllers\Authentication\LogOutController;
 use App\Http\Controllers\Authentication\ShowController;
 use App\Http\Controllers\Authentication\VerifyController;
 use App\Http\Controllers\BarcodeController;
+use App\Http\Controllers\QueueController as ControllersQueueController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('public.index');
 })->name('index');
+Route::get('/search', [ControllersQueueController::class, 'index'])->name('public.queue.index');
 
 Route::group(['prefix' => '/barcode'], function () {
     Route::get('/generate', [BarcodeController::class, 'index'])->name('barcode.show_form');

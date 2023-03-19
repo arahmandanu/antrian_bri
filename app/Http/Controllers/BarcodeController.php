@@ -86,9 +86,12 @@ class BarcodeController extends Controller
 
         return view('public.show_barcode', [
             'numberQueue' => $queue->number_queue,
+            'unitCode' => $queue->unit_code,
             'dateQueue' => $queue->queue_for,
             'nameQueue' => "Antrian $queue->created_at",
             'barcode' => $queue->getBarcode(),
+            'id' => $queue->id,
+            'bankCode' => $queue->bank_code,
         ]);
     }
 }

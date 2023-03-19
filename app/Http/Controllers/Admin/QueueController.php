@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\MstBank;
 use App\Models\Queue;
 use App\Models\UnitCode;
 use Illuminate\Http\Request;
