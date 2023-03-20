@@ -183,7 +183,7 @@
                             <td>{{ !isset($transaction->TOverSLA) ? '-' : $transaction->TOverSLA }}</td>
                         </tr>
                         @empty
-                        No Data Found
+                        {{-- No Data Found --}}
                         @endforelse
                     </tbody>
                 </table>
