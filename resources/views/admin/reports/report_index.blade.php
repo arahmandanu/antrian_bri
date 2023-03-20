@@ -14,9 +14,15 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Bank</h6>
                 <hr>
-                <h6><span class="badge bg-danger fst-italic">Silahkan pilih salah satu filter berdasar Area / Cabang /
+                <h6><span class="badge bg-success fst-italic">Silahkan pilih salah satu filter berdasar Area / Cabang /
                         Unit</span>
                 </h6>
+
+                @if ($errors->has('area_code') || $errors->has('bank_code') || $errors->has('branch_code'))
+                <span class="fst-italic">Anda hanya bisa memilih satu dianatara filter area / cabang /
+                    unit</span>
+                @endif
+
                 <form class="row g-3" method="GET" action="{{ route('admin.reports') }}">
                     <p>
                         <button class="btn btn-primary" onclick="collapse('byAreaBank')" type="button"
@@ -39,11 +45,11 @@
                     <div class="collapse" id="byAreaBank">
                         <div class="card card-body">
                             <label for="inputname" class="visually-hidden">Bank</label>
-                            <select type="text" name="area_code" class="form-control" id="byAreaBank"
-                                placeholder="Area Name">
+                            <select type="text" name="area_code" class="form-control" id="byAreaBankSelect">
                                 <option value="">Silahkan Pilih Area</option>
                                 @forelse($bankAreas as $bankArea)
-                                <option value="{{ $bankArea->code }}">{{ $bankArea->name }} - {{ $bankArea->code }}
+                                <option {{ Request::input('area_code')==$bankArea->code ? 'selected' : '' }} value="{{
+                                    $bankArea->code }}">{{ $bankArea->name }} - {{ $bankArea->code }}
                                 </option>
                                 @empty
                                 <option value="">No Data Found</option>
@@ -55,11 +61,12 @@
                     <div class="collapse" id="byCabangBank">
                         <div class="card card-body">
                             <label for="inputname" class="visually-hidden">Bank</label>
-                            <select type="text" name="branch_code" class="form-control" id="byCabangBank"
-                                placeholder="Cabang Name">
+                            <select type="text" name="branch_code" class="form-control" id="byCabangBankSelect">
                                 <option value="">Silahkan Pilih Kantor Cabang</option>
                                 @forelse($bankBranches as $bankBranch)
-                                <option value="{{ $bankBranch->code }}">{{ $bankBranch->name }} -
+                                <option {{ Request::input('branch_code')==$bankBranch->code ? 'selected' : '' }}
+                                    value="{{
+                                    $bankBranch->code }}">{{ $bankBranch->name }} -
                                     {{ $bankBranch->code }}</option>
                                 @empty
                                 <option value="">No Data Found</option>
@@ -71,11 +78,11 @@
                     <div class="collapse" id="byUnitBank">
                         <div class="card card-body">
                             <label for="inputname" class="visually-hidden">Bank</label>
-                            <select type="text" name="bank_code" class="form-control" id="byUnitBank"
-                                placeholder="Bank Name">
+                            <select type="text" name="bank_code" class="form-control" id="byUnitBankSelect">
                                 <option value="">Silahkan Pilih Kantor Unit</option>
                                 @forelse($banks as $bank)
-                                <option value="{{ $bank->code }}">{{ $bank->name }}</option>
+                                <option {{ Request::input('bank_code')==$bank->code ? 'selected' : '' }} value="{{
+                                    $bank->code }}">{{ $bank->name }}</option>
                                 @empty
                                 <option value="">No Data Found</option>
                                 @endforelse
@@ -191,38 +198,47 @@
 
 <script>
     function collapse(data) {
-            colls = ['byAreaBank', 'byCabangBank', 'byUnitBank'];
-            close = colls.filter(e => e !== data);
-            close.forEach(element => {
-                $("div.collapse,#" + element).collapse('hide');
-                $("select#" + element).val('');
-            });
-        }
-
-        $(document).ready(function() {
-            $('input[name="queue_for"]').daterangepicker({
-                opens: 'left',
-                autoUpdateInput: false,
-                locale: {
-                    cancelLabel: 'Clear'
-                }
-            });
-
-            $('input[name="queue_for"]').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('YYYY-MM-DD') + '/' + picker.endDate.format(
-                    'YYYY-MM-DD'));
-            });
-
-            $('input[name="queue_for"]').on('cancel.daterangepicker', function(ev, picker) {
-                $(this).val('');
-            });
-
-            $('#report').DataTable({
-                dom: 'Brtip',
-                buttons: [
-                    'csv', 'excel'
-                ]
-            });
+        colls = ['byAreaBank', 'byCabangBank', 'byUnitBank'];
+        close = colls.filter(e => e !== data);
+        close.forEach(element => {
+            $("div.collapse#" + element).collapse('hide');
+            console.log("select#" + element + "Select");
+            $("select#" + element + "Select").val('');
         });
+    }
+
+    $(document).ready(function() {
+        $('input[name="queue_for"]').daterangepicker({
+            opens: 'left',
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="queue_for"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD') + '/' + picker.endDate.format(
+                'YYYY-MM-DD'));
+        });
+
+        $('input[name="queue_for"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+
+        $('#report').DataTable({
+            dom: 'Brtip',
+            buttons: [
+                'csv', 'excel'
+            ]
+        });
+
+        if(@Json(Request::input('bank_code')) !== null) {
+            $("div.collapse#byUnitBank" + element).collapse('show');
+        } else if(@Json(Request::input('branch_code')) !== null){
+            $("div.collapse#byCabangBank").collapse('show');
+        } else if (@Json(Request::input('area_code')) !== null) {
+            $("div.collapse#byAreaBank").collapse('show');
+        }
+    });
 </script>
 @endsection
