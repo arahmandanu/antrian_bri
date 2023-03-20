@@ -233,7 +233,7 @@
         });
 
         if(@Json(Request::input('bank_code')) !== null) {
-            $("div.collapse#byUnitBank" + element).collapse('show');
+            $("div.collapse#byUnitBank").collapse('show');
         } else if(@Json(Request::input('branch_code')) !== null){
             $("div.collapse#byCabangBank").collapse('show');
         } else if (@Json(Request::input('area_code')) !== null) {
