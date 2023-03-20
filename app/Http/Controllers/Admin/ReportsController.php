@@ -64,7 +64,7 @@ class ReportsController extends Controller
                         return $query->whereNotNull('TOverSLA')->Where('TOverSLA', '<>', '00:00:00');
                     } else {
                         // Not Over SLA
-                        return $query->whereNull('TOverSLA')->orWhere('TOverSLA', '=', '00:00:00');
+                        return $query->whereIn('TOverSLA', ['', null, '00:00:00']);
                     }
                 })
                 ->when($dateRange, function ($query, $dateRange) {
