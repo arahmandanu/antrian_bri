@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateBank;
 use App\Models\BankArea;
 use App\Models\BankBranch;
 use App\Models\MstBank;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class BankController extends Controller
@@ -88,7 +87,7 @@ class BankController extends Controller
      */
     public function show(MstBank $bank)
     {
-        if (!$bank) {
+        if (! $bank) {
             abort(404);
         }
 
@@ -107,7 +106,7 @@ class BankController extends Controller
      */
     public function update(UpdateBank $request, MstBank $bank)
     {
-        abort_if(!$bank, 404);
+        abort_if(! $bank, 404);
 
         $bankBranch = BankBranch::where('code', $request->validated('KC_Code'))->firstOrFail();
         $attr = array_merge($request->validated(), ['Area_Code' => $bankBranch->area->code]);
@@ -126,7 +125,7 @@ class BankController extends Controller
      */
     public function destroy(MstBank $bank)
     {
-        abort_if(!$bank, 404);
+        abort_if(! $bank, 404);
 
         if ($bank->delete()) {
             flash()->success('Berhasil delete Bank');

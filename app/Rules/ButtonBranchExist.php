@@ -2,13 +2,13 @@
 
 namespace App\Rules;
 
-use App\Models\BankBranch;
 use App\Models\ButtonBranch;
 use Illuminate\Contracts\Validation\Rule;
 
 class ButtonBranchExist implements Rule
 {
     public $bank_code;
+
     /**
      * Create a new rule instance.
      *

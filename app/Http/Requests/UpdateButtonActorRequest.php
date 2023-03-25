@@ -31,6 +31,7 @@ class UpdateButtonActorRequest extends FormRequest
         if ($this->input('code') != $this->button_actor->code) {
             array_push($rule['code'], 'unique:button_actors,code');
         }
+
         return $rule;
     }
 }

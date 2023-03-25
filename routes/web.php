@@ -13,7 +13,6 @@ use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\ButtonActorController;
 use App\Http\Controllers\ButtonBranchController;
 use App\Http\Controllers\QueueController as ControllersQueueController;
-use App\Models\ButtonBranch;
 use Illuminate\Support\Facades\Route;
 
 /*

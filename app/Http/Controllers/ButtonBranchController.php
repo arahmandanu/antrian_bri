@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Operator\StoreButtonBranchRequest;
 use App\Http\Requests\Operator\UpdateButtonBranchRequest;
-use App\Http\Requests\StoreButtonActorRequest;
 use App\Models\ButtonActor;
 use App\Models\ButtonBranch;
-use App\Models\MstBank;
 use Illuminate\Http\Request;
 
 class ButtonBranchController extends Controller
@@ -25,7 +23,8 @@ class ButtonBranchController extends Controller
         })->where('bank_code', auth()->user()->unit_code)
             ->with('branch')
             ->with('actor')
-            ->paginate(10);
+            ->orderBy('button')
+            ->get();
 
         return view('admin.button_branch.index', [
             'buttonBranchs' => $buttonBranch,
@@ -41,7 +40,7 @@ class ButtonBranchController extends Controller
     {
         return view('admin.button_branch.create', [
             'actors' => ButtonActor::all(),
-            'buttons' => ButtonBranch::BUTTON
+            'buttons' => ButtonBranch::BUTTON,
         ]);
     }
 
@@ -57,6 +56,7 @@ class ButtonBranchController extends Controller
         ButtonBranch::create($attr);
 
         flash()->success('Berhasil menyimpan tombol user');
+
         return redirect()->route('operator.button.index');
     }
 
@@ -71,14 +71,13 @@ class ButtonBranchController extends Controller
         return view('admin.button_branch.show', [
             'buttonBranch' => $button,
             'actors' => ButtonActor::all(),
-            'buttons' => ButtonBranch::BUTTON
+            'buttons' => ButtonBranch::BUTTON,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ButtonBranch  $buttonBranch
      * @return \Illuminate\Http\Response
      */
     public function edit(ButtonBranch $buttonBranch)
@@ -97,13 +96,13 @@ class ButtonBranchController extends Controller
     {
         $button->update($request->validated());
         flash()->success('Berhasil mengubah data tombol');
+
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ButtonBranch  $buttonBranch
      * @return \Illuminate\Http\Response
      */
     public function destroy(ButtonBranch $buttonBranch)

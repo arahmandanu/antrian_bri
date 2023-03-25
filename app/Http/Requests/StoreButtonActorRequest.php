@@ -25,7 +25,7 @@ class StoreButtonActorRequest extends FormRequest
     {
         return [
             'code' => ['required', 'unique:button_actors,code'],
-            'name' => ['required', 'min:6', 'max:50']
+            'name' => ['required', 'min:6', 'max:50', 'unique:button_actors,name'],
         ];
     }
 }

@@ -14,7 +14,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Users <a href="{{ route('user.create') }}"
-                        class="btn btn-secondary">
+                        class="btn btn-outline-success">
                         <i class="fa fa-plus" aria-hidden="true"></i></a></h6>
 
             </div>
@@ -26,6 +26,7 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Unit</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -36,7 +37,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->roleName() }}</td>
+                            <td><span class="badge bg-{{ $user->roleName() == 'admin' ? 'success' : 'info' }}"> {{
+                                    $user->roleName() }} </span></td>
+                            <td>{{ $user->unit->name ?? '-' }}</td>
                             <td>
                                 <a class="btn btn-primary" href="{{ route('user.show', $user->id) }}"><i
                                         class="fa fa-pencil" aria-hidden="true"></i> Edit</a>

@@ -26,7 +26,7 @@ class UpdateButtonBranchRequest extends FormRequest
     {
         return [
             'button' => ['required'],
-            'actor_code' => ['required', new ButtonBranchExist(auth()->user()->unit_code)]
+            'actor_code' => ['required', new ButtonBranchExist(auth()->user()->unit_code)],
         ];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ButtonActor;
 use App\Http\Requests\StoreButtonActorRequest;
 use App\Http\Requests\UpdateButtonActorRequest;
+use App\Models\ButtonActor;
 use Illuminate\Http\Request;
 
 class ButtonActorController extends Controller
@@ -26,7 +26,7 @@ class ButtonActorController extends Controller
         session()->flashInput($request->input());
 
         return view('admin.button_actor.index', [
-            'actors' => $actor
+            'actors' => $actor,
         ]);
     }
 
@@ -43,7 +43,6 @@ class ButtonActorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreButtonActorRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreButtonActorRequest $request)
@@ -51,26 +50,25 @@ class ButtonActorController extends Controller
         ButtonActor::create($request->validated());
 
         flash()->success('Berhasil menyimpan user');
+
         return redirect()->route('operator.button_actor.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ButtonActor  $buttonActor
      * @return \Illuminate\Http\Response
      */
     public function show(ButtonActor $buttonActor)
     {
         return view('admin.button_actor.show', [
-            'actor' => $buttonActor
+            'actor' => $buttonActor,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ButtonActor  $buttonActor
      * @return \Illuminate\Http\Response
      */
     public function edit(ButtonActor $buttonActor)
@@ -81,7 +79,6 @@ class ButtonActorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateButtonActorRequest  $request
      * @param  \App\Models\ButtonActor  $buttonActor
      * @return \Illuminate\Http\Response
      */
@@ -90,13 +87,13 @@ class ButtonActorController extends Controller
         $button_actor->update($request->validated());
 
         flash()->success('Berhasil update data user');
+
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ButtonActor  $buttonActor
      * @return \Illuminate\Http\Response
      */
     public function destroy(ButtonActor $buttonActor)

@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Operator;
 
 use App\Rules\ButtonBranchExist;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule as ValidationRule;
 
 class StoreButtonBranchRequest extends FormRequest
 {
@@ -26,8 +27,8 @@ class StoreButtonBranchRequest extends FormRequest
     public function rules()
     {
         return [
-            'button' => ['required'],
-            'actor_code' => ['required', new ButtonBranchExist(auth()->user()->unit_code)]
+            'button' => ['required', ValidationRule::unique('button_branch')->where(fn (Builder $query) => $query->where('button', $this->button)->where('bank_code', auth()->user()->unit_code))],
+            'actor_code' => ['required', new ButtonBranchExist(auth()->user()->unit_code)],
         ];
     }
 }
