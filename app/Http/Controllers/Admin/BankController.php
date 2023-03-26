@@ -71,7 +71,7 @@ class BankController extends Controller
         if ($newBank) {
             flash()->success('Berhasil menyimpan data Bank');
 
-            return redirect()->route('banks.show', $newBank->id);
+            return redirect()->route('banks.index');
         }
 
         flash()->error('Gagal menyimpan data Bank');
@@ -87,7 +87,7 @@ class BankController extends Controller
      */
     public function show(MstBank $bank)
     {
-        if (! $bank) {
+        if (!$bank) {
             abort(404);
         }
 
@@ -106,7 +106,7 @@ class BankController extends Controller
      */
     public function update(UpdateBank $request, MstBank $bank)
     {
-        abort_if(! $bank, 404);
+        abort_if(!$bank, 404);
 
         $bankBranch = BankBranch::where('code', $request->validated('KC_Code'))->firstOrFail();
         $attr = array_merge($request->validated(), ['Area_Code' => $bankBranch->area->code]);
@@ -125,7 +125,7 @@ class BankController extends Controller
      */
     public function destroy(MstBank $bank)
     {
-        abort_if(! $bank, 404);
+        abort_if(!$bank, 404);
 
         if ($bank->delete()) {
             flash()->success('Berhasil delete Bank');

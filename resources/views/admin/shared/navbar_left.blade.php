@@ -2,7 +2,14 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin_dashboard') }}">
-        <div class="sidebar-brand-text mx-3">{{ auth()->user()->roleName() }} Antrian</div>
+        <div class="sidebar-brand-icon m-4 pt-2">
+            {{-- <i class="fas fa-laugh-wink"></i> --}}
+            <img src="{{ asset('images/logo_white.png') }}" class="img-fluid" alt="">
+        </div>
+
+
+
+        {{-- <div class="sidebar-brand-text mx-3">{{ auth()->user()->roleName() }} Antrian</div> --}}
     </a>
 
     <!-- Divider -->
@@ -76,8 +83,8 @@
         <div id="collapsePagesmaster" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.bank_area.index') }}">Area</a>
-                <a class="collapse-item" href="{{ route('admin.bank_branches.index') }}">Cabang</a>
-                <a class="collapse-item" href="{{ route('banks.index') }}">Unit</a>
+                <a class="collapse-item" href="{{ route('admin.bank_branches.index') }}">Cabang Induk</a>
+                <a class="collapse-item" href="{{ route('banks.index') }}">KC/KCP/KK/Unit</a>
             </div>
         </div>
     </li>
@@ -106,4 +113,11 @@
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
+
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center bottom-0 start-0"
+        href="{{ route('admin_dashboard') }}">
+        <div class="sidebar-brand-text mx-3">{{ auth()->user()->roleName() }} Antrian</div>
+    </a>
 </ul>

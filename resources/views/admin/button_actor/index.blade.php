@@ -13,13 +13,13 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Bank</h6>
+                <h6 class="m-0 font-weight-bold text-primary">CS/TELLER Name</h6>
                 <hr>
                 <form class="row g-3" method="GET" action="{{ route('operator.button_actor.index') }}">
                     @csrf
                     <div class="col-auto">
                         <label for="inputname" class="visually-hidden">Name</label>
-                        <input type="text" name="name" class="form-control" id="inputname" placeholder="Area Name"
+                        <input type="text" name="name" class="form-control" id="inputname" placeholder="Name"
                             value='{{ old(' name') }}'>
                     </div>
 
@@ -30,7 +30,7 @@
                     <div class="col-auto">
                         <a type="submit" href="{{ route('operator.button_actor.create') }}"
                             class="btn btn-success mb-3">Add
-                            user</a>
+                            User</a>
                     </div>
                 </form>
             </div>
