@@ -1,4 +1,5 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar"
+    style="background-image: linear-gradient(to right, rgba(46,85,199,255), rgba(38,37,34,255));">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin_dashboard') }}">
@@ -6,10 +7,6 @@
             {{-- <i class="fas fa-laugh-wink"></i> --}}
             <img src="{{ asset('images/logo_white.png') }}" class="img-fluid" alt="">
         </div>
-
-
-
-        {{-- <div class="sidebar-brand-text mx-3">{{ auth()->user()->roleName() }} Antrian</div> --}}
     </a>
 
     <!-- Divider -->
