@@ -4,8 +4,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h3 class="h3 mb-0 text-gray-800"> <a href="{{ route('admin_dashboard') }}"> Dashboard </a> > <a
-                href=" {{ route('banks.index') }} "> Master
-                Bank </a> > {{ $actor->name }} </h3>
+                href=" {{ route('operator.button_actor.index') }} "> Employee </a> > {{ $actor->name }} </h3>
     </div>
 
     <!-- Content Row -->

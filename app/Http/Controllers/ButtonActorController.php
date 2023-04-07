@@ -6,6 +6,7 @@ use App\Http\Requests\StoreButtonActorRequest;
 use App\Http\Requests\UpdateButtonActorRequest;
 use App\Models\ButtonActor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ButtonActorController extends Controller
 {
@@ -47,7 +48,10 @@ class ButtonActorController extends Controller
      */
     public function store(StoreButtonActorRequest $request)
     {
-        ButtonActor::create($request->validated());
+        $user = [];
+        $user['code'] = $request->validated('code');
+        $user['name'] = Str::upper($request->validated('name'));
+        ButtonActor::create($user);
 
         flash()->success('Berhasil menyimpan user');
 

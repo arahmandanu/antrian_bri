@@ -21,7 +21,7 @@ class VerifyController extends Controller
             return redirect()->route('admin_dashboard');
         }
 
-        flash()->error('Account not found');
+        flash()->error('Invalid User or password');
 
         return back();
     }
