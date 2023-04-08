@@ -14,6 +14,7 @@ use App\Http\Controllers\ButtonActorController;
 use App\Http\Controllers\ButtonBranchController;
 use App\Http\Controllers\QueueController as ControllersQueueController;
 use Illuminate\Support\Facades\Route;
+use Milon\Barcode\DNS2D;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ Route::get('/', function () {
     return view('public.index');
 })->name('index');
 Route::get('/search', [ControllersQueueController::class, 'index'])->name('public.queue.index');
+
+Route::get('/custom_barcode', function () {
+    $a = new DNS2D;
+    return view('public.custom_barcode', ['barcode' => $a->getBarcodeHTML(env('APP_URL'), 'QRCODE')]);
+});
 
 Route::group(['prefix' => '/barcode'], function () {
     Route::get('/generate', [BarcodeController::class, 'index'])->name('barcode.show_form');
