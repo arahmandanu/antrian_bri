@@ -52,4 +52,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(MstBank::class, 'unit_code', 'code');
     }
+
+    public function scopeWithRole($query)
+    {
+        if (auth()->user()->hasRole('admin')) {
+            return $query->whereHas('roles', function ($query) {
+                $query->where('name', '!=', 'developer');
+            });
+        }
+
+        return $query;
+    }
 }

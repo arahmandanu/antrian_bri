@@ -18,7 +18,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->hasRole('admin')) {
+        if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('developer')) {
             $date = Carbon::now();
             $weekRange = $this->getDateInWeek($date);
             $totalsByDate = [];

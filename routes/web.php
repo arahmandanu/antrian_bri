@@ -50,7 +50,7 @@ Route::group(['prefix' => 'auth', 'middleware' => ['isLogin']], function () {
     Route::post('/verify', [VerifyController::class, 'call'])->name('auth.verify');
 });
 
-Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'haveRole']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin_dashboard');
 
     Route::resource('/banks', BankController::class);

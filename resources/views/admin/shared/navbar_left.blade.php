@@ -12,7 +12,8 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
-    @if (auth()->user()->hasRole('admin'))
+    @if (auth()->user()->hasRole('admin') ||
+            auth()->user()->hasRole('developer'))
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
             <a class="nav-link" href="{{ route('admin_dashboard') }}">
@@ -88,15 +89,19 @@
                 </div>
             </div>
         </li>
-    @else
+    @endif
+
+    @if (auth()->user()->hasRole('developer') ||
+            auth()->user()->hasRole('operator'))
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesButton"
+                aria-expanded="true" aria-controls="collapsePagesButton">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Settings</span>
             </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="collapsePagesButton" class="collapse" aria-labelledby="headingPages"
+                data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">System:</h6>
                     <a class="collapse-item" href="{{ route('operator.button.index') }}">Tombol</a>
