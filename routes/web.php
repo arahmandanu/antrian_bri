@@ -13,6 +13,7 @@ use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\ButtonActorController;
 use App\Http\Controllers\ButtonBranchController;
 use App\Http\Controllers\QueueController as ControllersQueueController;
+use App\Models\ButtonActor;
 use Illuminate\Support\Facades\Route;
 use Milon\Barcode\DNS2D;
 
@@ -74,7 +75,10 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
     Route::resource('/user', \App\Http\Controllers\Admin\UserController::class);
     Route::get('/over_sla', [\App\Http\Controllers\Admin\OverSlaController::class, 'index'])->name('admin.over_sla');
+
+    Route::get('/list_actors', [ButtonActorController::class, 'list'])->name('admin.get_actors');
     Route::get('/reports', [\App\Http\Controllers\Admin\ReportsController::class, 'index'])->name('admin.reports');
+
     Route::get('/log_out', [LogOutController::class, 'call'])->name('auth.log_out');
 
     Route::group(['prefix' => '/settings'], function () {

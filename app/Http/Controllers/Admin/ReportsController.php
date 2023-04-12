@@ -28,6 +28,7 @@ class ReportsController extends Controller
         $area_code = $request->input('area_code');
         $branch_code = $request->input('branch_code');
         $bankCode = $request->input('bank_code');
+        $userId = $request->input('UserId');
         $transactions = [];
 
         if (isset($bankCode) || isset($branch_code) || isset($area_code)) {
@@ -36,7 +37,6 @@ class ReportsController extends Controller
             $unitCode = $request->input('unit_code');
             $dateRange = $request->input('queue_for');
             $sla = $request->input('sla');
-            $userId = $request->input('UserId');
 
             if (isset($branch_code)) {
                 $branchsId = MstBank::where('KC_Code', $branch_code)->pluck('code');
@@ -79,13 +79,19 @@ class ReportsController extends Controller
         }
 
         session()->flashInput($request->input());
+        $actor = null;
+        if ($userId !== null) {
+            $actor = ButtonActor::select('code as id', 'name as text')->where('code', $userId)->get()->toArray();
+        } else {
+            $actor = ButtonActor::select('code as id', 'name as text')->take(5)->get()->toArray();
+        }
 
         return view('admin.reports.report_index', [
             'banks' => MstBank::all(),
             'bankAreas' => BankArea::all(),
             'bankBranches' => BankBranch::all(),
             'transactions' => $transactions,
-            'actors' => ButtonActor::all(),
+            'actor' => $actor
         ]);
     }
 

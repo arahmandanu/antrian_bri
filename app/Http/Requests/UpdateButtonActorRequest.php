@@ -25,7 +25,7 @@ class UpdateButtonActorRequest extends FormRequest
     {
         $rule = [
             'code' => ['required'],
-            'name' => ['required', 'max:50', 'min:6'],
+            'name' => ['required', 'max:50', 'min:4'],
         ];
 
         if ($this->input('code') != $this->button_actor->code) {

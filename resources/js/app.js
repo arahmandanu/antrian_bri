@@ -12,7 +12,7 @@ import './jquery.easing';
 import Swal from 'sweetalert2';
 window.Swal = Swal;
 
-import select2 from 'select2/dist/js/select2';
+import select2 from 'select2/dist/js/select2.full';
 import domtoimage from 'dom-to-image';
 window.domtoimage = domtoimage;
 import daterangepicker from 'daterangepicker';

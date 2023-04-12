@@ -41,6 +41,7 @@ class ButtonBranchController extends Controller
         return view('admin.button_branch.create', [
             'actors' => ButtonActor::all(),
             'buttons' => ButtonBranch::BUTTON,
+            'actor' => ButtonActor::select('code as id', 'name as text')->take(1)->get()->toArray(),
         ]);
     }
 

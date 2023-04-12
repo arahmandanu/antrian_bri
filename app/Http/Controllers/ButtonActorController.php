@@ -88,7 +88,10 @@ class ButtonActorController extends Controller
      */
     public function update(UpdateButtonActorRequest $request, ButtonActor $button_actor)
     {
-        $button_actor->update($request->validated());
+        $user = [];
+        $user['code'] = $request->validated('code');
+        $user['name'] = Str::upper($request->validated('name'));
+        $button_actor->update($user);
 
         flash()->success('Berhasil update data user');
 
@@ -103,5 +106,22 @@ class ButtonActorController extends Controller
     public function destroy(ButtonActor $buttonActor)
     {
         //
+    }
+
+    public function list(Request $request)
+    {
+        $data = [];
+        if ($request->ajax()) {
+            $search = $request->name;
+            $result = ButtonActor::select('code as id', 'name as text')
+                ->when($search, function ($query, $search) {
+                    $query->where('name', 'like', "%$search%");
+                })
+                ->limit(5)
+                ->get();
+            $data = $result->toArray();
+        }
+
+        return json_encode($data);
     }
 }
