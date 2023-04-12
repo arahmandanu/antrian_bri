@@ -11,4 +11,13 @@ class Role extends \Spatie\Permission\Models\Role
     protected $table = 'roles';
 
     protected $fillable = ['name'];
+
+    public function scopeByRole($query)
+    {
+        if (auth()->user()->hasRole('admin')) {
+            return $query->where('name', '!=', 'developer');
+        } else {
+            return $query;
+        }
+    }
 }

@@ -31,7 +31,7 @@ class UserController extends Controller
     public function create()
     {
         return view('admin.user.create', [
-            'roles' => Role::all(),
+            'roles' => Role::ByRole()->get(),
             'unitBanks' => MstBank::all(),
         ]);
     }
