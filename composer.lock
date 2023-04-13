@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73ab0f06bebe275c7ba348b78c898812",
+    "content-hash": "d064514c7e503cff47127e42fab0c544",
     "packages": [
         {
             "name": "brick/math",
@@ -1516,6 +1516,79 @@
                 "source": "https://github.com/laravel/ui/tree/v4.2.1"
             },
             "time": "2023-02-17T09:17:24+00:00"
+        },
+        {
+            "name": "laravelista/ekko",
+            "version": "4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravelista/Ekko.git",
+                "reference": "6168d5a56c346cf74147a8f0517b7e01e2d33aeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravelista/Ekko/zipball/6168d5a56c346cf74147a8f0517b7e01e2d33aeb",
+                "reference": "6168d5a56c346cf74147a8f0517b7e01e2d33aeb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.18",
+                "illuminate/routing": "^8.0",
+                "illuminate/support": "^8.0",
+                "mockery/mockery": "^1.4",
+                "phpunit/phpunit": "^9.5",
+                "vimeo/psalm": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravelista\\Ekko\\Frameworks\\Laravel\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Ekko": "Laravelista\\Ekko\\Frameworks\\Laravel\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravelista\\Ekko\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mario Bašić",
+                    "email": "mario@laravelista.hr",
+                    "homepage": "https://mariobasic.com"
+                }
+            ],
+            "description": "Framework agnostic PHP package for marking navigation items active.",
+            "keywords": [
+                "active",
+                "bootstrap",
+                "function",
+                "helper",
+                "laravel",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/laravelista/Ekko/issues",
+                "source": "https://github.com/laravelista/Ekko/tree/4.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/laravelista",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-03-25T11:30:34+00:00"
         },
         {
             "name": "league/commonmark",
