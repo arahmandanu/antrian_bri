@@ -3,9 +3,12 @@
 @section('content')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h3 class="h3 mb-0 text-gray-800"> <a href="{{ route('admin_dashboard') }}"> Dashboard </a> > <a
-            href=" {{ route('banks.index') }} "> Master
-            Bank </a> > {{ $bank->name }} </h3>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('admin_dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('banks.index') }}">Master
+                Bank</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ $bank->name }}</li>
+    </ol>
 </div>
 
 <!-- Content Row -->

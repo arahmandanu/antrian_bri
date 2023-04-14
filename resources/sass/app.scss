@@ -14,3 +14,7 @@
 @import "../../node_modules/select2/src/scss/core";
 // If you need to import Bootstrap as well:
 @import "../../node_modules/select2-bootstrap-5-theme/src/select2-bootstrap-5-theme";
+
+.select2-container .select2-selection--single {
+    height: 35px !important;
+}

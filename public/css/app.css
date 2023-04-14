@@ -24957,3 +24957,7 @@ select + .select2-container--bootstrap-5 {
 .form-select-lg ~ .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__clear {
   right: 1rem;
 }
+
+.select2-container .select2-selection--single {
+  height: 35px !important;
+}

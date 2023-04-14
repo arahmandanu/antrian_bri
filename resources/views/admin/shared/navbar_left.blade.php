@@ -126,8 +126,7 @@
 
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center bottom-0 start-0"
-        href="{{ route('admin_dashboard') }}">
+    <div class="sidebar-brand d-flex align-items-center justify-content-center bottom-0 start-0">
         <div class="sidebar-brand-text mx-3">{{ auth()->user()->roleName() }} Antrian</div>
-    </a>
+    </div>
 </ul>

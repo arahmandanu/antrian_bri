@@ -3,7 +3,12 @@
 @section('content')
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h3 class="h3 mb-0 text-gray-800"> <a href="{{ route('admin_dashboard') }}"> Dashboard </a> > Master Bank</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('admin_dashboard') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Master Bank</li>
+        </ol>
+    </nav>
 </div>
 
 <!-- Content Row -->
@@ -43,9 +48,9 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Bank Code</th>
-                            <th>Bank Name</th>
+                            <th class="col-1">No</th>
+                            <th class="col-2">Bank Code</th>
+                            <th class="col-2">Bank Name</th>
                             <th>Bank Address</th>
                             <th>Action</th>
                         </tr>
@@ -60,7 +65,7 @@
                             <td>{{ $bank->address }}</td>
                             <td>
                                 <div class="d-flex flex-row bd-highlight">
-                                    <div class="p-2 bd-highlight"><a type="button" class="btn btn-info btn-sm btn-block"
+                                    <div class="bd-highlight"><a type="button" class="btn btn-info btn-sm btn-block"
                                             href="{{ route('banks.show', $bank->id) }} "><i class="fa fa-pencil"
                                                 aria-hidden="true"></i></a>
                                     </div>
