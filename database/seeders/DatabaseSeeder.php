@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
             $this->call(UnitCodeSeeder::class);
         }
         $this->call(UserSeeder::class);
+        $this->call(CreateDeveloperUserSeeder::class);
     }
 }

@@ -18,6 +18,7 @@ class UnitCodeSeeder extends Seeder
         foreach ($code as $key => $value) {
             UnitCode::create([
                 'code' => $value,
+                'name' => "Unit {$key}"
             ]);
         }
     }

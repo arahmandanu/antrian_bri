@@ -3,8 +3,13 @@
 @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h3 class="h3 mb-0 text-gray-800"> <a href="{{ route('admin_dashboard') }}"> Dashboard </a> > <a
-                href=" {{ route('unit_codes.index') }} "> Unit Code </a> > {{ $unit_code->code }} </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('admin_dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href=" {{ route('unit_codes.index') }} ">Unit Codes</a></li>
+                <li class="breadcrumb-item active" aria-current="page"> {{ $unit_code->code }}</li>
+            </ol>
+        </nav>
     </div>
 
     <!-- Content Row -->

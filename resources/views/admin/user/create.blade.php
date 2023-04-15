@@ -3,7 +3,13 @@
 @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h3 class="h3 mb-0 text-gray-800"> <a href="{{ route('admin_dashboard') }}"> Dashboard </a>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('admin_dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Users</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create New User</li>
+            </ol>
+        </nav>
     </div>
 
     <!-- Content Row -->
@@ -49,7 +55,8 @@
                             <select name="unit_code" class="form-control">
                                 <option value="">-- Unit --</option>
                                 @foreach ($unitBanks as $bank)
-                                    <option value="{{ $bank->code }}">{{ $bank->name }} - {{ $bank->code }}</option>
+                                    <option value="{{ $bank->code }}">{{ $bank->name }} - {{ $bank->code }}
+                                    </option>
                                 @endforeach
                             </select>
 
