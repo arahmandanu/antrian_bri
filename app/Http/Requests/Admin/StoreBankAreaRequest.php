@@ -25,7 +25,7 @@ class StoreBankAreaRequest extends FormRequest
     {
         return [
             'code' => ['required', 'unique:bank_areas,code'],
-            'name' => ['required', 'max:255', 'min:10'],
+            'name' => ['required', 'max:255', 'min:5'],
         ];
     }
 }

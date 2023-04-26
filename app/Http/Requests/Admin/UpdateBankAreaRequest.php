@@ -25,7 +25,7 @@ class UpdateBankAreaRequest extends FormRequest
     {
         $rule = [
             'code' => ['required'],
-            'name' => ['required', 'max:255', 'min:10'],
+            'name' => ['required', 'max:255', 'min:5'],
         ];
 
         if ($this->input('code') != $this->bank_area->code) {

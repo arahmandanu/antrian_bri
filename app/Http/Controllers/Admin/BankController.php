@@ -114,7 +114,7 @@ class BankController extends Controller
 
         flash()->success('Berhasil update Bank');
 
-        return back();
+        return redirect()->back();
     }
 
     /**

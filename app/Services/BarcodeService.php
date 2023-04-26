@@ -66,9 +66,9 @@ class BarcodeService
     private function formatQueueNumber($queue)
     {
         if (strlen($queue) == 2) {
-            $queue = '0'.$queue;
+            $queue = '0' . $queue;
         } elseif (strlen($queue) == 1) {
-            $queue = '00'.$queue;
+            $queue = '00' . $queue;
         }
 
         return $queue;

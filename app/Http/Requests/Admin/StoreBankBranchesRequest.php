@@ -26,7 +26,7 @@ class StoreBankBranchesRequest extends FormRequest
         return [
             'area_code' => ['required', 'exists:bank_areas,code'],
             'code' => ['required', 'unique:bank_branches,code'],
-            'name' => ['required', 'max:255', 'min:10'],
+            'name' => ['required', 'max:255', 'min:5'],
         ];
     }
 }

@@ -11,6 +11,11 @@ class BankArea extends Model
 
     protected $fillable = ['code', 'name'];
 
+    protected $primaryKey = 'code';
+
+    public $incrementing = false;
+
+
     public function bankBranches()
     {
         return $this->hasMany(BankBranch::class, 'area_code', 'code');

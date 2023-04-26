@@ -26,7 +26,7 @@ class UpdateBankBranchRequest extends FormRequest
         $rule = [
             'area_code' => ['required', 'exists:bank_areas,code'],
             'code' => ['required'],
-            'name' => ['required', 'max:255', 'min:10'],
+            'name' => ['required', 'max:255', 'min:5'],
         ];
 
         if ($this->input('code') != $this->bank_branch->code) {
