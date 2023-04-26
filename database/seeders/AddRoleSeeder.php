@@ -22,7 +22,6 @@ class AddRoleSeeder extends Seeder
             ['name' => 'operator']
         );
 
-
         Role::create(
             ['name' => 'developer']
         );

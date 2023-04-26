@@ -89,10 +89,17 @@ class BankBranchesController extends Controller
      */
     public function update(UpdateBankBranchRequest $request, BankBranch $bank_branch)
     {
+        $relation = $bank_branch->units();
         $bank_branch->update($request->validated());
+
+        $relation->update([
+            'KC_Code' => $bank_branch->code,
+            'Area_Code' => $bank_branch->area_code,
+        ]);
+
         flash()->success('Berhasil update data branch');
 
-        return redirect()->back();
+        return redirect()->route('admin.bank_branches.show', $bank_branch->code);
     }
 
     /**

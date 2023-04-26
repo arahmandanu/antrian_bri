@@ -85,10 +85,16 @@ class BankAreaController extends Controller
      */
     public function update(UpdateBankAreaRequest $request, BankArea $bank_area)
     {
+        $units = $bank_area->units();
         $bank_area->update($request->validated());
+
+        $units->update([
+            'Area_Code' => $bank_area->code,
+        ]);
+
         flash()->success('Berhasil update data area');
 
-        return redirect()->back();
+        return redirect()->route('admin.bank_area.show', $bank_area->code);
     }
 
     /**

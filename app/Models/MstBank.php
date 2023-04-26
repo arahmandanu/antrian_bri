@@ -31,10 +31,10 @@ class MstBank extends Model
         $constant = $unit == 'km' ? 6371 : 3959;
         $haversine = "(
             $constant * acos(
-                cos(radians(" . $latitude . '))
+                cos(radians(".$latitude.'))
                 * cos(radians(`latitude`))
-                * cos(radians(`longitude`) - radians(' . $longitude . '))
-                + sin(radians(' . $latitude . ')) * sin(radians(`latitude`))
+                * cos(radians(`longitude`) - radians('.$longitude.'))
+                + sin(radians('.$latitude.')) * sin(radians(`latitude`))
             )
         )';
 

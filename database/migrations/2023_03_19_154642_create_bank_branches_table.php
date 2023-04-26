@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('area_code');
-            $table->foreign('area_code')->nullable(true)->references('code')->on('bank_areas');
+            $table->foreign('area_code')->nullable(true)->references('code')->on('bank_areas')->onUpdate('cascade');
 
             $table->string('code');
             $table->string('name');

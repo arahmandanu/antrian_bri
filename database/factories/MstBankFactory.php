@@ -17,7 +17,7 @@ class MstBankFactory extends Factory
     public function definition()
     {
         return [
-            'code' => fake()->unique()->uuid(),
+            'code' => substr(fake()->unique()->uuid(), 0, 5),
             'name' => fake()->unique()->name(),
             'address' => fake()->unique()->address(),
         ];

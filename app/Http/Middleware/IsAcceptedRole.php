@@ -16,7 +16,7 @@ class IsAcceptedRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!in_array(Auth::user()->getRoleNames()->first(), ['admin', 'developer', 'operator'])) {
+        if (! in_array(Auth::user()->getRoleNames()->first(), ['admin', 'developer', 'operator'])) {
             return redirect()->route('admin_dashboard');
         }
 

@@ -15,9 +15,13 @@ class BankArea extends Model
 
     public $incrementing = false;
 
-
     public function bankBranches()
     {
         return $this->hasMany(BankBranch::class, 'area_code', 'code');
+    }
+
+    public function units()
+    {
+        return $this->hasMany(MstBank::class, 'Area_Code', 'code');
     }
 }

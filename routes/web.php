@@ -13,7 +13,6 @@ use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\ButtonActorController;
 use App\Http\Controllers\ButtonBranchController;
 use App\Http\Controllers\QueueController as ControllersQueueController;
-use App\Models\ButtonActor;
 use Illuminate\Support\Facades\Route;
 use Milon\Barcode\DNS2D;
 
@@ -35,6 +34,7 @@ Route::get('/search', [ControllersQueueController::class, 'index'])->name('publi
 
 Route::get('/custom_barcode', function () {
     $a = new DNS2D;
+
     return view('public.custom_barcode', ['barcode' => $a->getBarcodeHTML(env('APP_URL'), 'QRCODE')]);
 });
 

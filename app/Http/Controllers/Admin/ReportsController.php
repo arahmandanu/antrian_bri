@@ -91,7 +91,7 @@ class ReportsController extends Controller
             'bankAreas' => BankArea::all(),
             'bankBranches' => BankBranch::all(),
             'transactions' => $transactions,
-            'actor' => $actor
+            'actor' => $actor,
         ]);
     }
 
