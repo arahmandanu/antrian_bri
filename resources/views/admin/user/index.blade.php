@@ -42,9 +42,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td><span class="badge bg-{{ $user->roleName() == 'admin' ? 'success' : 'info' }}">
-                                            {{ $user->roleName() }} </span></td>
-                                    <td>{{ $user->unit->name ?? '-' }}</td>
+                                    <td><span
+                                            class="badge bg-{{ $user->roles->first()->name == 'admin' ? 'success' : 'info' }}">
+                                            {{ $user->roles->first()->name }} </span></td>
+                                    <td>{{ isset($user->unit) ? "{$user->unit->code} - {$user->unit->name}" : '' }}</td>
                                     <td>
                                         <a class="btn btn-primary" href="{{ route('user.show', $user->id) }}"><i
                                                 class="fa fa-pencil" aria-hidden="true"></i></a>

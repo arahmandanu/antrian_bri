@@ -53,14 +53,13 @@ class User extends Authenticatable
         return $this->belongsTo(MstBank::class, 'unit_code', 'code');
     }
 
-    public function scopeWithRole($query)
+    public function scopeListByRole($query)
     {
-        if (auth()->user()->hasRole('admin')) {
+        $excludeRole = auth()->user()->hasRole('admin');
+        return $query->when($excludeRole, function ($query, $excludeRole) {
             return $query->whereHas('roles', function ($query) {
-                $query->where('name', '!=', 'developer');
+                return $query->where('name', '!=', 'developer');
             });
-        }
-
-        return $query;
+        });
     }
 }

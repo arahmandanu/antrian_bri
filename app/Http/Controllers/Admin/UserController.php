@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user.index', [
-            'users' => User::WithRole()->with('unit')->get(),
+            'users' => User::ListByRole()->with('roles')->with('unit')->get(),
         ]);
     }
 
