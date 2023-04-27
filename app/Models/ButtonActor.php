@@ -10,4 +10,9 @@ class ButtonActor extends Model
     use HasFactory;
 
     protected $fillable = ['code', 'name'];
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class, 'UserId', 'code');
+    }
 }

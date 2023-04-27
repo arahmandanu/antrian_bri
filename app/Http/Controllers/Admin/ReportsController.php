@@ -46,9 +46,11 @@ class ReportsController extends Controller
                 $areaId = MstBank::where('Area_Code', $area_code)->pluck('code');
             }
 
-            $transactions = Transaction::when($bankCode, function ($query, $bankCode) {
-                return $query->where('br_code', $bankCode);
-            })
+            $transactions = Transaction::rightJoin('button_actors', 'transactioncust.UserId', '=', 'button_actors.code')
+                ->select('transactioncust.*', 'button_actors.name as actor_name')
+                ->when($bankCode, function ($query, $bankCode) {
+                    return $query->where('br_code', $bankCode);
+                })
                 ->when($branchsId, function ($query, $branchsId) {
                     return $query->wherein('br_code', $branchsId);
                 })
@@ -64,7 +66,9 @@ class ReportsController extends Controller
                         return $query->whereNotNull('TOverSLA')->Where('TOverSLA', '<>', '00:00:00');
                     } else {
                         // Not Over SLA
-                        return $query->whereIn('TOverSLA', ['', null, '00:00:00']);
+                        return $query->where(function ($query) {
+                            $query->whereIn('TOverSLA', ['', '00:00:00'])->orWhereNull('TOverSLA');;
+                        });
                     }
                 })
                 ->when($dateRange, function ($query, $dateRange) {

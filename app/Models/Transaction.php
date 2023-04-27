@@ -20,4 +20,9 @@ class Transaction extends Model
     {
         return $query->where('UnitServe', 'B');
     }
+
+    public function actor()
+    {
+        return $this->hasOne(ButtonActor::class, 'code', 'UserId');
+    }
 }
