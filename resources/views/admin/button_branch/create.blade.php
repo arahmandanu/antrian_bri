@@ -102,7 +102,7 @@
                     data: function(params) {
                         var query = {
                             name: params.term,
-                            type: 'public'
+                            type: 'select'
                         }
                         return query;
                     },

@@ -16,7 +16,12 @@ return new class extends Migration
         Schema::create('transactioncust', function (Blueprint $table) {
             $table->id();
             $table->string('BaseDt')->nullable(true);
-            $table->string('br_code')->nullable(true);
+
+            # Bank Unit Code
+            // $table->string('br_code')->nullable(true);
+            $table->string('br_code');
+            $table->foreign('br_code')->nullable(true)->references('code')->on('mst_bank')->onUpdate('cascade');
+
             $table->string('SeqNumber')->nullable(true);
             $table->string('TrxDesc')->nullable(true);
             $table->string('TimeTicket')->nullable(true);
@@ -25,7 +30,12 @@ return new class extends Migration
             $table->string('UnitServe')->nullable(true);
             $table->string('CounterNo')->nullable(true);
             $table->string('Absent')->nullable(true);
-            $table->string('UserId')->nullable(true);
+
+            # Button Actor code
+            // $table->string('UserId')->nullable(true);
+            $table->string('UserId');
+            $table->foreign('UserId')->nullable(true)->references('code')->on('button_actors')->onUpdate('cascade');
+
             $table->string('Flag')->nullable(true);
             $table->string('TimeEnd')->nullable(true);
             $table->string('Tservice')->nullable(true);

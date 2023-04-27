@@ -93,7 +93,6 @@ class BankBranchesController extends Controller
         $bank_branch->update($request->validated());
 
         $relation->update([
-            'KC_Code' => $bank_branch->code,
             'Area_Code' => $bank_branch->area_code,
         ]);
 

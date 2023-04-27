@@ -111,17 +111,25 @@ class ButtonActorController extends Controller
     public function list(Request $request)
     {
         $data = [];
+        $search = $request->name;
+        $result = ButtonActor::limit(5)
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%$search%");
+            })
+            ->get();
+
         if ($request->ajax()) {
-            $search = $request->name;
-            $result = ButtonActor::select('code as id', 'name as text')
-                ->when($search, function ($query, $search) {
-                    $query->where('name', 'like', "%$search%");
-                })
-                ->limit(5)
-                ->get();
-            $data = $result->toArray();
+            if (isset($request->type) && ($request->type == 'select')) {
+                foreach ($result as $key => $value) {
+                    array_push($data, ['id' => $value->code, 'text' => $value->name]);
+                }
+
+                $data = json_encode($data);
+            }
+        } else {
+            $data = $result;
         }
 
-        return json_encode($data);
+        return $data;
     }
 }

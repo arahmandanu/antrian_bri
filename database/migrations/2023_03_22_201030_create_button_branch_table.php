@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
 
             $table->string('bank_code');
-            $table->foreign('bank_code')->nullable(true)->references('code')->on('mst_bank');
+            $table->foreign('bank_code')->nullable(true)->references('code')->on('mst_bank')->onUpdate('cascade');
 
             $table->string('button');
 
             $table->string('actor_code')->nullable(true);
-            $table->foreign('actor_code')->references('code')->on('button_actors');
+            $table->foreign('actor_code')->references('code')->on('button_actors')->onUpdate('cascade');
 
             $table->timestamps();
         });

@@ -21,13 +21,14 @@ return new class extends Migration
 
             //Unit Code
             $table->string('unit_code');
-            $table->foreign('unit_code')->references('code')->on('unit_codes');
+            $table->foreign('unit_code')->references('code')->on('unit_codes')->onUpdate('cascade');
             $table->string('unit_code_name')->nullable(false);
 
             //BANK
             $table->unsignedBigInteger('bank_id');
-            $table->foreign('bank_id')->references('id')->on('mst_bank');
+            $table->foreign('bank_id')->references('id')->on('mst_bank')->onUpdate('cascade');
             $table->string('bank_code', 100)->nullable(false);
+            $table->foreign('bank_code')->references('code')->on('mst_bank')->onUpdate('cascade');
             $table->string('bank_name', 255)->nullable(false);
             $table->text('bank_address')->nullable(false);
 

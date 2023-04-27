@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('unit_code')->nullable(true);
-            $table->foreign('unit_code')->references('code')->on('mst_bank');
+            $table->foreign('unit_code')->references('code')->on('mst_bank')->onUpdate('cascade');
         });
     }
 

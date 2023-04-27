@@ -14,7 +14,7 @@ class UnitCodeSeeder extends Seeder
      */
     public function run()
     {
-        $code = ['cs', 'teller'];
+        $code = ['A', 'B'];
         foreach ($code as $key => $value) {
             UnitCode::create([
                 'code' => $value,

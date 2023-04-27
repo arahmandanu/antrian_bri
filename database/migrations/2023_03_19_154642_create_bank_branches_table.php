@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('area_code');
             $table->foreign('area_code')->nullable(true)->references('code')->on('bank_areas')->onUpdate('cascade');
 
-            $table->string('code');
+            $table->string('code')->unique(true);
             $table->string('name');
             $table->timestamps();
         });

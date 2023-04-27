@@ -241,7 +241,6 @@
         });
 
         function callSelectUserId(defaultValue) {
-            console.log(defaultValue);
             $('select#userIdFilter').select2({
                 data: defaultValue,
                 placeholder: 'Silahkan pilih User',
@@ -252,7 +251,7 @@
                     data: function(params) {
                         var query = {
                             name: params.term,
-                            type: 'public'
+                            type: 'select'
                         }
                         return query;
                     },
