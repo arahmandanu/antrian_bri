@@ -43,7 +43,7 @@
                                     @forelse ($unitCodes as $unitCode)
                                         <option {{ Request::input('unit_code') == $unitCode->code ? 'selected' : '' }}
                                             value="{{ $unitCode->code }}">
-                                            {{ $unitCode->code }}</option>
+                                            {{ $unitCode->code . ' - ' . $unitCode->name }}</option>
                                     @empty
                                         <option>-- No Data Found --</option>
                                     @endforelse
