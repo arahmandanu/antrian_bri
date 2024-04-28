@@ -56,6 +56,7 @@ class User extends Authenticatable
     public function scopeListByRole($query)
     {
         $excludeRole = auth()->user()->hasRole('admin');
+
         return $query->when($excludeRole, function ($query, $excludeRole) {
             return $query->whereHas('roles', function ($query) {
                 return $query->where('name', '!=', 'developer');

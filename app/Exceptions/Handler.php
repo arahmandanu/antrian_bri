@@ -3,9 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Rollbar\Payload\Level;
+use Rollbar\Rollbar;
 use Throwable;
-use \Rollbar\Rollbar;
-use \Rollbar\Payload\Level;
 
 class Handler extends ExceptionHandler
 {
@@ -47,11 +47,11 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             Rollbar::init(
-                array(
+                [
                     'access_token' => env('ROLLBAR_TOKEN'),
                     'environment' => env('APP_ENV', 'production'),
-                    'root' => base_path()
-                )
+                    'root' => base_path(),
+                ]
             );
 
             Rollbar::log(Level::ALERT, $e);

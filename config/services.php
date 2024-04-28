@@ -34,6 +34,6 @@ return [
     'rollbar' => [
         'access_token' => env('ROLLBAR_TOKEN'),
         'environtment' => env('APP_ENV', 'production'),
-        'root' => base_path()
-    ]
+        'root' => base_path(),
+    ],
 ];

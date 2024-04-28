@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('BaseDt')->nullable(true);
 
-            # Bank Unit Code
+            // Bank Unit Code
             // $table->string('br_code')->nullable(true);
             $table->string('br_code');
             $table->foreign('br_code')->nullable(true)->references('code')->on('mst_bank')->onUpdate('cascade');
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('CounterNo')->nullable(true);
             $table->string('Absent')->nullable(true);
 
-            # Button Actor code
+            // Button Actor code
             // $table->string('UserId')->nullable(true);
             $table->string('UserId');
             $table->foreign('UserId')->nullable(true)->references('code')->on('button_actors')->onUpdate('cascade');
