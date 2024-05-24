@@ -35,8 +35,8 @@
         function nextMenu(type) {
             var latitude = document.getElementById('local_latitude').value;
             var longitude = document.getElementById('local_longitude').value;
-            var query = "?latitude=" + latitude + "&longitude=" + longitude;
-            window.location.href = "{{ route('barcode.newBarcode', '') }}" + "/" + type + query;
+            var query = "?type=" + type + "&latitude=" + latitude + "&longitude=" + longitude;
+            window.location.href = "{{ route('barcode.newBarcode') }}" + query;
         }
     </script>
 @endsection

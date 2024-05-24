@@ -7,7 +7,7 @@
             <form action="{{ route('barcode.post_form') }}" method="POST">
                 @csrf
                 @method('POST')
-
+                <input type="hidden" name="unit_code" value="{{ $unitCode }}">
                 <div class="col-12">
                     <div class="container">
                         <div id="map" style="height: 30vh;"></div>
@@ -15,7 +15,7 @@
                 </div>
                 <hr>
                 <div class="mb-3 text-center">
-                    <label for="form bank" class="fw-bold form-label">Bank</label>
+                    <label for="form bank" class="fw-bold form-label">Bank (Terdekat)</label>
                     <select name="bank"
                         class="js-data-example-ajax form-control {{ $errors->has('bank') ? 'is-invalid' : '' }}" required
                         id="bank">
@@ -161,7 +161,7 @@
                             "<div class='col-10'>" +
                             "<div class='text-start'>" + escape(item.name) + "</div>" +
                             "<div class='text-start fst-italic'><em>" + escape(item.address) +
-                            "</em></div>" +
+                            "<br>Jarak " + escape(Math.ceil(item.distance)) + " Km </div>" +
                             "</div>" + "</div>"
                         );
                     },

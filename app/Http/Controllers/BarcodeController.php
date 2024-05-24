@@ -28,12 +28,13 @@ class BarcodeController extends Controller
         return view('public.show_menu_unit_service');
     }
 
-    public function newBarcode(Request $request, $type)
+    public function newBarcode(Request $request)
     {
         $distance = 50;
         $latitude = $request->latitude;
         $longitude = $request->longitude;
         $coor = null;
+        $unitCode = $request->input('type') ?? 'A';
 
         if (isset($latitude) && isset($longitude)) {
             $coor = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
@@ -43,17 +44,21 @@ class BarcodeController extends Controller
             ->when($coor, function ($query, $coor) {
                 $query->distance($coor['latitude'], $coor['longitude'], $coor['distance']);
             })
-            ->take(5)
-            ->get();
+            ->take(10)
+            ->get()
+            ->reverse()
+            ->values();
 
         if ($nearestBank->count() == 0) {
             $nearestBank = MstBank::select('id', 'code', 'name', 'address', 'latitude', 'longitude')
-                ->take(5)
-                ->get();
+                ->take(10)
+                ->get()
+                ->reverse()
+                ->values();
         }
-
         return view('public.create_barcode_new', [
             "nearestBank" => $nearestBank,
+            "unitCode" => $unitCode
         ]);
     }
 
@@ -80,7 +85,7 @@ class BarcodeController extends Controller
                 ->when($coor, function ($query, $coor) {
                     $query->distance($coor['latitude'], $coor['longitude'], $coor['distance']);
                 })
-                ->take(5)
+                ->take(10)
                 ->get();
 
             if ($result->count() == 0) {
@@ -90,7 +95,7 @@ class BarcodeController extends Controller
                             ->where('address', 'like', "%$search%")
                             ->orWhere('name', 'like', "%$search%");
                     })
-                    ->take(5)
+                    ->take(10)
                     ->get();
             }
             $data = $result->toArray();
