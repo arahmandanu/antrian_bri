@@ -14,12 +14,13 @@ class BarcodeService
         string $queueFor,
         int $idBank,
         string $createdAt,
-        string $ip
+        string $ip,
+        ?string $transaction_params_id,
     ) {
         $unitCode = $this->getUnitCode($unitCode);
         $bank = $this->getBank($idBank);
         $numberQueue = $this->getNumberQueue($queueFor, $bank->code, $unitCode);
-        $uniqId = $this->generateUniqId($queueFor, $bank->code, $unitCode->code, $numberQueue);
+        $uniqId = $this->generateUniqId($queueFor, $bank->code, $unitCode->code, $numberQueue, $transaction_params_id);
 
         $queue = $this->saveQueue([
             'ip' => $ip,
@@ -34,6 +35,7 @@ class BarcodeService
             'bank_address' => $bank->address,
             'OnlineQ' => 'Y',
             'call' => 'P',
+            'transaction_params_id' => $transaction_params_id
         ]);
 
         return encrypt($queue->id);
@@ -66,9 +68,9 @@ class BarcodeService
     private function formatQueueNumber($queue)
     {
         if (strlen($queue) == 2) {
-            $queue = '0'.$queue;
+            $queue = '0' . $queue;
         } elseif (strlen($queue) == 1) {
-            $queue = '00'.$queue;
+            $queue = '00' . $queue;
         }
 
         return $queue;
@@ -84,10 +86,10 @@ class BarcodeService
         return Queue::create($data);
     }
 
-    private function generateUniqId($queueFor, $bankCode, $unitCode, $numberQueue)
+    private function generateUniqId($queueFor, $bankCode, $unitCode, $numberQueue, $transaction_params_id)
     {
         $formatedQueueuFor = Carbon::parse($queueFor)->format('dmY');
 
-        return "{$formatedQueueuFor}{$bankCode}{$unitCode}{$numberQueue}";
+        return "{$formatedQueueuFor}{$bankCode}{$unitCode}{$numberQueue}{$transaction_params_id}";
     }
 }

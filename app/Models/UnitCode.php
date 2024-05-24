@@ -11,6 +11,11 @@ class UnitCode extends Model
 
     use HasFactory;
 
+    public function transactions()
+    {
+        return $this->hasMany(TransactionParam::class);
+    }
+
     protected $fillable = [
         'code',
         'name',

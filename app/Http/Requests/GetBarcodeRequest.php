@@ -30,6 +30,7 @@ class GetBarcodeRequest extends FormRequest
             'unit_code' => ['required', new UnitCodeIsExist],
             'queue_for' => ['required', new CreateBarcodeQueueForRequest],
             'bank' => ['required', new BankIsExist],
+            'transaction_params_id' => ['string', 'nullable'],
         ];
     }
 

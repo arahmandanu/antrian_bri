@@ -37,7 +37,6 @@ class BarcodeController extends Controller
         $longitude = $request->longitude;
         $coor = null;
         $unitCode = $request->input('type') ?? 'A';
-
         if (isset($latitude) && isset($longitude)) {
             $coor = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
         }
@@ -58,9 +57,18 @@ class BarcodeController extends Controller
                 ->reverse()
                 ->values();
         }
+
+        $unitCodeLocal = UnitCode::where('code', '=', $unitCode)->first();
+        if (empty($unitCodeLocal) || empty($unitCodeLocal->transactions)) {
+            $transactionParams = [];
+        } else {
+            $transactionParams = $unitCodeLocal->transactions;
+        }
+
         return view('public.create_barcode_new', [
             "nearestBank" => $nearestBank,
-            "unitCode" => $unitCode
+            "unitCode" => $unitCode,
+            "transactionParams" => $transactionParams
         ]);
     }
 
@@ -109,8 +117,7 @@ class BarcodeController extends Controller
     public function generateBarcode(GetBarcodeRequest $request, IpService $ip)
     {
         $barcode = new BarcodeService;
-
-        return redirect()->route('barcode.show', ['queue' => $barcode->generate($request->unit_code, $request->queue_for, $request->bank, now(), $ip->get_client_ip())]);
+        return redirect()->route('barcode.show', ['queue' => $barcode->generate($request->unit_code, $request->queue_for, $request->bank, now(), $ip->get_client_ip(), $request->transaction_params_id)]);
     }
 
     public function showBarcode($queueUuid)

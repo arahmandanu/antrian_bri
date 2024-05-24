@@ -15,7 +15,7 @@ return new class extends Migration
     {
         if (!Schema::hasColumn('queue', 'transaction_params_id')) {
             Schema::table('queue', function (Blueprint $table) {
-                $table->unsignedBigInteger('transaction_params_id')->nullable(true);
+                $table->string('transaction_params_id')->nullable(true);
             });
         }
     }

@@ -1,6 +1,7 @@
 @extends('shared.main')
 
 @section('content')
+    @include('admin.shared.error_validation')
     <div class="row justify-content-md-center mt-3">
         <div class="col-lg-6">
             @include('shared.alert')
@@ -23,6 +24,25 @@
                     </select>
 
                     @error('bank')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3 text-center">
+                    <label for="form bank" class="fw-bold form-label">Jenis Transaksi</label>
+                    <select name="transaction_params_id"
+                        class="js-data-example-ajax form-control {{ $errors->has('transaction_params_id') ? 'is-invalid' : '' }}">
+                        <option value="">Silahkan Pilih Jenis Transaksi</option>
+
+                        @forelse ($transactionParams as $item)
+                            <option value="{{ $item->code }}">{{ Str::upper($item->name) }}</option>
+                        @empty
+                        @endforelse
+                    </select>
+
+                    @error('transaction_params_id')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
