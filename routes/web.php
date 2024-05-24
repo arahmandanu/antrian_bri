@@ -12,6 +12,7 @@ use App\Http\Controllers\Authentication\VerifyController;
 use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\ButtonActorController;
 use App\Http\Controllers\ButtonBranchController;
+use App\Http\Controllers\PublicDashboardController;
 use App\Http\Controllers\QueueController as ControllersQueueController;
 use Illuminate\Support\Facades\Route;
 use Milon\Barcode\DNS2D;
@@ -27,9 +28,7 @@ use Milon\Barcode\DNS2D;
 |
 */
 
-Route::get('/', function () {
-    return view('public.index');
-})->name('index');
+Route::get('/', [PublicDashboardController::class, 'index'])->name('index');
 Route::get('/search', [ControllersQueueController::class, 'index'])->name('public.queue.index');
 
 Route::get('/custom_barcode', function () {

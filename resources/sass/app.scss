@@ -8,9 +8,8 @@
 @import 'bootstrap/scss/bootstrap';
 
 @import '../css/theme.css';
-
+@import 'marker';
 @import './style.scss';
-@import '../custom/font-awesome-4.7.0/scss/font-awesome.scss';
 @import "../../node_modules/select2/src/scss/core";
 // If you need to import Bootstrap as well:
 @import "../../node_modules/select2-bootstrap-5-theme/src/select2-bootstrap-5-theme";

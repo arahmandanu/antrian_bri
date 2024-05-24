@@ -7,8 +7,9 @@
     <meta name="description" content="System antrian BRI">
     <meta name="HandheldFriendly" content="true">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/leaflet/leaflet.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
-
+    <script src="{{ asset('vendor/leaflet/leaflet.js') }}"></script>
     <style>
         body {
             background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), rgb(12, 14, 145));
