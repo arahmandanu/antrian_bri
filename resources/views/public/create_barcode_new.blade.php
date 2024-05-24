@@ -7,39 +7,13 @@
             <form action="{{ route('barcode.post_form') }}" method="POST">
                 @csrf
                 @method('POST')
-                <div class="mb-3 text-center">
-                    <label for="unit_code" class="fw-bold form-label">Unit</label>
-                    <select name="unit_code"
-                        class="js-example-placeholder-single js-states form-control {{ $errors->has('unit_code') ? 'is-invalid' : '' }}"
-                        id="unit" required>
-                        <option value=""></option>
-                        @forelse ($unitCodes as $unitCode)
-                            <option value="{{ $unitCode->code }}"
-                                @if (old('unit_code') == $unitCode->code) {{ 'selected' }} @endif>
-                                {{ Str::upper($unitCode->name) }}</option>
-                        @empty
-                            <option> No Data Found</option>
-                        @endforelse
-                    </select>
 
-                    @error('unit_code')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+                <div class="col-12">
+                    <div class="container">
+                        <div id="map" style="height: 30vh;"></div>
+                    </div>
                 </div>
-                <div class="mb-3 text-center">
-                    <label for="form queue_for" class="fw-bold form-label">Tanggal
-                        Antrian</label>
-                    <input name="queue_for" type="date"
-                        class="form-control {{ $errors->has('queue_for') ? 'is-invalid' : '' }}" id="exampleInputPassword1"
-                        value="{{ old('queue_for') }}" required>
-                    @error('queue_for')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+                <hr>
                 <div class="mb-3 text-center">
                     <label for="form bank" class="fw-bold form-label">Bank</label>
                     <select name="bank"
@@ -54,6 +28,20 @@
                         </div>
                     @enderror
                 </div>
+
+                <div class="mb-3 text-center">
+                    <label for="form queue_for" class="fw-bold form-label">Tanggal
+                        Antrian</label>
+                    <input name="queue_for" type="date"
+                        class="form-control {{ $errors->has('queue_for') ? 'is-invalid' : '' }}" id="exampleInputPassword1"
+                        value="{{ old('queue_for') }}" required>
+                    @error('queue_for')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
                 <div class="mb-3 text-center">
                     <button type="submit"
                         class="btn new-btn-custom-secondary rounded-pill new-btn-gradient">Submit</button>
@@ -64,6 +52,18 @@
 
     <script>
         $(document).ready(function() {
+            var marker = {!! json_encode($nearestBank) !!};
+            var map = L.map('map').setView([51.505, -0.09], 14);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            $.each(marker, function(i, v) {
+                var marker = L.marker([v.latitude, v.longitude]).addTo(map);
+                marker.bindPopup("<span>" + v.name + "</span><br>" + v.address).openPopup();
+            });
+
             Selectize.define('no_results', function(options) {
                 var self = this;
 
@@ -142,7 +142,7 @@
                 valueField: 'id',
                 labelField: 'name',
                 searchField: ['name'],
-                options: @json($banks),
+                options: @json($nearestBank),
                 plugins: ["clear_button", 'no_results'],
                 render: {
                     item: function(item, escape) {

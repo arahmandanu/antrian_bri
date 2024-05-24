@@ -32,6 +32,9 @@
 </head>
 
 <body>
+    <input type="hidden" name='latitude' id="local_latitude">
+    <input type="hidden" name='longitude' id="local_longitude">
+
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-auto mt-3" style="text-align: center;">
@@ -58,5 +61,20 @@
         </div>
     </div>
 </body>
+
+<script>
+    $(document).ready(function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(assignData);
+        } else {
+            false;
+        }
+    });
+
+    function assignData(position) {
+        $('input#local_latitude').val(position.coords.latitude);
+        $('input#local_longitude').val(position.coords.longitude);
+    }
+</script>
 
 </html>

@@ -18,7 +18,7 @@
             </div>
 
             <div class="d-flex justify-content-center m-3">
-                <a href="{{ route('barcode.show_form') }}"
+                <a href="{{ route('barcode.showUnitServiceMenu') }}"
                     class="btn new-btn-custom-secondary new-btn-gradient rounded-pill" style="width: 400px">Ambil Antrian
                     Baru</a>
             </div>

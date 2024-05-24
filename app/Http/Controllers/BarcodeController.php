@@ -23,6 +23,40 @@ class BarcodeController extends Controller
         ]);
     }
 
+    public function showUnitServiceMenu()
+    {
+        return view('public.show_menu_unit_service');
+    }
+
+    public function newBarcode(Request $request, $type)
+    {
+        $distance = 50;
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
+        $coor = null;
+
+        if (isset($latitude) && isset($longitude)) {
+            $coor = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
+        }
+
+        $nearestBank = MstBank::select('id', 'code', 'name', 'address', 'latitude', 'longitude')
+            ->when($coor, function ($query, $coor) {
+                $query->distance($coor['latitude'], $coor['longitude'], $coor['distance']);
+            })
+            ->take(5)
+            ->get();
+
+        if ($nearestBank->count() == 0) {
+            $nearestBank = MstBank::select('id', 'code', 'name', 'address', 'latitude', 'longitude')
+                ->take(5)
+                ->get();
+        }
+
+        return view('public.create_barcode_new', [
+            "nearestBank" => $nearestBank,
+        ]);
+    }
+
     public function bank(Request $request)
     {
         $data = [];

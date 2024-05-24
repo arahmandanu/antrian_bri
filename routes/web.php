@@ -38,6 +38,9 @@ Route::get('/custom_barcode', function () {
 });
 
 Route::group(['prefix' => '/barcode'], function () {
+    Route::get('/menu_index', [BarcodeController::class, 'showUnitServiceMenu'])->name('barcode.showUnitServiceMenu');
+    Route::get('/new/{type}', [BarcodeController::class, 'newBarcode'])->name('barcode.newBarcode');
+
     Route::get('/generate', [BarcodeController::class, 'index'])->name('barcode.show_form');
     Route::get('/bank', [BarcodeController::class, 'bank'])->name('barcode.get_bank');
     Route::post('/bank', [BarcodeController::class, 'generateBarcode'])->name('barcode.post_form');
