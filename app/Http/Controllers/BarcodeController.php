@@ -25,7 +25,9 @@ class BarcodeController extends Controller
 
     public function showUnitServiceMenu()
     {
-        return view('public.show_menu_unit_service');
+        return view('public.show_menu_unit_service', [
+            'unitCodes' => UnitCode::all(),
+        ]);
     }
 
     public function newBarcode(Request $request)

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BankBranchesController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QueueController;
+use App\Http\Controllers\Admin\TransactionParamsController;
 use App\Http\Controllers\Admin\UnitCodeController;
 use App\Http\Controllers\Authentication\LogOutController;
 use App\Http\Controllers\Authentication\ShowController;
@@ -73,6 +74,14 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'haveRole']], funct
         'show' => 'admin.bank_branches.show',
         'store' => 'admin.bank_branches.store',
         'update' => 'admin.bank_branches.update',
+    ]);
+
+    Route::resource('/transaction_params', TransactionParamsController::class)->names([
+        'index' => 'admin.transactionParams.index',
+        'create' => 'admin.transactionParams.create',
+        'show' => 'admin.transactionParams.show',
+        'store' => 'admin.transactionParams.store',
+        'update' => 'admin.transactionParams.update',
     ]);
 
     Route::resource('/user', \App\Http\Controllers\Admin\UserController::class);

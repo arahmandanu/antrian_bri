@@ -12,8 +12,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    @if (auth()->user()->hasRole('admin') ||
-            auth()->user()->hasRole('developer'))
+    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('developer'))
         <!-- Nav Item - Dashboard -->
         <li class="nav-item {{ Ekko::isActive('/admin/dashboard') }}">
             <a class=" nav-link" href="{{ route('admin_dashboard') }}">
@@ -72,6 +71,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">System:</h6>
                     <a class="collapse-item" href="{{ route('unit_codes.index') }}">Unit Codes</a>
+                    <a class="collapse-item" href="{{ route('admin.transactionParams.index') }}">Jenis Transaksi</a>
                     <a class="collapse-item" href="{{ route('user.index') }}">User</a>
                 </div>
             </div>
@@ -97,8 +97,7 @@
         </li>
     @endif
 
-    @if (auth()->user()->hasRole('developer') ||
-            auth()->user()->hasRole('operator'))
+    @if (auth()->user()->hasRole('developer') || auth()->user()->hasRole('operator'))
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item {{ Ekko::isActive(['/admin/settings/button', '/admin/settings/button_actor']) }}">
             <a class="nav-link {{ Ekko::isActive(['/admin/settings/button', '/admin/settings/button_actor'], 'collapsed') }}"

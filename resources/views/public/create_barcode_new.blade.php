@@ -161,7 +161,6 @@
                             "<div class='col-10'>" +
                             "<div class='text-start'>" + escape(item.name) + "</div>" +
                             "<div class='text-start fst-italic'><em>" + escape(item.address) +
-                            "<br>Jarak " + escape(Math.ceil(item.distance)) + " Km </div>" +
                             "</div>" + "</div>"
                         );
                     },
