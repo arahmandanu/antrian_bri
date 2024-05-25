@@ -21,7 +21,7 @@
         }
 
         img#call_bri {
-            width: 80px;
+            width: 150px;
         }
 
         img#mobile_queue {
@@ -51,7 +51,7 @@
 
         <div class="position-absolute bottom-0 start-50 translate-middle-x mb-2 rounded-circle">
             <div class="row justify-content-md-center">
-                <img src="{{ asset('images/CALL_BRI.png') }}" class="img-responsive center-block d-block mx-auto"
+                <img src="{{ asset('images/contact_bri.jpg') }}" class="img-responsive center-block d-block mx-auto"
                     alt="" id="call_bri">
             </div>
             <div class="row justify-content-md-center">
