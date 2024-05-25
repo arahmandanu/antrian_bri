@@ -39,19 +39,21 @@
             </div>
         </li>
 
-        <li class="nav-item {{ Ekko::isActive(['/admin/over_sla', '/admin/reports']) }}">
-            <a class="nav-link {{ Ekko::isActive(['/admin/over_sla', '/admin/reports'], 'collapsed') }}" href="#"
-                data-toggle="collapse" data-target="#collapsereports" aria-expanded="true"
+        <li class="nav-item {{ Ekko::isActive(['/admin/over_sla', '/admin/reports', '/admin/branch/map']) }}">
+            <a class="nav-link {{ Ekko::isActive(['/admin/over_sla', '/admin/reports', '/admin/branch/map'], 'collapsed') }}"
+                href="#" data-toggle="collapse" data-target="#collapsereports" aria-expanded="true"
                 aria-controls="collapsereports">
                 <i class="fas fa-fw fa-bars"></i>
                 <span>Laporan</span>
             </a>
             <div id="collapsereports"
-                class="collapse {{ Ekko::isActive(['/admin/over_sla', '/admin/reports'], 'show') }}"
+                class="collapse {{ Ekko::isActive(['/admin/over_sla', '/admin/reports', '/admin/branch/map'], 'show') }}"
                 aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{ route('admin.over_sla') }}">Chart Over Sla</a>
                     <a class="collapse-item" href="{{ route('admin.reports') }}">Reports</a>
+                    <a class="collapse-item" href="{{ route('admin.branchMap') }}">
+                        Branch Map</a>
                 </div>
             </div>
         </li>
@@ -61,12 +63,14 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item {{ Ekko::isActive(['/admin/unit_codes', '/admin/user']) }}">
-            <a class="nav-link {{ Ekko::isActive(['/admin/unit_codes', '/admin/user'], 'collapsed') }}" href="#"
-                data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link {{ Ekko::isActive(['/admin/unit_codes', '/admin/user', '/admin/transaction_params'], 'collapsed') }}"
+                href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Settings</span>
             </a>
-            <div id="collapsePages" class="collapse {{ Ekko::isActive(['/admin/unit_codes', '/admin/user'], 'show') }}"
+            <div id="collapsePages"
+                class="collapse {{ Ekko::isActive(['/admin/unit_codes', '/admin/user', '/admin/transaction_params'], 'show') }}"
                 aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">System:</h6>
@@ -106,14 +110,17 @@
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Settings</span>
             </a>
+
             <div id="collapsePagesButton"
                 class="collapse {{ Ekko::isActive(['/admin/settings/button', '/admin/settings/button_actor'], 'show') }}"
                 aria-labelledby="headingPages" data-parent="#accordionSidebar">
+
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">System:</h6>
                     <a class="collapse-item" href="{{ route('operator.button.index') }}">Tombol</a>
                     <a class="collapse-item" href="{{ route('operator.button_actor.index') }}">Employee</a>
                 </div>
+
             </div>
         </li>
     @endif

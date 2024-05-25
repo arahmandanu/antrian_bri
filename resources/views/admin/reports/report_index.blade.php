@@ -206,7 +206,7 @@
         }
 
         $(document).ready(function() {
-            callSelectUserId(@json($actor));
+            //callSelectUserId(@json($actor));
             $('input[name="queue_for"]').daterangepicker({
                 opens: 'left',
                 autoUpdateInput: false,

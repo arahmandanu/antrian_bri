@@ -89,7 +89,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'haveRole']], funct
 
     Route::get('/list_actors', [ButtonActorController::class, 'list'])->name('admin.get_actors');
     Route::get('/reports', [\App\Http\Controllers\Admin\ReportsController::class, 'index'])->name('admin.reports');
-
+    Route::get('/branch/map', [\App\Http\Controllers\Admin\ReportsController::class, 'branchMap'])->name('admin.branchMap');
     Route::get('/log_out', [LogOutController::class, 'call'])->name('auth.log_out');
 
     Route::group(['prefix' => '/settings'], function () {
