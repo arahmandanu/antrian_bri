@@ -25,4 +25,27 @@ class Transaction extends Model
     {
         return $this->hasOne(ButtonActor::class, 'code', 'UserId');
     }
+
+    protected $fillable = [
+        'BaseDt',
+        'br_code',
+        'SeqNumber',
+        'TrxDesc',
+        'TimeTicket',
+        'TimeCall',
+        'CustWaitDuration',
+        'UnitServe',
+        'CounterNo',
+        'Absent',
+        'UserId',
+        'Flag',
+        'TimeEnd',
+        'Tservice',
+        'TWservice',
+        'TSLAservice',
+        'TOverSLA',
+        'QrSeqNumber',
+        'OnlineQ',
+        'newUserId'
+    ];
 }

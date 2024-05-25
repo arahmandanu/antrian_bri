@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\MstBank;
 use App\Models\Queue;
+use App\Models\Transaction;
 use App\Models\UnitCode;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,6 +14,50 @@ use Illuminate\Support\Str;
 class SyncQueueController extends Controller
 {
     public const MAX_QUEUE = 3;
+
+    public function syncReportFromLocal(Request $request)
+    {
+        $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
+        if (!empty($company)) {
+            $formatedReports = [];
+            $reports = $request->input('reports');
+            foreach ($reports as $key => $value) {
+                $params = [
+                    'BaseDt' => $value['BaseDt'],
+                    'br_code' => $company->code,
+                    'SeqNumber' => $value['SeqNumber'],
+                    'TrxDesc' => $value['TrxDesc'],
+                    'TimeTicket' => $value['TimeTicket'],
+                    'TimeCall' => $value['TimeCall'],
+                    'CustWaitDuration' => $value['CustWaitDuration'],
+                    'UnitServe' => $value['UnitServe'],
+                    'CounterNo' => $value['CounterNo'],
+                    'Absent' => $value['Absent'],
+                    'newUserId' => $value['UserId'],
+                    'UserId' => $value['UserId'],
+                    'Flag' => $value['Flag'],
+                    'TimeEnd' => $value['TimeEnd'],
+                    'Tservice' => $value['Tservice'],
+                    'TWservice' => $value['TWservice'],
+                    'TSLAservice' => $value['TSLAservice'],
+                    'TOverSLA' => $value['TOverSLA'],
+                    'QrSeqNumber' => null,
+                    'OnlineQ' => 'N',
+                ];
+                array_push($formatedReports, $params);
+            }
+        }
+
+        if (Transaction::insert($formatedReports)) {
+            $message = 'success';
+            $code = 201;
+        } else {
+            $message = 'failed';
+            $code = 422;
+        }
+
+        return response()->json(['message' => $message], $code);
+    }
 
     public function syncFromLocal(Request $request)
     {
