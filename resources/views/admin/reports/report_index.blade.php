@@ -93,19 +93,19 @@
                                 </select>
                             </div>
                         </div>
-
+                        {{--
                         <div class="col-md-4">
                             <label for="userIdFilter" class="visually-hidden">User</label>
                             <select type="text" name="UserId" class="js-example-theme-single form-control"
                                 id="userIdFilter" placeholder="Bank Name">
                                 <option></option>
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="col-auto">
                             <label for="inputname" class="visually-hidden">Unit Code</label>
                             <select name="unit_code" class="form-control" id="inputname" placeholder="Bank Name">
-                                <option value="">Unit Code</option>
+                                <option value="">All</option>
                                 <option value="B" {{ old('unit_code') == 'B' ? 'selected' : '' }}>CS</option>
                                 <option value="A" {{ old('unit_code') == 'A' ? 'selected' : '' }}>TELLER</option>
                             </select>
@@ -175,7 +175,7 @@
                                     <td>{{ $transaction->Tservice }}</td>
                                     <td>{{ $transaction->UnitServe }}</td>
                                     <td>{{ $transaction->CounterNo }}</td>
-                                    <td>{{ $transaction->actor_name }}</td>
+                                    <td>{{ $transaction->UserId }}</td>
                                     <td>{{ $transaction->TrxDesc }}</td>
                                     <td>{{ !isset($transaction->TSLAservice) ? '-' : $transaction->TSLAservice }}
                                     </td>
@@ -240,29 +240,29 @@
             }
         });
 
-        function callSelectUserId(defaultValue) {
-            $('select#userIdFilter').select2({
-                data: defaultValue,
-                placeholder: 'Silahkan pilih User',
-                allowClear: true,
-                ajax: {
-                    url: "{{ route('admin.get_actors') }}",
-                    dataType: 'json',
-                    data: function(params) {
-                        var query = {
-                            name: params.term,
-                            type: 'select'
-                        }
-                        return query;
-                    },
-                    processResults: function(data, params) {
-                        return {
-                            results: data,
-                        };
-                    },
-                    cache: true
-                }
-            });
-        }
+        // function callSelectUserId(defaultValue) {
+        //     $('select#userIdFilter').select2({
+        //         data: defaultValue,
+        //         placeholder: 'Silahkan pilih User',
+        //         allowClear: true,
+        //         ajax: {
+        //             url: "{{ route('admin.get_actors') }}",
+        //             dataType: 'json',
+        //             data: function(params) {
+        //                 var query = {
+        //                     name: params.term,
+        //                     type: 'select'
+        //                 }
+        //                 return query;
+        //             },
+        //             processResults: function(data, params) {
+        //                 return {
+        //                     results: data,
+        //                 };
+        //             },
+        //             cache: true
+        //         }
+        //     });
+        // }
     </script>
 @endsection

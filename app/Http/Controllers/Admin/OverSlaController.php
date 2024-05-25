@@ -49,13 +49,13 @@ class OverSlaController extends Controller
                 }
 
                 if ($transaction->UnitServe == 'A') {
-                    if (isset($transaction->TOverSLA)) {
+                    if (isset($transaction->TOverSLA) && ($transaction->TOverSLA != '00:00:00')) {
                         $tellerOver++;
                     } else {
                         $teller++;
                     }
                 } else {
-                    if (isset($transaction->TOverSLA)) {
+                    if (isset($transaction->TOverSLA) && ($transaction->TOverSLA != '00:00:00')) {
                         $csOver++;
                     } else {
                         $cs++;

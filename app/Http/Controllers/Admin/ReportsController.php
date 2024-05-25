@@ -46,11 +46,9 @@ class ReportsController extends Controller
                 $areaId = MstBank::where('Area_Code', $area_code)->pluck('code');
             }
 
-            $transactions = Transaction::rightJoin('button_actors', 'transactioncust.UserId', '=', 'button_actors.code')
-                ->select('transactioncust.*', 'button_actors.name as actor_name')
-                ->when($bankCode, function ($query, $bankCode) {
-                    return $query->where('br_code', $bankCode);
-                })
+            $transactions = Transaction::when($bankCode, function ($query, $bankCode) {
+                return $query->where('br_code', $bankCode);
+            })
                 ->when($branchsId, function ($query, $branchsId) {
                     return $query->wherein('br_code', $branchsId);
                 })
