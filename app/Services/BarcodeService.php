@@ -35,7 +35,7 @@ class BarcodeService
             'bank_address' => $bank->address,
             'OnlineQ' => 'Y',
             'call' => 'P',
-            'transaction_params_id' => $transaction_params_id
+            'transaction_params_id' => $transaction_params_id,
         ]);
 
         return encrypt($queue->id);
@@ -68,9 +68,9 @@ class BarcodeService
     private function formatQueueNumber($queue)
     {
         if (strlen($queue) == 2) {
-            $queue = '0' . $queue;
+            $queue = '0'.$queue;
         } elseif (strlen($queue) == 1) {
-            $queue = '00' . $queue;
+            $queue = '00'.$queue;
         }
 
         return $queue;

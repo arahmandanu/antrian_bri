@@ -46,6 +46,6 @@ class Transaction extends Model
         'TOverSLA',
         'QrSeqNumber',
         'OnlineQ',
-        'newUserId'
+        'newUserId',
     ];
 }

@@ -18,7 +18,7 @@ class TransactionParamsController extends Controller
     public function index()
     {
         return view('admin.transaction_params.index', [
-            'transactionParams' => TransactionParam::all()
+            'transactionParams' => TransactionParam::all(),
         ]);
     }
 
@@ -30,14 +30,13 @@ class TransactionParamsController extends Controller
     public function create()
     {
         return view('admin.transaction_params.create', [
-            'unitCodes' => UnitCode::all()
+            'unitCodes' => UnitCode::all(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -60,21 +59,19 @@ class TransactionParamsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TransactionParam  $transactionParam
      * @return \Illuminate\Http\Response
      */
     public function show(TransactionParam $transactionParam)
     {
         return view('admin.transaction_params.show', [
             'transactionParams' => $transactionParam,
-            'unitCodes' => UnitCode::all()
+            'unitCodes' => UnitCode::all(),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TransactionParam  $transactionParam
      * @return \Illuminate\Http\Response
      */
     public function edit(TransactionParam $transactionParam)
@@ -85,14 +82,12 @@ class TransactionParamsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TransactionParam  $transactionParam
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, TransactionParam $transactionParam)
     {
         $validated = Validator::make($request->all(), [
-            'unit_code_id' => "required|string|exists:unit_codes,id",
+            'unit_code_id' => 'required|string|exists:unit_codes,id',
             'code' => "required|string|min:4|max:4|unique:transaction_params,code,$transactionParam->id",
             'name' => 'required',
         ])->validate();
@@ -109,7 +104,6 @@ class TransactionParamsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TransactionParam  $transactionParam
      * @return \Illuminate\Http\Response
      */
     public function destroy(TransactionParam $transactionParam)

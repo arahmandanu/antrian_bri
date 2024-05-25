@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('queue', 'transaction_params_id')) {
+        if (! Schema::hasColumn('queue', 'transaction_params_id')) {
             Schema::table('queue', function (Blueprint $table) {
                 $table->string('transaction_params_id')->nullable(true);
             });

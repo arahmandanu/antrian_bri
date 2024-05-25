@@ -18,7 +18,7 @@ class SyncQueueController extends Controller
     public function syncReportFromLocal(Request $request)
     {
         $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
-        if (!empty($company)) {
+        if (! empty($company)) {
             $formatedReports = [];
             $reports = $request->input('reports');
             foreach ($reports as $key => $value) {
@@ -69,7 +69,7 @@ class SyncQueueController extends Controller
         $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
         $unitCode = UnitCode::where('code', '=', $request->input('UnitServe'))->get()->first();
 
-        if (!($localTime->format('Ymd') ==  $baseDt) || empty($company) || empty($unitCode)) {
+        if (! ($localTime->format('Ymd') == $baseDt) || empty($company) || empty($unitCode)) {
             $response['error'] = true;
             $response['message'] = 'Not valid params!';
         } else {
@@ -87,7 +87,7 @@ class SyncQueueController extends Controller
                 'bank_address' => $company->address,
                 'OnlineQ' => 'N',
                 'call' => 'P',
-                'transaction_params_id' => $request->input('code_trx')
+                'transaction_params_id' => $request->input('code_trx'),
             ];
 
             $a = new Queue($queue);
@@ -159,6 +159,6 @@ class SyncQueueController extends Controller
             return $que;
         }
 
-        return $this->formatQueue('0' . $que);
+        return $this->formatQueue('0'.$que);
     }
 }

@@ -66,9 +66,9 @@ class BarcodeController extends Controller
         }
 
         return view('public.create_barcode_new', [
-            "nearestBank" => $nearestBank,
-            "unitCode" => $unitCode,
-            "transactionParams" => $transactionParams
+            'nearestBank' => $nearestBank,
+            'unitCode' => $unitCode,
+            'transactionParams' => $transactionParams,
         ]);
     }
 
@@ -117,6 +117,7 @@ class BarcodeController extends Controller
     public function generateBarcode(GetBarcodeRequest $request, IpService $ip)
     {
         $barcode = new BarcodeService;
+
         return redirect()->route('barcode.show', ['queue' => $barcode->generate($request->unit_code, $request->queue_for, $request->bank, now(), $ip->get_client_ip(), $request->transaction_params_id)]);
     }
 

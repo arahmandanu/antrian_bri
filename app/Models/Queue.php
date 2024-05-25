@@ -28,13 +28,13 @@ class Queue extends Model
         'unit_code_name',
         'OnlineQ',
         'call',
-        'transaction_params_id'
+        'transaction_params_id',
     ];
 
     public function getBarcode()
     {
         $dateFor = Carbon::parse($this->queue_for)->format('dmY');
-        $data = "$dateFor" . "$this->bank_code" . "$this->unit_code" . $this->formatQueueNumber($this->number_queue) . $this->transaction_params_id;
+        $data = "$dateFor"."$this->bank_code"."$this->unit_code".$this->formatQueueNumber($this->number_queue).$this->transaction_params_id;
         $a = new DNS2D;
 
         return $a->getBarcodeHTML($data, 'QRCODE');
@@ -43,9 +43,9 @@ class Queue extends Model
     private function formatQueueNumber($queue)
     {
         if (strlen($queue) == 2) {
-            $queue = '0' . $queue;
+            $queue = '0'.$queue;
         } elseif (strlen($queue) == 1) {
-            $queue = '00' . $queue;
+            $queue = '00'.$queue;
         }
 
         return $queue;
