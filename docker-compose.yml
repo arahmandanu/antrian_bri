@@ -1,0 +1,80 @@
+version: "3.7"
+services:
+    #  app:
+    #    build:
+    #      context: ./
+    #      dockerfile: Dockerfile
+    #    image: laravel-jwt
+    #    container_name: laravel-jwt-app
+    #    restart: unless-stopped
+    #    working_dir: /var/www/
+    #    volumes:
+    #      - ./:/var/www
+    #
+    #  app_queue:
+    #    build:
+    #      context: ./
+    #      dockerfile: Dockerfile
+    #    image: laravel-jwt
+    #    container_name: laravel-jwt-app-queue
+    #    restart: always
+    #    command: php artisan queue:work
+    #    depends_on:
+    #      - app
+    #    working_dir: /var/www/
+    #    volumes:
+    #      - ./:/var/www
+    #
+    #  app_cron:
+    #    build:
+    #      context: ./
+    #      dockerfile: Dockerfile
+    #    image: laravel-jwt
+    #    container_name: laravel-jwt-app-cron
+    #    restart: always
+    #    command: php artisan schedule:work
+    #    depends_on:
+    #      - app
+    #    working_dir: /var/www/
+    #    volumes:
+    #      - ./:/var/www
+
+    # db:
+    #     image: postgres:14.1-alpine
+    #     container_name: antrian_bri
+    #     restart: always
+    #     environment:
+    #         POSTGRES_DB: ${DB_DATABASE}
+    #         POSTGRES_USER: ${DB_USERNAME}
+    #         POSTGRES_PASSWORD: ${DB_PASSWORD}
+    #     networks:
+    #         - laravel-jwt
+    #     ports:
+    #         - "5432:5432"
+
+    redis:
+        image: redis:latest
+        container_name: antrian_bri-redis
+        restart: always
+        ports:
+            - '6379:6379'
+
+    db_mysql:
+        image: mysql:latest
+        container_name: antrian_bri-mysql
+        restart: always
+        ports:
+            - "3307:3307"
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+
+volumes:
+    db:
+        driver: local
