@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 
 class SyncQueueController extends Controller
 {
+    public const MAX_QUEUE = 3;
 
     public function syncFromLocal(Request $request)
     {
@@ -56,79 +57,63 @@ class SyncQueueController extends Controller
 
         return response()->json($queue, 201);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function getNumberQueue(Request $request)
     {
-        //
+        $localTime = now();
+        $paramsTime = Carbon::parse($request->input('currentTime'));
+        $startDate = $localTime->copy()->startOfDay();
+        $endDate = $localTime->copy()->endOfDay();
+
+        $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
+        $unitCode = UnitCode::where('code', '=', $request->input('unitCode'))->get()->first();
+        if (empty($company) || empty($unitCode)) {
+            $response = ['antrian' => null];
+        } else {
+            $newest = Queue::whereBetween('queue_for', [$startDate, $endDate])
+                ->where('bank_id', '=', $company->id)
+                ->where('bank_code', '=', $company->code)
+                ->where('unit_code', '=', $unitCode->code)
+                ->orderBy('number_queue', 'desc')
+                ->first();
+
+            if (empty($newest)) {
+                $response = ['antrian' => 001];
+            } else {
+                $nextNumber = $this->formatQueue($newest->number_queue + 1);
+                $newRecord = [
+                    'ip' => 'sync',
+                    'id' => Str::uuid(),
+                    'queue_for' => $localTime,
+                    'number_queue' => $nextNumber,
+                    'unit_code' => $unitCode->code,
+                    'unit_code_name' => $unitCode->name,
+                    'bank_id' => $company->id,
+                    'bank_code' => $company->code,
+                    'bank_name' => $company->name,
+                    'bank_address' => $company->address,
+                    'OnlineQ' => 'N',
+                    'call' => 'N',
+                    'transaction_params_id' => $request->transaction_params_id,
+                ];
+
+                if (Queue::create($newRecord)) {
+                    $response = ['antrian' => $nextNumber];
+                } else {
+                    $response = ['antrian' => null];
+                }
+            }
+        }
+
+        return response()->json($response, 201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function formatQueue($que)
     {
-        //
-    }
+        if (strlen($que) == self::MAX_QUEUE) {
+            return $que;
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Queue  $queue
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Queue $queue)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Queue  $queue
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Queue $queue)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Queue  $queue
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Queue $queue)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Queue  $queue
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Queue $queue)
-    {
-        //
+        return $this->formatQueue('0' . $que);
     }
 }

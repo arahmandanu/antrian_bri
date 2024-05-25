@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/sync_from_local', [SyncQueueController::class, 'syncFromLocal'])->name('api.syncfromlocal');
+Route::post('/get_number_queue', [SyncQueueController::class, 'getNumberQueue'])->name('api.getNumberQueue');
