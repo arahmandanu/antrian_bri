@@ -42,7 +42,7 @@ class SyncQueueController extends Controller
                     'TSLAservice' => $value['TSLAservice'],
                     'TOverSLA' => $value['TOverSLA'],
                     'QrSeqNumber' => null,
-                    'OnlineQ' => 'N',
+                    'OnlineQ' => $value['is_queue_online'] == 0 ? 'N' : 'Y',
                 ];
                 array_push($formatedReports, $params);
             }
