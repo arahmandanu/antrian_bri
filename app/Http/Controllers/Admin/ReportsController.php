@@ -100,8 +100,9 @@ class ReportsController extends Controller
     public function branchMap()
     {
         $banks = MstBank::all()->toArray();
+
         return view('admin.reports.branch_map', [
-            "banks" => $banks
+            'banks' => $banks,
         ]);
     }
 }
