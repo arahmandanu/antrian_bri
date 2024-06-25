@@ -43,6 +43,8 @@ class SyncQueueController extends Controller
                     'TOverSLA' => $value['TOverSLA'],
                     'QrSeqNumber' => null,
                     'OnlineQ' => $value['is_queue_online'] == 0 ? 'N' : 'Y',
+                    'created_at' => now(),
+                    'updated_at' => now()
                 ];
                 array_push($formatedReports, $params);
             }
