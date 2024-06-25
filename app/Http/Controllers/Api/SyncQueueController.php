@@ -18,7 +18,7 @@ class SyncQueueController extends Controller
     public function syncReportFromLocal(Request $request)
     {
         $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
-        if (! empty($company)) {
+        if (!empty($company)) {
             $formatedReports = [];
             $reports = $request->input('reports');
             foreach ($reports as $key => $value) {
@@ -69,7 +69,7 @@ class SyncQueueController extends Controller
         $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
         $unitCode = UnitCode::where('code', '=', $request->input('UnitServe'))->get()->first();
 
-        if (! ($localTime->format('Ymd') == $baseDt) || empty($company) || empty($unitCode)) {
+        if (!($localTime->format('Ymd') == $baseDt) || empty($company) || empty($unitCode)) {
             $response['error'] = true;
             $response['message'] = 'Not valid params!';
         } else {
@@ -89,7 +89,6 @@ class SyncQueueController extends Controller
                 'call' => 'P',
                 'transaction_params_id' => $request->input('code_trx'),
             ];
-
             $a = new Queue($queue);
             if ($a->save()) {
                 $response['error'] = false;
@@ -112,6 +111,7 @@ class SyncQueueController extends Controller
 
         $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
         $unitCode = UnitCode::where('code', '=', $request->input('unitCode'))->get()->first();
+
         if (empty($company) || empty($unitCode)) {
             $response = ['antrian' => null];
         } else {
@@ -123,30 +123,32 @@ class SyncQueueController extends Controller
                 ->first();
 
             if (empty($newest)) {
-                $response = ['antrian' => 001];
+                $nextNumber = $this->formatQueue(1);
+                $response = ['antrian' => $nextNumber];
             } else {
                 $nextNumber = $this->formatQueue($newest->number_queue + 1);
-                $newRecord = [
-                    'ip' => 'sync',
-                    'id' => Str::uuid(),
-                    'queue_for' => $localTime,
-                    'number_queue' => $nextNumber,
-                    'unit_code' => $unitCode->code,
-                    'unit_code_name' => $unitCode->name,
-                    'bank_id' => $company->id,
-                    'bank_code' => $company->code,
-                    'bank_name' => $company->name,
-                    'bank_address' => $company->address,
-                    'OnlineQ' => 'N',
-                    'call' => 'N',
-                    'transaction_params_id' => $request->transaction_params_id,
-                ];
+            }
 
-                if (Queue::create($newRecord)) {
-                    $response = ['antrian' => $nextNumber];
-                } else {
-                    $response = ['antrian' => null];
-                }
+            $newRecord = [
+                'ip' => 'sync',
+                'id' => Str::uuid(),
+                'queue_for' => $localTime,
+                'number_queue' => $nextNumber,
+                'unit_code' => $unitCode->code,
+                'unit_code_name' => $unitCode->name,
+                'bank_id' => $company->id,
+                'bank_code' => $company->code,
+                'bank_name' => $company->name,
+                'bank_address' => $company->address,
+                'OnlineQ' => 'N',
+                'call' => 'N',
+                'transaction_params_id' => $request->transaction_params_id,
+            ];
+
+            if (Queue::create($newRecord)) {
+                $response = ['antrian' => $nextNumber];
+            } else {
+                $response = ['antrian' => null];
             }
         }
 
@@ -159,6 +161,6 @@ class SyncQueueController extends Controller
             return $que;
         }
 
-        return $this->formatQueue('0'.$que);
+        return $this->formatQueue('0' . $que);
     }
 }
