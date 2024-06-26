@@ -18,7 +18,7 @@ class SyncQueueController extends Controller
     public function syncReportFromLocal(Request $request)
     {
         $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
-        if (! empty($company)) {
+        if (!empty($company)) {
             $formatedReports = [];
             $reports = $request->input('reports');
             foreach ($reports as $key => $value) {
@@ -71,7 +71,7 @@ class SyncQueueController extends Controller
         $company = MstBank::where('code', '=', $request->input('company_id'))->get()->first();
         $unitCode = UnitCode::where('code', '=', $request->input('UnitServe'))->get()->first();
 
-        if (! ($localTime->format('Ymd') == $baseDt) || empty($company) || empty($unitCode)) {
+        if (!($localTime->format('Ymd') == $baseDt) || empty($company) || empty($unitCode)) {
             $response['error'] = true;
             $response['message'] = 'Not valid params!';
         } else {
@@ -125,8 +125,12 @@ class SyncQueueController extends Controller
                 ->first();
 
             if (empty($newest)) {
-                $nextNumber = $this->formatQueue(1);
-                $response = ['antrian' => $nextNumber];
+                if ($request->input('last_queue_number')) {
+                    $nextNumber = $this->formatQueue((int)$request->input('last_queue_number') + 1);
+                } else {
+                    $nextNumber = $this->formatQueue(1);
+                    $response = ['antrian' => $nextNumber];
+                }
             } else {
                 $nextNumber = $this->formatQueue($newest->number_queue + 1);
             }
@@ -163,6 +167,6 @@ class SyncQueueController extends Controller
             return $que;
         }
 
-        return $this->formatQueue('0'.$que);
+        return $this->formatQueue('0' . $que);
     }
 }
