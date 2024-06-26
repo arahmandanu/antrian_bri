@@ -14,5 +14,9 @@ class TransactionParam extends Model
         return $this->belongsTo(UnitCode::class);
     }
 
-    protected $fillable = ['unit_code_id', 'code', 'name'];
+    protected $fillable = [
+        'unit_code_id',
+        'code',
+        'name'
+    ];
 }

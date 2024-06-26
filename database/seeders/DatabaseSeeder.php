@@ -15,10 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(AddRoleSeeder::class);
-        if (in_array(env('APP_ENV'), ['local', 'staging', 'development'])) {
-            // $this->call(MstBankSeeder::class);
-            $this->call(UnitCodeSeeder::class);
-        }
+        $this->call(UnitCodeSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CreateDeveloperUserSeeder::class);
     }
