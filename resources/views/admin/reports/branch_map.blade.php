@@ -17,7 +17,7 @@
         <div class="col-lg-12 mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Lokasi Bank</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Unit Location</h6>
                     <hr>
 
                     <div style="height: 70vh" id="map"></div>

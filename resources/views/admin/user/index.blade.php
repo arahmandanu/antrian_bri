@@ -28,10 +28,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Unit</th>
+                                <th>User Name</th>
+                                <th>User Email</th>
+                                <th>User Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,7 +44,6 @@
                                     <td><span
                                             class="badge bg-{{ $user->roles->first()->name == 'admin' ? 'success' : 'info' }}">
                                             {{ $user->roles->first()->name }} </span></td>
-                                    <td>{{ isset($user->unit) ? "{$user->unit->code} - {$user->unit->name}" : '' }}</td>
                                     <td>
                                         <a class="btn btn-primary" href="{{ route('user.show', $user->id) }}"><i
                                                 class="fa fa-pencil" aria-hidden="true"></i></a>

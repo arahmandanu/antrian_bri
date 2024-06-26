@@ -16,7 +16,6 @@
     <div class="row">
         <!-- Content Column -->
         <div class="col-lg-12 mb-4">
-
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">New</h6>
@@ -27,7 +26,7 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Name</label>
+                            <label for="exampleFormControlInput1" class="form-label">User Name</label>
                             <input type="text" name="name"
                                 class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" placeholder="Nama User"
                                 value='{{ old('name') }}'>
@@ -39,7 +38,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email</label>
+                            <label for="exampleFormControlInput1" class="form-label">User Email</label>
                             <input type="email" name="email"
                                 class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
                                 placeholder="Email User" value='{{ old('email') }}'>
@@ -50,7 +49,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Unit Bank</label>
                             <select name="unit_code" class="form-control">
                                 <option value="">-- Unit --</option>
@@ -65,7 +64,7 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Role</label>
@@ -76,7 +75,7 @@
                                 @endforeach
                             </select>
 
-                            @error('email')
+                            @error('role')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

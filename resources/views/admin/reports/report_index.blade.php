@@ -17,15 +17,14 @@
         <div class="col-lg-12 mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Bank</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Reports Que</h6>
                     <hr>
-                    <h6><span class="badge bg-success fst-italic">Silahkan pilih salah satu filter berdasar Area / Cabang /
+                    <h6><span class="badge bg-success fst-italic">Please choose one of filter by Area / Cabang /
                             Unit</span>
                     </h6>
 
                     @if ($errors->has('area_code') || $errors->has('bank_code') || $errors->has('branch_code'))
-                        <span class="fst-italic">Anda hanya bisa memilih satu dianatara filter area / cabang /
-                            unit</span>
+                        <span class="fst-italic">filter by area / branch / unit</span>
                     @endif
 
                     <form class="row g-3" method="GET" action="{{ route('admin.reports') }}">
@@ -33,25 +32,25 @@
                             <button class="btn btn-primary" onclick="collapse('byAreaBank')" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#byAreaBank" aria-expanded="false"
                                 aria-controls="byAreaBank">
-                                Area Bank
+                                Area
                             </button>
                             <button class="btn btn-primary" onclick="collapse('byCabangBank')" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#byCabangBank" aria-expanded="false"
                                 aria-controls="byCabangBank">
-                                Kantor Cabang
+                                Branch
                             </button>
                             <button class="btn btn-primary" onclick="collapse('byUnitBank')" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#byUnitBank" aria-expanded="false"
                                 aria-controls="byUnitBank">
-                                Kantor Unit
+                                Unit
                             </button>
                         </p>
 
                         <div class="collapse" id="byAreaBank">
                             <div class="card card-body">
-                                <label for="inputname" class="visually-hidden">Bank Area</label>
+                                <label for="inputname" class="visually-hidden">Area</label>
                                 <select type="text" name="area_code" class="form-control" id="byAreaBankSelect">
-                                    <option value="">Silahkan Pilih Area</option>
+                                    <option value="">Choose Area</option>
                                     @forelse($bankAreas as $bankArea)
                                         <option {{ Request::input('area_code') == $bankArea->code ? 'selected' : '' }}
                                             value="{{ $bankArea->code }}">{{ $bankArea->name }} - {{ $bankArea->code }}
@@ -67,7 +66,7 @@
                             <div class="card card-body">
                                 <label for="inputname" class="visually-hidden">Bank Branch</label>
                                 <select type="text" name="branch_code" class="form-control" id="byCabangBankSelect">
-                                    <option value="">Silahkan Pilih Kantor Cabang</option>
+                                    <option value="">Choose Branch</option>
                                     @forelse($bankBranches as $bankBranch)
                                         <option {{ Request::input('branch_code') == $bankBranch->code ? 'selected' : '' }}
                                             value="{{ $bankBranch->code }}">{{ $bankBranch->name }} -
@@ -83,7 +82,7 @@
                             <div class="card card-body">
                                 <label for="inputname" class="visually-hidden">Bank Unit</label>
                                 <select type="text" name="bank_code" class="form-control" id="byUnitBankSelect">
-                                    <option value="">Silahkan Pilih Kantor Unit</option>
+                                    <option value="">Choose Unit</option>
                                     @forelse($banks as $bank)
                                         <option {{ Request::input('bank_code') == $bank->code ? 'selected' : '' }}
                                             value="{{ $bank->code }}">{{ $bank->name }}</option>
@@ -105,7 +104,7 @@
                         <div class="col-auto">
                             <label for="inputname" class="visually-hidden">Unit Code</label>
                             <select name="unit_code" class="form-control" id="inputname" placeholder="Bank Name">
-                                <option value="">All</option>
+                                <option value="">Unit Service</option>
                                 <option value="B" {{ old('unit_code') == 'B' ? 'selected' : '' }}>CS</option>
                                 <option value="A" {{ old('unit_code') == 'A' ? 'selected' : '' }}>TELLER</option>
                             </select>
@@ -114,7 +113,7 @@
                         <div class="col-auto">
                             <label for="inputname" class="visually-hidden">SLA</label>
                             <select name="sla" class="form-control" id="inputname" placeholder="Bank Name">
-                                <option value="">SLA</option>
+                                <option value="">-- SLA SERVICE --</option>
                                 <option value="1" {{ old('sla') == '1' ? 'selected' : '' }}>Over Sla</option>
                                 <option value="2" {{ old('sla') == '2' ? 'selected' : '' }}>Not Over Sla</option>
                             </select>
@@ -179,7 +178,18 @@
                                     <td>{{ $transaction->TrxDesc }}</td>
                                     <td>{{ !isset($transaction->TSLAservice) ? '-' : $transaction->TSLAservice }}
                                     </td>
-                                    <td>{{ !isset($transaction->TOverSLA) ? '-' : $transaction->TOverSLA }}</td>
+                                    <td>
+                                        @php
+                                            $overSla = !isset($transaction->TOverSLA)
+                                                ? '00:00:00'
+                                                : $transaction->TOverSLA;
+                                            if ($overSla == '00:00:00') {
+                                                echo "<span class='badge bg-success'>$overSla</span>";
+                                            } else {
+                                                echo "<span class='badge bg-danger'>$overSla</span>";
+                                            }
+                                        @endphp
+                                    </td>
                                 </tr>
                             @empty
                                 {{-- No Data Found --}}

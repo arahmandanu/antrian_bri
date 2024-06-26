@@ -6,7 +6,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin_dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Unit Codes</li>
+                <li class="breadcrumb-item active" aria-current="page">Transactions</li>
             </ol>
         </nav>
     </div>
@@ -17,12 +17,12 @@
         <div class="col-lg-12 mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Jenis Transaksi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Type Transactions</h6>
                     <hr>
                     <div class="col-auto">
                         <a type="submit" href="{{ route('admin.transactionParams.create') }}"
-                            class="btn btn-success mb-3">Tambah Jenis
-                            Transaksi</a>
+                            class="btn btn-success mb-3">Add Type
+                            Transactions</a>
                     </div>
                 </div>
 
@@ -32,8 +32,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Unit</th>
-                                <th>Kode Transaksi</th>
-                                <th>Nama Transaksi</th>
+                                <th>Transactions Code</th>
+                                <th>Transactions Name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -44,7 +44,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->unitCode->name }}</td>
                                     <td>{{ $item->code }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ Str::Upper($item->name) }}</td>
                                     <td>
                                         <div class="d-flex flex-row bd-highlight">
                                             <div class="bd-highlight"><a class="btn btn-info btn-sm"

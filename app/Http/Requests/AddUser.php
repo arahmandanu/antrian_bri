@@ -28,7 +28,7 @@ class AddUser extends FormRequest
             'email' => ['required', 'unique:users'],
             'password' => ['min:6', 'required'],
             'role' => ['required'],
-            'unit_code' => ['required', 'exists:mst_bank,code'],
+            // 'unit_code' => ['required', 'exists:mst_bank,code'],
         ];
 
         return $rule;

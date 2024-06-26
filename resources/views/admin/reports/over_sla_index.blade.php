@@ -16,7 +16,7 @@
         <div class="col-xl-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Tahun {{ now()->year }}</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Year {{ now()->year }}</h6>
                     <hr>
                     <form class="row g-3" method="GET" action="{{ route('admin.over_sla') }}">
                         @csrf
@@ -24,7 +24,7 @@
                             <label for="inputcode" class="visually-hidden">Code</label>
                             <select type="text" name="month" class="form-control" required id="month"
                                 placeholder="Bank Code">
-                                <option value="">Pilih Bulan</option>
+                                <option value="">Choose Month</option>
                                 <option value="1" {{ old('month') == 1 ? 'selected' : '' }}>Januari</option>
                                 <option value="2" {{ old('month') == 2 ? 'selected' : '' }}>Februari</option>
                                 <option value="3" {{ old('month') == 3 ? 'selected' : '' }}>Maret</option>
@@ -63,12 +63,6 @@
                             <canvas id="doughnut-chartcanvas-1"></canvas>
                         </div>
                     </div>
-
-                    {{-- <div class="col-6 shadow rounded">
-                        <div class="card-body">
-                            <canvas id="doughnut-chartcanvas-onoff"></canvas>
-                        </div>
-                    </div> --}}
 
                 </div>
             </div>

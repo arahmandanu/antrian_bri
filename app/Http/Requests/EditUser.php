@@ -26,7 +26,7 @@ class EditUser extends FormRequest
         $rule = [
             'name' => ['required', 'min:4'],
             'email' => ['required', 'min:4'],
-            'unit_code' => ['required'],
+            // 'unit_code' => ['required'],
         ];
 
         if ($this->email != $this->user->email) {

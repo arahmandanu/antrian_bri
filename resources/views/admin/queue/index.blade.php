@@ -21,7 +21,7 @@
                     <form method="GET" action="{{ route('queue_logs.index') }}">
                         <div class="row">
                             <div class="col">
-                                <label for="bank">Bank</label>
+                                <label for="bank">Unit</label>
                                 <select name="bank"
                                     class="js-data-example-ajax form-control {{ $errors->has('bank') ? 'is-invalid' : '' }}"
                                     id="bank">
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="col">
-                                <label for="unit_code">Kode Unit</label>
+                                <label for="unit_code">Unit Service</label>
                                 <select name="unit_code"
                                     class="js-example-placeholder-single js-states form-control {{ $errors->has('unit_code') ? 'is-invalid' : '' }}"
                                     id="unit">
@@ -82,11 +82,11 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Antrian</th>
-                                <th>Kode Unit</th>
-                                <th>Alamat Bank</th>
-                                <th>Tanggal Antrian</th>
-                                <th>Tanggal Buat</th>
+                                <th>Queue Code</th>
+                                <th>Unit Service</th>
+                                <th>Bank Address</th>
+                                <th>Queue Created at</th>
+                                <th>Queue Date For</th>
                             </tr>
                         </thead>
 
@@ -157,13 +157,13 @@
             });
 
             $('select#unit').select2({
-                placeholder: 'Silahkan pilih Unit',
+                placeholder: 'Choose Unit Service',
                 minimumResultsForSearch: Infinity,
                 allowClear: true,
             });
 
             $('select#bank').select2({
-                placeholder: 'Silahkan pilih Bank',
+                placeholder: 'Choose Unit',
                 minimumInputLength: 0,
                 dataType: 'json',
                 delay: 250,
