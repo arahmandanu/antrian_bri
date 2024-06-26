@@ -133,6 +133,12 @@ class SyncQueueController extends Controller
                 }
             } else {
                 $nextNumber = $this->formatQueue($newest->number_queue + 1);
+                if ($request->input('last_queue_number')) {
+                    $currentLocalQueue = (int)$request->input('last_queue_number');
+                    if ($currentLocalQueue > (int)$newest->number_queue) {
+                        $nextNumber = $this->formatQueue((int)$request->input('last_queue_number') + 1);
+                    }
+                }
             }
 
             $newRecord = [

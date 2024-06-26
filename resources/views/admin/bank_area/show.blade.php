@@ -39,7 +39,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Name</label>
+                            <label for="exampleFormControlInput1" class="form-label">Area Name</label>
                             <input type="text" name="name" placeholder="Area Name"
                                 class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                 value="{{ $bankArea->name }}">

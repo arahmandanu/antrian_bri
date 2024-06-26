@@ -59,8 +59,14 @@
                 <div class="row p-1">
 
                     <div class="col-6 shadow rounded">
-                        <div class="card-body ">
+                        <div class="card-body">
                             <canvas id="doughnut-chartcanvas-1"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-6 shadow rounded">
+                        <div class="card-body">
+                            <canvas id="doughnut-chartcanvas-onoff"></canvas>
                         </div>
                     </div>
 
@@ -75,8 +81,8 @@
         var csover = @json($csover);
         var teller = @json($teller);
         var tellerover = @json($tellerover);
-        var namemonth = "Over SLA Bulan ";
-        var namemonthonoff = "Total Antrian Online / Offline Bulan ";
+        var namemonth = "Over SLA Bulan";
+        var namemonthonoff = "Online / Offline";
 
         if ($('select#month option:selected').val()) {
             namemonth = namemonth + $('select#month option:selected').text();
