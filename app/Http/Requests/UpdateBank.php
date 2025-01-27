@@ -27,7 +27,7 @@ class UpdateBank extends FormRequest
     {
         $rule = [
             'KC_Code' => ['required', 'exists:bank_branches,code'],
-            'code' => ['required', 'min:5', 'max:5'],
+            'code' => ['required'],
             'name' => ['required', 'max:100'],
             'address' => ['required', 'max:255'],
             'latitude' => [new ValidLatitude],

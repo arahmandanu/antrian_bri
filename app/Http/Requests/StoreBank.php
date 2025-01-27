@@ -27,7 +27,7 @@ class StoreBank extends FormRequest
     {
         return [
             'KC_Code' => ['required', 'exists:bank_branches,code'],
-            'code' => ['required', 'min:5', 'max:5', 'unique:mst_bank'],
+            'code' => ['required', 'unique:mst_bank'],
             'name' => ['required', 'max:100', 'unique:mst_bank'],
             'address' => ['required', 'max:255'],
             'latitude' => [new ValidLatitude],
