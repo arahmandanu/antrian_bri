@@ -12,7 +12,6 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
     <link href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="//cdn.datatables.net/buttons/1.5.6/css/buttons.bootstrap4.min.css" rel="stylesheet">
