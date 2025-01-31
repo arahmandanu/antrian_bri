@@ -16,8 +16,10 @@ class ValidLatitude implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        if (! ($value >= -90 && $value <= 90)) {
-            return $fail('Latitude tidak sesuai');
+        if ($value !== null) {
+            if (! ($value >= -90 && $value <= 90)) {
+                return $fail('Latitude tidak sesuai');
+            }
         }
     }
 }

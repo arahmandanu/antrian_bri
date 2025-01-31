@@ -80,16 +80,15 @@
             }).addTo(map);
 
             $.each(marker, function(i, v) {
+                console.log(i, v);
                 var marker = L.marker([v.latitude, v.longitude]).addTo(map);
                 marker.bindPopup("<span>" + v.name + "</span><br>" + v.address).openPopup();
             });
 
             Selectize.define('no_results', function(options) {
                 var self = this;
-
                 options = $.extend({
                     message: 'No results found.',
-
                     html: function(data) {
                         return (
                             '<div class="selectize-dropdown ' + data.classNames + '">' +

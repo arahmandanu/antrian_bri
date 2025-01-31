@@ -16,8 +16,11 @@ class ValidLongitude implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        if (! ($value >= -180 || $value <= 180)) {
-            return $fail('Longitude tidak sesuai');
+
+        if ($value !== null) {
+            if (! ($value >= -180 && $value <= 180)) {
+                return $fail('Longitude tidak sesuai');
+            }
         }
     }
 }

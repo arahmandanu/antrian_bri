@@ -30,8 +30,8 @@ class StoreBank extends FormRequest
             'code' => ['required', 'unique:mst_bank'],
             'name' => ['required', 'max:100', 'unique:mst_bank'],
             'address' => ['required', 'max:255'],
-            // 'latitude' => [new ValidLatitude],
-            // 'longitude' => [new ValidLongitude],
+            'latitude' => [new ValidLatitude],
+            'longitude' => [new ValidLongitude],
             'city' => ['required'],
         ];
     }

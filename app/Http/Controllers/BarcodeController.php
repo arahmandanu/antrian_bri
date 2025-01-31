@@ -45,6 +45,8 @@ class BarcodeController extends Controller
             ->when($coor, function ($query, $coor) {
                 $query->distance($coor['latitude'], $coor['longitude'], $coor['distance']);
             })
+            ->whereNotNull('latitude')
+            ->where('latitude', '!=', "")
             ->take(10)
             ->get()
             ->reverse()
@@ -52,6 +54,8 @@ class BarcodeController extends Controller
 
         if ($nearestBank->count() == 0) {
             $nearestBank = MstBank::select('id', 'code', 'name', 'address', 'latitude', 'longitude')
+                ->whereNotNull('latitude')
+                ->where('latitude', '!=', "")
                 ->take(10)
                 ->get()
                 ->reverse()

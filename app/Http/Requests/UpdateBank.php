@@ -30,8 +30,8 @@ class UpdateBank extends FormRequest
             'code' => ['required'],
             'name' => ['required', 'max:100'],
             'address' => ['required', 'max:255'],
-            // 'latitude' => [new ValidLatitude],
-            // 'longitude' => [new ValidLongitude],
+            'latitude' => [new ValidLatitude],
+            'longitude' => [new ValidLongitude],
         ];
 
         if ($this->code != $this->bank->code) {
