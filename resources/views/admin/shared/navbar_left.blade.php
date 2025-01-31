@@ -93,8 +93,8 @@
                 class="collapse {{ Ekko::isActive(['/admin/bank_area', '/admin/bank_branches', '/admin/banks'], 'show') }}"
                 aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{ route('admin.bank_area.index') }}">Area</a>
-                    <a class="collapse-item" href="{{ route('admin.bank_branches.index') }}">Cabang Induk</a>
+                    {{-- <a class="collapse-item" href="{{ route('admin.bank_area.index') }}">Area</a>
+                    <a class="collapse-item" href="{{ route('admin.bank_branches.index') }}">Cabang Induk</a> --}}
                     <a class="collapse-item" href="{{ route('banks.index') }}">KC/KCP/KK/Unit</a>
                 </div>
             </div>

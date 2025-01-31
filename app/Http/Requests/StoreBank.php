@@ -26,12 +26,12 @@ class StoreBank extends FormRequest
     public function rules()
     {
         return [
-            'KC_Code' => ['required', 'exists:bank_branches,code'],
+            // 'KC_Code' => ['required', 'exists:bank_branches,code'],
             'code' => ['required', 'unique:mst_bank'],
             'name' => ['required', 'max:100', 'unique:mst_bank'],
             'address' => ['required', 'max:255'],
-            'latitude' => [new ValidLatitude],
-            'longitude' => [new ValidLongitude],
+            // 'latitude' => [new ValidLatitude],
+            // 'longitude' => [new ValidLongitude],
             'city' => ['required'],
         ];
     }

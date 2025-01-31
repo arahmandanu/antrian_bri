@@ -26,12 +26,12 @@ class UpdateBank extends FormRequest
     public function rules()
     {
         $rule = [
-            'KC_Code' => ['required', 'exists:bank_branches,code'],
+            // 'KC_Code' => ['required', 'exists:bank_branches,code'],
             'code' => ['required'],
             'name' => ['required', 'max:100'],
             'address' => ['required', 'max:255'],
-            'latitude' => [new ValidLatitude],
-            'longitude' => [new ValidLongitude],
+            // 'latitude' => [new ValidLatitude],
+            // 'longitude' => [new ValidLongitude],
         ];
 
         if ($this->code != $this->bank->code) {

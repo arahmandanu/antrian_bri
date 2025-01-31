@@ -29,7 +29,7 @@
 
                     <form class="row g-3" method="GET" action="{{ route('admin.reports') }}">
                         <p>
-                            <button class="btn btn-primary" onclick="collapse('byAreaBank')" type="button"
+                            {{-- <button class="btn btn-primary" onclick="collapse('byAreaBank')" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#byAreaBank" aria-expanded="false"
                                 aria-controls="byAreaBank">
                                 Area
@@ -38,7 +38,7 @@
                                 data-bs-toggle="collapse" data-bs-target="#byCabangBank" aria-expanded="false"
                                 aria-controls="byCabangBank">
                                 Branch
-                            </button>
+                            </button> --}}
                             <button class="btn btn-primary" onclick="collapse('byUnitBank')" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#byUnitBank" aria-expanded="false"
                                 aria-controls="byUnitBank">
@@ -46,7 +46,7 @@
                             </button>
                         </p>
 
-                        <div class="collapse" id="byAreaBank">
+                        {{-- <div class="collapse" id="byAreaBank">
                             <div class="card card-body">
                                 <label for="inputname" class="visually-hidden">Area</label>
                                 <select type="text" name="area_code" class="form-control" id="byAreaBankSelect">
@@ -76,7 +76,7 @@
                                     @endforelse
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="collapse" id="byUnitBank">
                             <div class="card card-body">

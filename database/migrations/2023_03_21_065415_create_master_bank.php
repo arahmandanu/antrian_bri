@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('city', 255)->nullable(true);
 
             // $table->string('Area_Code', 255)->nullable(true);
-            $table->string('Area_Code');
-            $table->foreign('Area_Code')->nullable(true)->references('code')->on('bank_areas')->onUpdate('cascade');
+            $table->string('Area_Code')->nullable()->default(null);
+            $table->foreign('Area_Code')->nullable()->references('code')->on('bank_areas')->onUpdate('cascade');
 
             // $table->string('KC_Code', 255)->nullable(true);
-            $table->string('KC_Code');
-            $table->foreign('KC_Code')->nullable(true)->references('code')->on('bank_branches')->onUpdate('cascade');
+            $table->string('KC_Code')->nullable()->default(null);
+            $table->foreign('KC_Code')->nullable()->references('code')->on('bank_branches')->onUpdate('cascade');
 
             $table->text('address')->nullable(false);
             $table->double('latitude')->nullable();

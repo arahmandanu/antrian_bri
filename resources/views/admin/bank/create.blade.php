@@ -27,7 +27,7 @@
                     <form action="{{ route('banks.store') }}" method="POST">
                         @csrf
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Branch Code</label>
                             <select name="KC_Code" class="form-control">
                                 <option value="">-- Branch --</option>
@@ -46,10 +46,10 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">KC/KCP/KK/Unit Code (5 digit)</label>
+                            <label for="exampleFormControlInput1" class="form-label">KC/KCP/KK/Unit Code</label>
                             <input type="text" name="code"
                                 class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}"
                                 placeholder="Bank Unit Code" value='{{ old('code') }}'>

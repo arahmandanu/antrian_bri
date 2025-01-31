@@ -64,9 +64,10 @@ class BankController extends Controller
      */
     public function store(StoreBank $request)
     {
-        $bankBranch = BankBranch::where('code', $request->validated('KC_Code'))->firstOrFail();
-        $attr = array_merge($request->validated(), ['Area_Code' => $bankBranch->area->code]);
-        $newBank = MstBank::create($attr);
+        // $bankBranch = BankBranch::where('code', $request->validated('KC_Code'))->firstOrFail();
+        // $attr = array_merge($request->validated(), ['Area_Code' => $bankBranch->area->code]);
+        // $newBank = MstBank::create($attr);
+        $newBank = MstBank::create($request->validated());
 
         if ($newBank) {
             flash()->success('Berhasil menyimpan data Bank');
@@ -108,9 +109,9 @@ class BankController extends Controller
     {
         abort_if(! $bank, 404);
 
-        $bankBranch = BankBranch::where('code', $request->validated('KC_Code'))->firstOrFail();
-        $attr = array_merge($request->validated(), ['Area_Code' => $bankBranch->area->code]);
-        $bank->update($attr);
+        // $bankBranch = BankBranch::where('code', $request->validated('KC_Code'))->firstOrFail();
+        // $attr = array_merge($request->validated(), ['Area_Code' => $bankBranch->area->code]);
+        $bank->update($request->validated());
 
         flash()->success('Berhasil update Bank');
 

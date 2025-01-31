@@ -67,8 +67,8 @@
                                         <div class="d-flex flex-row bd-highlight">
                                             <div class="bd-highlight"><a type="button"
                                                     class="btn btn-info btn-sm btn-block"
-                                                    href="{{ route('banks.show', $bank->code) }} "><i class="fa fa-pencil"
-                                                        aria-hidden="true"></i></a>
+                                                    href="{{ route('banks.show', $bank->code) }} "> Edit<i
+                                                        class="fa fa-pencil" aria-hidden="true"></i></a>
                                             </div>
                                         </div>
                                     </td>

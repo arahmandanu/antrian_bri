@@ -24,12 +24,17 @@
                     <form action="{{ route('banks.update', $bank->code) }}" method="POST">
                         @method('PUT')
                         @csrf
+                        {{--
+                        Not used
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Area Code</label>
                             <input disabled type="text" class="form-control" placeholder="Area Bank Code"
                                 value="{{ $bank->Area_Code }}">
                         </div>
+                        --}}
 
+                        {{--
+                        Not Used
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Branch Code</label>
                             <select name="KC_Code" class="form-control">
@@ -50,9 +55,10 @@
                                 </div>
                             @enderror
                         </div>
+                        --}}
 
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">KC/KCP/KK/Unit Code (5 digit)</label>
+                            <label for="exampleFormControlInput1" class="form-label">KC/KCP/KK/Unit Code</label>
                             <input type="text" name="code"
                                 class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" placeholder="Bank Code"
                                 value="{{ $bank->code }}">

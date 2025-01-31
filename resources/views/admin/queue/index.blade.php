@@ -32,6 +32,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <hr>
                             </div>
 
                             <div class="col">
@@ -54,6 +55,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <hr>
                             </div>
                         </div>
 
