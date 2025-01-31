@@ -73,7 +73,7 @@
     <script>
         $(document).ready(function() {
             var marker = {!! json_encode($nearestBank) !!};
-            var map = L.map('map').setView([51.505, -0.09], 14);
+            var map = L.map('map').setView([-2.4065276, 115.6183344], 5);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
