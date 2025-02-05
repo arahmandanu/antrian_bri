@@ -63,7 +63,7 @@
                                             <div class="bd-highlight"><a type="button"
                                                     class="btn btn-info btn-sm btn-block"
                                                     href="{{ route('admin.bank_branches.show', $bank->code) }} "><i
-                                                        class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                        class="fa fa-pencil" aria-hidden="true"> Edit</i></a>
                                             </div>
                                         </div>
                                     </td>
