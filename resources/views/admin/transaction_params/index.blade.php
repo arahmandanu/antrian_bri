@@ -49,7 +49,7 @@
                                         <div class="d-flex flex-row bd-highlight">
                                             <div class="bd-highlight"><a class="btn btn-info btn-sm"
                                                     href="{{ route('admin.transactionParams.show', $item->id) }}">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    <i class="fa fa-pencil" aria-hidden="true"> Edit</i>
                                                 </a>
                                             </div>
                                         </div>
