@@ -46,7 +46,7 @@
                                             {{ $user->roles->first()->name }} </span></td>
                                     <td>
                                         <a class="btn btn-primary" href="{{ route('user.show', $user->id) }}"><i
-                                                class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                class="fa fa-pencil" aria-hidden="true"> Edit</i></a>
                                     </td>
                                 </tr>
                             @empty
