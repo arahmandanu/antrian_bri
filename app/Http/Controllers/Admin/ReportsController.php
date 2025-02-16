@@ -99,10 +99,25 @@ class ReportsController extends Controller
 
     public function branchMap()
     {
-        $banks = MstBank::all()->toArray();
+        $list = [];
+        $banks = MstBank::all();
+        foreach ($banks as $value) {
+            $data = [];
+            $onlineStatus = $value->onlineStatus();
+
+            if ($onlineStatus <= 3) {
+                $data = $value->toArray();
+                $data['onlineStatus'] = true;
+            } else {
+                $data = $value->toArray();
+                $data['onlineStatus'] = false;
+            }
+
+            array_push($list, $data);
+        }
 
         return view('admin.reports.branch_map', [
-            'banks' => $banks,
+            'banks' => $list,
         ]);
     }
 }

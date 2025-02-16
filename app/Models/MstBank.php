@@ -41,4 +41,10 @@ class MstBank extends Model
         return $query->selectRaw("$haversine AS distance")
             ->having('distance', '<=', $distance);
     }
+
+    public function onlineStatus()
+    {
+        $dt = $this->updated_at;
+        return $dt->diffInDays(now());
+    }
 }

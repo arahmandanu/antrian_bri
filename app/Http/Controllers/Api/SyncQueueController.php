@@ -51,6 +51,7 @@ class SyncQueueController extends Controller
         }
 
         if (Transaction::insert($formatedReports)) {
+            $company->touch();
             $message = 'success';
             $code = 201;
         } else {

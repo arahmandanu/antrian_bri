@@ -30,13 +30,34 @@
         $(document).ready(function() {
             var marker = {!! json_encode($banks) !!};
             var map = L.map('map').setView([51.505, -0.09], 12);
+            var LeafIcon = L.Icon.extend({
+                options: {
+                    iconSize: [30, 50],
+                    iconAnchor: [22, 94],
+                    shadowAnchor: [4, 62],
+                    popupAnchor: [-3, -76]
+                }
+            });
+
+            var onlineMarker = new LeafIcon({
+                    iconUrl: "{{ asset('vendor/marker/online.png') }}"
+                }),
+                offlineMarker = new LeafIcon({
+                    iconUrl: "{{ asset('vendor/marker/offline.png') }}"
+                });
+
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
             $.each(marker, function(i, v) {
-                var marker = L.marker([v.latitude, v.longitude]).addTo(map);
+                if (v.latitude === null || v.longitude === null) {
+                    return true;
+                }
+                var marker = L.marker([v.latitude, v.longitude], {
+                    icon: v.onlineStatus === true ? onlineMarker : offlineMarker
+                }).addTo(map);
                 marker.bindPopup("<span>" + v.name + " " + v.code + "</span><br>" + v.address).openPopup();
             });
 
