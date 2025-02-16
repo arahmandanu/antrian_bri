@@ -84,11 +84,11 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Antrian</th>
+                                {{-- <th>Kode Antrian</th> --}}
                                 <th>Unit Service</th>
-                                <th>Bank Address</th>
-                                <th>Bank Name</th>
-                                <th>Bank Code</th>
+                                <th>Alamat Bank</th>
+                                <th>Nama Bank</th>
+                                <th>Kode Bank</th>
                                 <th>Antrian Created at</th>
                                 <th>Antrian Date For</th>
                             </tr>
@@ -98,7 +98,7 @@
                             @forelse ($queues as $queue)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $queue->id }}</td>
+                                    {{-- <td>{{ $queue->id }}</td> --}}
                                     <td>{{ $queue->unit_code == 'A' ? 'Teller' : 'CS' }}</td>
                                     <td>{{ $queue->bank_address }}</td>
                                     <td>{{ $queue->bank_name }}</td>
