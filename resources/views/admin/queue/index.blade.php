@@ -141,7 +141,7 @@
             });
 
             $('input[name="queue_for"]').on('cancel.daterangepicker', function(ev, picker) {
-                $(this).val('');
+                $(this).val("{{ old('queue_for') }}");
             });
 
 
@@ -159,7 +159,7 @@
             });
 
             $('input[name="created_at"]').on('cancel.daterangepicker', function(ev, picker) {
-                $(this).val('');
+                $(this).val("{{ old('created_at') }}");
             });
 
             $('select#unit').select2({
@@ -194,6 +194,14 @@
                     cache: true
                 }
             });
+
+            var defaultBank = {!! json_encode($defaultBank) !!};
+            if (defaultBank !== null) {
+                // Create a DOM Option and pre-select by default
+                var newOption = new Option(defaultBank.name, defaultBank.id, true, true);
+                // Append it to the select
+                $('select#bank').append(newOption).trigger('change');
+            }
         });
 
         function formatBankView(data) {

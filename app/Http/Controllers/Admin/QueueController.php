@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MstBank;
 use App\Models\Queue;
 use App\Models\UnitCode;
 use Illuminate\Http\Request;
@@ -41,10 +42,18 @@ class QueueController extends Controller
         $queues->appends($request->all());
         session()->flashInput($request->input());
 
-        return view('admin.queue.index', [
+        $result = [
             'queues' => $queues,
             'unitCodes' => UnitCode::get(),
-        ]);
+            'defaultBank' => null
+        ];
+        if ($request->input('bank')) {
+            $dataBank = MstBank::where("id", $request->input('bank'))->first();
+            if ($dataBank) {
+                $result['defaultBank'] = ['id' => $dataBank->id, 'name' => $dataBank->name];
+            }
+        }
+        return view('admin.queue.index', $result);
     }
 
     /**
