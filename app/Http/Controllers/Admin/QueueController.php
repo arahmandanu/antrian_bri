@@ -36,7 +36,7 @@ class QueueController extends Controller
                 $query->whereBetween('created_at', [$formatCreatedAt['from']->startOfDay(), $formatCreatedAt['to']->endOfDay()]);
             })
             ->latest()
-            ->paginate(20);
+            ->paginate(50);
 
         $queues->appends($request->all());
         session()->flashInput($request->input());
