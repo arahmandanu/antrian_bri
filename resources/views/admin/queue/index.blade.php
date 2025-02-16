@@ -83,7 +83,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                {{-- <th>No</th> --}}
                                 {{-- <th>Kode Antrian</th> --}}
                                 <th>Unit Service</th>
                                 <th>Alamat Bank</th>
@@ -97,7 +97,7 @@
                         <tbody>
                             @forelse ($queues as $queue)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    {{-- <td>{{ $loop->iteration }}</td> --}}
                                     {{-- <td>{{ $queue->id }}</td> --}}
                                     <td>{{ $queue->unit_code == 'A' ? 'Teller' : 'CS' }}</td>
                                     <td>{{ $queue->bank_address }}</td>
