@@ -53,7 +53,7 @@
                     <a class="collapse-item" href="{{ route('admin.over_sla') }}">Chart Over Sla</a>
                     <a class="collapse-item" href="{{ route('admin.reports') }}">Reports</a>
                     <a class="collapse-item" href="{{ route('admin.branchMap') }}">
-                        Branch Map</a>
+                        Lokasi Branch</a>
                 </div>
             </div>
         </li>
