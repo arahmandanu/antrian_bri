@@ -149,7 +149,7 @@
                                 <th>Time Call</th>
                                 <th>Time End</th>
                                 <th>Cust Wait Duration</th>
-                                <th>Serv Wait Duration</th>
+                                {{-- <th>Serv Wait Duration</th> --}}
                                 <th>Time Serv Duration</th>
                                 <th>Unit Service</th>
                                 <th>Counter</th>
@@ -170,7 +170,7 @@
                                     <td>{{ $transaction->TimeCall }}</td>
                                     <td>{{ $transaction->TimeEnd }}</td>
                                     <td>{{ $transaction->CustWaitDuration }}</td>
-                                    <td>{{ !isset($transaction->TWservice) ? '-' : $transaction->TWservice }}</td>
+                                    {{-- <td>{{ !isset($transaction->TWservice) ? '-' : $transaction->TWservice }}</td> --}}
                                     <td>{{ $transaction->Tservice }}</td>
                                     <td>{{ $transaction->UnitServe }}</td>
                                     <td>{{ $transaction->CounterNo }}</td>

@@ -84,11 +84,11 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Queue Code</th>
+                                <th>Kode Antrian</th>
                                 <th>Unit Service</th>
                                 <th>Bank Address</th>
-                                <th>Queue Created at</th>
-                                <th>Queue Date For</th>
+                                <th>Antrian Created at</th>
+                                <th>Antrian Date For</th>
                             </tr>
                         </thead>
 
@@ -97,7 +97,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $queue->id }}</td>
-                                    <td>{{ $queue->unit_code }}</td>
+                                    <td>{{ $queue->unit_code == 'A' ? 'Teller' : 'CS' }}</td>
                                     <td>{{ $queue->bank_address }}</td>
                                     <td>{{ $queue->queue_for }}</td>
                                     <td>{{ $queue->created_at }}</td>
