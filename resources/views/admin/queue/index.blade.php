@@ -87,6 +87,8 @@
                                 <th>Kode Antrian</th>
                                 <th>Unit Service</th>
                                 <th>Bank Address</th>
+                                <th>Bank Name</th>
+                                <th>Bank Code</th>
                                 <th>Antrian Created at</th>
                                 <th>Antrian Date For</th>
                             </tr>
@@ -99,6 +101,8 @@
                                     <td>{{ $queue->id }}</td>
                                     <td>{{ $queue->unit_code == 'A' ? 'Teller' : 'CS' }}</td>
                                     <td>{{ $queue->bank_address }}</td>
+                                    <td>{{ $queue->bank_name }}</td>
+                                    <td>{{ $queue->bank_code }}</td>
                                     <td>{{ $queue->queue_for }}</td>
                                     <td>{{ $queue->created_at }}</td>
                                 </tr>
