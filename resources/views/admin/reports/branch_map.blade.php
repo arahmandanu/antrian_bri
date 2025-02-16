@@ -37,7 +37,7 @@
 
             $.each(marker, function(i, v) {
                 var marker = L.marker([v.latitude, v.longitude]).addTo(map);
-                marker.bindPopup("<span>" + v.name + "</span><br>" + v.address).openPopup();
+                marker.bindPopup("<span>" + v.name + " " + v.name + +"</span><br>" + v.address).openPopup();
             });
 
         });
