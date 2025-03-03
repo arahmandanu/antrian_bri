@@ -10,6 +10,8 @@
 // If you need to import Bootstrap as well:
 @import "../../node_modules/select2-bootstrap-5-theme/src/select2-bootstrap-5-theme";
 @import '../../node_modules/@selectize/selectize/dist/css/selectize.bootstrap5.css';
+@import "/node_modules/flag-icons/css/flag-icons.min.css";
+@import "../../node_modules/flag-icons/sass/flag-icons.scss";
 
 .select2-container .select2-selection--single {
     height: 35px !important;

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\TransactionParamsController;
 use App\Http\Controllers\Admin\UnitCodeController;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Authentication\LogOutController;
 use App\Http\Controllers\Authentication\ShowController;
 use App\Http\Controllers\Authentication\VerifyController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\ButtonActorController;
 use App\Http\Controllers\ButtonBranchController;
 use App\Http\Controllers\PublicDashboardController;
 use App\Http\Controllers\QueueController as ControllersQueueController;
+use App\Models\Currency;
 use Illuminate\Support\Facades\Route;
 use Milon\Barcode\DNS2D;
 
@@ -57,6 +59,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'haveRole']], funct
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin_dashboard');
 
     Route::resource('/banks', BankController::class);
+    Route::resource('/kurs', CurrencyController::class);
     Route::resource('/unit_codes', UnitCodeController::class);
     Route::resource('/queue_logs', QueueController::class);
 

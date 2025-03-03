@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\SyncQueueController;
+use App\Http\Controllers\Api\CurrencyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/sync_from_local', [SyncQueueController::class, 'syncFromLocal'])->name('api.syncfromlocal');
 Route::post('/get_number_queue', [SyncQueueController::class, 'getNumberQueue'])->name('api.getNumberQueue');
 Route::post('/sync_report_from_local', [SyncQueueController::class, 'syncReportFromLocal'])->name('api.getNumberQueue');
+Route::get('/currencies/list', [CurrencyController::class, 'list'])->name('api.getListCurrencies');
