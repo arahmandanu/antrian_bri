@@ -45,7 +45,7 @@
                                 placeholder="Bank Code">
                                 @forelse($banks as $bank)
                                     <option value="{{ $bank->code }}" @if (old('bank_code') == $bank->code) selected @endif>
-                                        {{ $bank->name }}</option>
+                                        [{{ $bank->address }}] {{ $bank->name }}</option>
                                 @empty
                                     <option>No Data Found</option>
                                 @endforelse
