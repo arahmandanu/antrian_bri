@@ -74,7 +74,7 @@
                 aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">System:</h6>
-                    <a class="collapse-item" href="{{ route('unit_codes.index') }}">Unit Codes</a>
+                    {{-- <a class="collapse-item" href="{{ route('unit_codes.index') }}">Unit Codes</a> --}}
                     <a class="collapse-item" href="{{ route('admin.transactionParams.index') }}">Type Transaction</a>
                     <a class="collapse-item" href="{{ route('user.index') }}">User</a>
                 </div>
