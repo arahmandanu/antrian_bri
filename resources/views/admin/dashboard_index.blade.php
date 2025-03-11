@@ -127,7 +127,7 @@
                         yAxes: [{
                             ticks: {
                                 min: 0,
-                                max: 50,
+                                max: 2000,
                                 maxTicksLimit: 10,
                                 padding: 5,
                                 callback: function(value, index, values) {
