@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\TransactionParamsController;
 use App\Http\Controllers\Admin\UnitCodeController;
 use App\Http\Controllers\Admin\CurrencyController;
+use App\Http\Controllers\Admin\MasterProductController;
+use App\Http\Controllers\Admin\ProductDetailController;
 use App\Http\Controllers\Authentication\LogOutController;
 use App\Http\Controllers\Authentication\ShowController;
 use App\Http\Controllers\Authentication\VerifyController;
@@ -59,6 +61,23 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'haveRole']], funct
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin_dashboard');
 
     Route::resource('/banks', BankController::class);
+    Route::resource('/products', MasterProductController::class, ['names' => [
+        'index' => 'admin.product.index',
+        'create' => 'admin.product.create',
+        'store' => 'admin.product.store',
+        'edit' => 'admin.product.edit',
+        'update' => 'admin.product.update',
+    ]]);
+
+    Route::resource('/product_detail', ProductDetailController::class, ['names' => [
+        'index' => 'admin.product_detail.index',
+        'create' => 'admin.product_detail.create',
+        'store' => 'admin.product_detail.store',
+        'edit' => 'admin.product_detail.edit',
+        'update' => 'admin.product_detail.update',
+        'show' => 'admin.product_detail.show',
+    ]]);
+
     Route::resource('/kurs', CurrencyController::class);
     Route::resource('/unit_codes', UnitCodeController::class);
     Route::resource('/queue_logs', QueueController::class);

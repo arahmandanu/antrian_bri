@@ -116,6 +116,25 @@
                 </div>
             </div>
         </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {{ Ekko::isActive(['/admin/products', '/admin/products', '/admin/products']) }}">
+            <a class="nav-link {{ Ekko::isActive(['/admin/products', '/admin/products', '/admin/products'], 'collapsed') }}"
+                href="#" data-toggle="collapse" data-target="#collapsePagesProduct" aria-expanded="true"
+                aria-controls="collapsePagesProduct">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Master Produk</span>
+            </a>
+
+            <div id="collapsePagesProduct"
+                class="collapse {{ Ekko::isActive(['/admin/products', '/admin/products', '/admin/products'], 'show') }}"
+                aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('admin.product.index') }}">Produk</a>
+                    <a class="collapse-item" href="{{ route('admin.product_detail.index') }}">Tarif Suku Bunga</a>
+                </div>
+            </div>
+        </li>
     @endif
 
     @if (auth()->user()->hasRole('developer') || auth()->user()->hasRole('operator'))

@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(CreateDeveloperUserSeeder::class);
         $this->call(CurrencySeeder::class);
+        $this->call(AddProductSeeder::class);
     }
 }
