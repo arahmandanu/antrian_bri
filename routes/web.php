@@ -76,7 +76,9 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'haveRole']], funct
         'edit' => 'admin.product_detail.edit',
         'update' => 'admin.product_detail.update',
         'show' => 'admin.product_detail.show',
+        'destroy' => 'admin.product_detail.destroy',
     ]]);
+    Route::get('/product_detail/{productId}/display_number', [ProductDetailController::class, 'displayNumberByProductId'])->name('admin.product_detail.displayNumberByProductId');
 
     Route::resource('/kurs', CurrencyController::class);
     Route::resource('/unit_codes', UnitCodeController::class);

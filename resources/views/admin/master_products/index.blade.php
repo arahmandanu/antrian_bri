@@ -45,8 +45,14 @@
                         <tbody>
                             @forelse ($masterProducts as $product)
                                 <tr>
-                                    <td>{{ $product->display_number }}</td>
-                                    <td>{{ $product->name }}</td>
+                                    <td>
+                                        {{ $product->display_number }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.product_detail.index', ['product' => $product->id]) }}">
+                                            {{ $product->name }}
+                                        </a>
+                                    </td>
                                     <td>
                                         @if ($product->show)
                                             <span class="badge bg-success">Yes</span>

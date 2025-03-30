@@ -17,7 +17,6 @@
     <div class="row">
         <!-- Content Column -->
         <div class="col-lg-12 mb-4">
-
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="card-header py-3">
@@ -29,56 +28,49 @@
                         </select>
                         <hr>
                         <h6 class="m-0 font-weight-bold text-primary">Tambah Detail
-                            <a href="{{ route('admin.product.create') }}" class="btn btn-outline-success">
+                            <a href="{{ route('admin.product_detail.create') }}" class="btn btn-outline-success">
                                 <i class="fa fa-plus" aria-hidden="true"></i></a>
                         </h6>
                     </div>
 
-
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="detailProducts">
                         <colgroup>
                             <col span="1" style="width: 10%;">
-                            <col span="1" style="width: 70%;">
-                            <col span="1" style="width: 10%;">
+                            <col span="1" style="width: 60%;">
+                            <col span="1" style="width: 20%;">
                             <col span="1" style="width: 10%;">
                         </colgroup>
-
                         <thead>
                             <tr>
                                 <th>Nomor Urut</th>
                                 <th>Value</th>
-                                <th>Ditampilkan?</th>
+                                <th>Suku Bunga</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-
                         <tbody>
                         </tbody>
                     </table>
-
                 </div>
             </div>
-
         </div>
     </div>
 
     <script>
         $(document).ready(function() {
             $('select#selectProduct').on('change', function() {
-                console.log(this.value);
                 $.get("{{ route('admin.product_detail.show', '') }}" + '/' + this.value, {},
                     function(data, textStatus, jqXHR) {
-                        if (data.hasOwnProperty('data')) {
-                            $.each(data.data, function(indexInArray, valueOfElement) {
-                                // TODO ADJUST LISTING COLUMN
-                                console.log(valueOfElement);
-                            });
-                        }
-
+                        $("table#detailProducts").find("tbody").html(data.data);
                     },
                     "Json"
                 );
             });
+
+            var id = {!! $id !!};
+            if (!$.isEmptyObject(id.id)) {
+                $("select#selectProduct").val(id.id).change();
+            }
         });
     </script>
 @endsection
