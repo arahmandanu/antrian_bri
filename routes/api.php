@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\SyncQueueController;
 use App\Http\Controllers\Api\CurrencyController;
+use App\Http\Controllers\Api\SyncProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,7 @@ Route::post('/sync_from_local', [SyncQueueController::class, 'syncFromLocal'])->
 Route::post('/get_number_queue', [SyncQueueController::class, 'getNumberQueue'])->name('api.getNumberQueue');
 Route::post('/sync_report_from_local', [SyncQueueController::class, 'syncReportFromLocal'])->name('api.sync_report_from_local');
 Route::get('/currencies/list', [CurrencyController::class, 'list'])->name('api.getListCurrencies');
+
+Route::group(['prefix' => '/product'], function () {
+    Route::get('/detail', [SyncProductController::class, 'index'])->name('api.getListProductDetail');
+});
