@@ -21,6 +21,7 @@ class SyncProductController extends Controller
         foreach ($masterProduct as $value) {
             $details = [];
             $details['name'] = $value->name;
+            $details['display_number'] = $value->display_number;
             $details['data'] = $value->productDetails;
 
             array_push($data, $details);
