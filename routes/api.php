@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\SyncQueueController;
 use App\Http\Controllers\Api\CurrencyController;
 use App\Http\Controllers\Api\SyncProductController;
+use App\Http\Controllers\Api\VideoAddsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,8 @@ Route::get('/currencies/list', [CurrencyController::class, 'list'])->name('api.g
 
 Route::group(['prefix' => '/product'], function () {
     Route::get('/detail', [SyncProductController::class, 'index'])->name('api.getListProductDetail');
+});
+
+Route::group(['prefix' => '/video_adds'], function () {
+    Route::get('/', [VideoAddsController::class, 'index'])->name('api.currency.list');
 });

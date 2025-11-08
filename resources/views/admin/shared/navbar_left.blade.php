@@ -135,6 +135,24 @@
                 </div>
             </div>
         </li>
+
+        <!-- Nav Item - Video Ads Collapse Menu -->
+        <li class="nav-item {{ Ekko::isActive(['/admin/video_adds', '/admin/video_adds', '/admin/video_adds']) }}">
+            <a class="nav-link {{ Ekko::isActive(['/admin/video_adds', '/admin/video_adds', '/admin/video_adds'], 'collapsed') }}"
+                href="#" data-toggle="collapse" data-target="#collapsePagesVideo" aria-expanded="true"
+                aria-controls="collapsePagesVideo">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Master Iklan Video</span>
+            </a>
+
+            <div id="collapsePagesVideo"
+                class="collapse {{ Ekko::isActive(['/admin/video_adds', '/admin/video_adds', '/admin/video_adds'], 'show') }}"
+                aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('admin.video_adds.index') }}">Video</a>
+                </div>
+            </div>
+        </li>
     @endif
 
     @if (auth()->user()->hasRole('developer') || auth()->user()->hasRole('operator'))

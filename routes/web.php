@@ -131,5 +131,11 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'haveRole']], funct
             'store' => 'operator.button_actor.store',
             'update' => 'operator.button_actor.update',
         ]);
+        Route::resource('/video_adds', \App\Http\Controllers\Admin\VideoAddsController::class)->names([
+            'index' => 'admin.video_adds.index',
+            'create' => 'admin.video_adds.create',
+            'store' => 'admin.video_adds.store',
+            'destroy' => 'admin.video_adds.destroy',
+        ]);
     });
 });
