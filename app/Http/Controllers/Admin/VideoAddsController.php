@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\VideoAdd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class VideoAddsController extends Controller
 {
@@ -45,27 +46,53 @@ class VideoAddsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'file' => [
+            'title' => [
                 'required',
-                'mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime',
-                'max:128000'  // Max 128MB
+                'max:255'
             ],
         ]);
+        $entries = scandir(public_path(VideoAdd::VIDEOPATH));
+        $files = array_diff($entries, array('.', '..'));
 
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $path = VideoAdd::VIDEOPATH . $fileName;
-            $file->move(public_path(VideoAdd::VIDEOPATH), $fileName);
-
-            VideoAdd::create([
-                'title' => $file->getClientOriginalName(),
-                'url' => $path,
-            ]);
-
-            flash()->success('Iklan video berhasil ditambahkan.');
-            return redirect()->route('admin.video_adds.index');
+        if (empty($files)) {
+            flash()->error('Silahkan upload file dahulu.');
+            return redirect()->route('admin.video_adds.create');
         }
+
+        // validate ext
+        $regex_pattern = '/\.(mp4|avi|mov)$/i';
+        if (!preg_match($regex_pattern, $validated['title'])) {
+            flash()->error('File tidak valid.');
+            return redirect()->route('admin.video_adds.create');
+        }
+
+        $fileExist = false;
+        $validName = '';
+        foreach ($files as $key => $file) {
+            if (Str::contains($file, $validated['title'])) {
+                $fileExist = true;
+                $validName = $file;
+                break;
+            }
+        }
+
+        if (!$fileExist) {
+            flash()->error('File tidak ditemukan.');
+            return redirect()->route('admin.video_adds.create');
+        }
+
+        if (!file_exists(public_path(VideoAdd::VIDEOPATH . $validName))) {
+            flash()->error('Silahkan upload file dahulu.');
+            return redirect()->route('admin.video_adds.create');
+        }
+
+        VideoAdd::create([
+            'title' => $validName,
+            'url' => VideoAdd::VIDEOPATH . $validName,
+        ]);
+
+        flash()->success('Iklan video berhasil ditambahkan.');
+        return redirect()->route('admin.video_adds.index');
     }
 
     /**
@@ -123,6 +150,9 @@ class VideoAddsController extends Controller
                 flash()->error('Gagal menghapus file video dari penyimpanan.');
                 return redirect()->route('admin.video_adds.index');
             }
+        } else {
+            $videoAdd->delete();
+            flash()->success('Iklan video berhasil dihapus.');
         }
 
         return redirect()->route('admin.video_adds.index');

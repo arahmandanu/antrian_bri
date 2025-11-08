@@ -19,13 +19,14 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     @include('admin.shared.error_validation')
-                    <form action="{{ route('admin.video_adds.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.video_adds.store') }}" method="post">
                         @csrf
                         <div class="col-12">
                             <div class="mb-3">
-                                <label for="formFile" class="form-label">File</label>
-                                <input class="form-control" type="file" accept="video/*" id="formFile" name="file"
-                                    required>
+                                <label for="formFile" class="form-label">File Name</label>
+                                <label for="formFile" class="form-label">Tambahkan extension dibelakang nya</label>
+                                <input class="form-control" type="text" id="formFile" name="title" required
+                                    placeholder="tes.mp4">
                             </div>
                         </div>
 
