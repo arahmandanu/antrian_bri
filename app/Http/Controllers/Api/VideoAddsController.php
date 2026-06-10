@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VideoAddsCollection;
-use App\Http\Resources\VideoAddsResource;
 use App\Models\VideoAdd;
 use Illuminate\Http\Request;
 
@@ -15,9 +14,15 @@ class VideoAddsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new VideoAddsCollection(VideoAdd::all());
+        $query = VideoAdd::query();
+
+        if ($request->has('type')) {
+            $query->OfType($request->get('type'));
+        }
+
+        return new VideoAddsCollection($query->get());
     }
 
     /**

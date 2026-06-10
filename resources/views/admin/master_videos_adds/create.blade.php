@@ -31,6 +31,18 @@
                         </div>
 
                         <div class="col-12">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Type</label>
+                                <label for="formFile" class="form-label">Type must have prefix kcp_ or unit_</label>
+                                <select class="form-control" id="formFile" name="type" required>
+                                    @foreach ($types as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>

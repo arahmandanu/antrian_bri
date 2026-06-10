@@ -34,7 +34,9 @@ class VideoAddsController extends Controller
             return redirect()->route('admin.video_adds.index');
         }
 
-        return view('admin.master_videos_adds.create');
+        return view('admin.master_videos_adds.create', [
+            'types' => VideoAdd::TYPE,
+        ]);
     }
 
     /**
@@ -50,7 +52,12 @@ class VideoAddsController extends Controller
                 'required',
                 'max:255'
             ],
+            'type' => [
+                'required',
+                'in:' . implode(',', array_keys(VideoAdd::TYPE)),
+            ],
         ]);
+
         $entries = scandir(public_path(VideoAdd::VIDEOPATH));
         $files = array_diff($entries, array('.', '..'));
 
@@ -86,9 +93,27 @@ class VideoAddsController extends Controller
             return redirect()->route('admin.video_adds.create');
         }
 
+        // Validate filename based on type
+        if ($validated['type'] === 'kcp' && !Str::startsWith($validName, 'kcp_')) {
+            flash()->error('File dengan tipe KCP harus dimulai dengan "kcp_".');
+            return redirect()->route('admin.video_adds.create');
+        }
+
+        if ($validated['type'] === 'unit' && !Str::startsWith($validName, 'unit_')) {
+            flash()->error('File dengan tipe Unit harus dimulai dengan "unit_".');
+            return redirect()->route('admin.video_adds.create');
+        }
+
+        // Check if type already exists
+        if (VideoAdd::where('type', $validated['type'])->exists()) {
+            flash()->error('Video dengan tipe ' . $validated['type'] . ' sudah ada.');
+            return redirect()->route('admin.video_adds.create');
+        }
+
         VideoAdd::create([
             'title' => $validName,
             'url' => VideoAdd::VIDEOPATH . $validName,
+            'type' => $validated['type'],
         ]);
 
         flash()->success('Iklan video berhasil ditambahkan.');

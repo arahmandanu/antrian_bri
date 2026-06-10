@@ -36,6 +36,7 @@
                             <tr>
                                 <th>Video</th>
                                 <th>Nama Video</th>
+                                <th>Type</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -51,6 +52,9 @@
                                     </td>
                                     <td>
                                         {{ $video_adds->title }}
+                                    </td>
+                                    <td>
+                                        {{ $video_adds->type ?? '-' }}
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm" role="group"
