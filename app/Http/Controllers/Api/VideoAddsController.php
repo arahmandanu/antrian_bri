@@ -20,6 +20,9 @@ class VideoAddsController extends Controller
 
         if ($request->has('type')) {
             $query->OfType($request->get('type'));
+        } else {
+            # set default type to 'all' if no type is provided
+            $query->OfType(VideoAdd::TYPE['all']);
         }
 
         return new VideoAddsCollection($query->get());
